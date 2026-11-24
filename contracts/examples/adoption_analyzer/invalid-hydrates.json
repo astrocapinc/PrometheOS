@@ -1,0 +1,29 @@
+{
+  "id": "opc.slx",
+  "version": "1.0.0",
+  "kind": "builtin",
+  "determinism": "pure",
+  "summary": "Simulink model package metadata and block references",
+  "selects": {
+    "containers": [
+      "opc_slx"
+    ],
+    "extensions": [
+      ".slx"
+    ],
+    "zones": []
+  },
+  "reads": "container_parts",
+  "max_bytes": 67108864,
+  "emits": [
+    "same_origin_as",
+    "model_reference",
+    "library_link",
+    "facet"
+  ],
+  "tiers": [
+    "T1",
+    "T3"
+  ],
+  "hydrates_placeholders": true
+}

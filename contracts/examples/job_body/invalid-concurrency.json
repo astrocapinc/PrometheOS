@@ -1,0 +1,21 @@
+{
+  "handler": "paper_check",
+  "parameters": {
+    "paper_id": "paper_00000000-0000-4000-8000-000000000020"
+  },
+  "schedule": {
+    "type": "weekly",
+    "day": "monday",
+    "time": "09:00",
+    "zone": "Europe/London"
+  },
+  "enabled": true,
+  "budget": {
+    "max_inputs": 20,
+    "max_output_chars": 4000,
+    "max_provider_calls": 0,
+    "max_concurrent_runs": 2,
+    "spend_cap_estimate_usd": null
+  },
+  "last_slot": null
+}

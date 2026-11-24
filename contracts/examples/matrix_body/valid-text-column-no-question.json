@@ -1,0 +1,14 @@
+{
+  "title": "Flywheel losses",
+  "question_ref": null,
+  "columns": [
+    {
+      "id": "finding",
+      "label": "Key finding",
+      "value_kind": "text",
+      "instructions": ""
+    }
+  ],
+  "rubric_version": 3,
+  "work_refs": []
+}

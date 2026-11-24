@@ -1,0 +1,3315 @@
+{
+  "schema_version": 1,
+  "suites": {
+    "CP0": {
+      "C00-BOOT": {
+        "summary": "Wheel builds and installs with lock-pinned runtime deps into fresh Python 3.12 and 3.14 environments; help/version run with no project, credentials or created files; lint, format, type and dependency-register gates pass.",
+        "commands": {
+          "boot-clean-install": [
+            "uv",
+            "run",
+            "python",
+            "tools/clean_install_check.py"
+          ],
+          "boot-cli-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cli_boot.py"
+          ],
+          "boot-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "boot-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "boot-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "boot-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "boot-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "boot-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "boot-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ]
+        }
+      },
+      "C00-CONTRACT": {
+        "summary": "Generated schemas equal committed copies and are valid Draft 2020-12; examples validate; malformed IDs, unknown fields, duplicate keys and non-finite values are rejected by the strict parser, models and schemas; migration harness is ordered, transactional and refuses downgrade.",
+        "commands": {
+          "contract-check": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "contract-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_canonical.py",
+            "tests/test_models.py",
+            "tests/test_contracts_tool.py",
+            "tests/test_migrations.py"
+          ]
+        }
+      },
+      "C00-RECEIPT": {
+        "summary": "Receipt validation and promotion reject missing/duplicate/foreign checks, stale candidate and spec bindings, missing or hash-mismatched or escaping artifacts, forged exit codes, self-review and unreviewed impact chains; valid receipts promote derived state.",
+        "commands": {
+          "receipt-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_receipts.py"
+          ]
+        }
+      }
+    },
+    "CP1": {
+      "C01-TXN": {
+        "summary": "Identical retries replay the original response; same request ID with different payload conflicts; stale expected_seq and base_rev conflicts mutate nothing; batches are all-or-nothing with one sequence per request and ordered audit; six simultaneous processes with one expected_seq yield exactly one commit; four refreshing writer processes lose no update; protected routes, size limits and sensitivity concealment hold; CLI slice emits one JSON document and stable exit codes. Agent-scope source checks, project counts and apply references treat hidden records exactly like absent ones. An agent create reusing a hidden record's ID gets the same conflict as for a visible one; the CLI reaches owner scope for apply and source check.",
+        "commands": {
+          "txn-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_transactions.py"
+          ],
+          "cli-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_cli.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ],
+          "txn-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_review_regressions.py",
+            "-k",
+            "scope or hidden_id"
+          ]
+        }
+      },
+      "C01-SOURCE": {
+        "summary": "Import plans preview retained/reference/transmitted sets and persist without mutating records; commit rejects bytes changed after planning; retained historical versions stay verifiable after the original changes while reference-only artifacts become honestly missing; re-import creates a new version under the same source; quotes and locators must match retained bytes; reference-only versions cannot be quoted; derived entries inherit evidence sensitivity. Availability is recomputed on get, as-of get and list, and corrupt same-size media read as missing; one source per file across stale plans and case variants; LF-only line numbering. Execution receipts (decision 0009) pin every input/output to a stored version by digest, stay 'reported' (an 'observed' claim is refused), inherit the highest sensitivity, replay idempotently, are cited by JSON pointer and searchable; research file types use a fixed MIME table (.csv text/csv, .slx, .m); the notebook_draft context lists the latest registered versions with digests after adopted commitments, says how many older sources it omits and hides restricted sources from agents; receipts are recorded at the caller's scope (hidden or purged artifacts read as absent, also over MCP) and linked to their artifacts so sensitivity raises and purges reach them.",
+        "commands": {
+          "source-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_sources.py"
+          ],
+          "source-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_review_regressions.py",
+            "-k",
+            "availability or verification_cache or stale_plans or case_variant or quote_lines or save_retry or saved_failed or renaming_case"
+          ],
+          "source-receipts": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_execution_receipts.py"
+          ]
+        }
+      },
+      "C01-RECOVERY": {
+        "summary": "Separate processes terminated with os._exit at commit_before, commit_after, import_after_stage, import_after_blob, import_before_commit, backup_in_snapshot and restore_before_switch leave an intact database with no partial references; identical retries commit once or replay; orphans are reported and collected only after the grace period; a killed maintenance-lock holder releases the lock and bounded acquisition reports busy. Orphan collection cannot run while a media import is staging/committing (maintenance lock).",
+        "commands": {
+          "recovery-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_recovery.py"
+          ],
+          "recovery-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_review_regressions.py",
+            "-k",
+            "orphan_collection"
+          ]
+        }
+      },
+      "C01-RESTORE": {
+        "summary": "A verified backup restores into a second directory with a semantically identical record/revision/relation/source-binding snapshot; the registry switches only after verification while the previous store is kept; missing research roots are reported and rebound only explicitly; reference-only bytes are listed as excluded; bit-flipped database, altered media, tampered or duplicate-key manifests and truncated archives are rejected without touching the registry or target. Invalid --rebind aliases/paths switch nothing; hostile manifests yield one JSON validation error without traceback. CP18's rows (events, detector state, approvals, runs) survive backup and restore, and a backup older than the running schema is restored and then upgraded, keeping its pre-migration backup (decisions 0048 and 0052; int8 CP1-F1, decision 0056).",
+        "commands": {
+          "restore-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_restore.py",
+            "tests/test_cp18_restore.py"
+          ],
+          "restore-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_review_regressions.py",
+            "-k",
+            "invalid_rebind or malformed_manifest"
+          ]
+        }
+      },
+      "C01-PATH": {
+        "summary": "Traversal, absolute, drive, UNC, device and reserved Windows names, alternate data streams and ambiguous segments are refused; an NTFS junction inside a research root cannot escape it; archive members with traversal/absolute/unexpected names or duplicates are rejected before extraction; corrupt and missing media are reported and refused for backup and quoting; network and synchronised store locations are refused.",
+        "commands": {
+          "path-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp1_paths.py"
+          ]
+        }
+      }
+    },
+    "CP2": {
+      "C02-CORRECTION": {
+        "summary": "Two scoped findings (SIMPLIFIED-A, PLANT-B) stay distinct; support needs a scope-matched supporting assessment with retained evidence and an owner capability; a correction proposal changes no effective state; applying it (capability-bound to the exact request digest) supersedes the overbroad claim, records the replacement, flags dependent records needs_review and changes the agent context atomically, while history stays readable as known before. Model text and fields grant no authority; capabilities are single-use, exact, revocable, expiring and never stored.",
+        "commands": {
+          "journey": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_journey.py"
+          ],
+          "decisions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_decisions.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ],
+          "correction-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_review_regressions.py",
+            "-k",
+            "transition_reasons or settings_and_archive or raising_sensitivity"
+          ]
+        }
+      },
+      "C02-NUMERIC": {
+        "summary": "Structured quantities must reproduce retained bytes exactly through text:<line>:<start>:<end> or json:<pointer> pointers; altered (2.41), reformatted (2.4, 2.400), small (0.6 mm) and stale-locator bindings fail; reference-only sources cannot back quantities; generated prose with unbound numbers is rejected.",
+        "commands": {
+          "numeric": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_numeric.py"
+          ],
+          "numeric-round2": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_review_round2.py",
+            "-k",
+            "boundaries"
+          ]
+        }
+      },
+      "C02-MEETING": {
+        "summary": "A meeting held 2026-09-28 and captured later is absent from as-known context before capture; proposed items carry exact line locators and re-submitting the same locator is a conflict; reconciliation is a pure view; adopting the commitment (owner capability) creates exactly one linked action, the suggestion stays proposed and the unowned question keeps no owner or date; next steps order blocked, due, evidence and exploratory work; done needs completion evidence; waivers and cycles are controlled.",
+        "commands": {
+          "journey-meeting": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_journey.py"
+          ],
+          "views": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_upgrade_views.py"
+          ],
+          "cli": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_cli.py"
+          ],
+          "meeting-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_review_regressions.py",
+            "-k",
+            "item_identity or agenda_shows"
+          ]
+        }
+      },
+      "C02-PRIVACY": {
+        "summary": "Restricted sources and derived quotes never appear in agent-scope context, notebook, search hits, lists, next steps, links or project counts, nor in audit/request logs; owner scope needs a capability; an owner-capability purge removes the canary from every live store file including tokenised FTS remnants, tombstones the closure, keeps unrelated bytes, is idempotent and lists backup/physical-remnant limitations.",
+        "commands": {
+          "privacy": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_privacy.py"
+          ],
+          "privacy-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_review_regressions.py",
+            "-k",
+            "propagates or hidden_ids or purge_plan or as_of_views or replace_text"
+          ],
+          "privacy-round2": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_review_round2.py",
+            "-k",
+            "oracle or purged_records or interactive or wrong_code"
+          ]
+        }
+      },
+      "C02-CONTEXT": {
+        "summary": "Context is deterministic for a snapshot, stays within 2,000-64,000 character budgets, renders corrections/contradictions/needs-review/coverage first, discloses omissions per section, missing and changed sources and unavailable roots, flags incomplete critical content, supports as-known sequences, never renders hidden records and says it is not a whole-project view; notebook output is identical after backup and restore; a schema-1 store upgrades only after a verified backup.",
+        "commands": {
+          "context": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_context.py"
+          ],
+          "upgrade-and-views": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_upgrade_views.py"
+          ],
+          "context-next-steps-purged": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp2_review_round2.py",
+            "-k",
+            "next_steps_as_of"
+          ]
+        }
+      }
+    },
+    "CP3": {
+      "C03-PARITY": {
+        "summary": "The official-SDK MCP server exposes exactly the frozen registry inventory with exact advertised input/output schemas (validated by the services, so errors keep the CLI envelope) and annotations matching each tool and family member's actual behaviour; the same request through MCP and the CLI creates equivalent records, replays identically and yields identical error envelopes; MCP reads equal service reads and hide restricted records; a real stdio subprocess session lists tools, reads and writes; record text containing instructions is framed as data and stays inert. An execution receipt recorded through MCP and through the CLI stores identical canonical bytes, and an 'observed' claim yields the same error envelope on both.",
+        "commands": {
+          "mcp": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_mcp.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ],
+          "parity-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_review_regressions.py",
+            "-k",
+            "request_ids or exact_schemas"
+          ]
+        }
+      },
+      "C03-TASK": {
+        "summary": "Prepared tasks persist context, input bindings and digest before returning and are read back identically by a restarted service; submissions create only proposals, replay idempotently, conflict on a reused request ID with a different payload, commit once, and are refused when bound inputs changed, the task was cancelled or expired; approval fields are schema errors and approval text grants nothing.",
+        "commands": {
+          "tasks": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_tasks.py"
+          ],
+          "task-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_review_regressions.py",
+            "-k",
+            "malformed or purged or redact"
+          ]
+        }
+      },
+      "C03-SKILL": {
+        "summary": "Three original skills validate against the Agent Skills specification and the validator rejects name, description, compatibility, unknown-field, duplicate, body and reference violations; host setup plans before writing, writes only inside the chosen project folder, merges without overwriting, is idempotent and refuses home/global locations; the E01 harness builds its disposable project.",
+        "commands": {
+          "skills": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_skills.py"
+          ],
+          "e01-setup": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_e01_setup.py"
+          ],
+          "clean-install": [
+            "uv",
+            "run",
+            "python",
+            "tools/clean_install_check.py"
+          ],
+          "skill-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_review_regressions.py",
+            "-k",
+            "validator or host_setup"
+          ]
+        }
+      }
+    },
+    "CP4": {
+      "C04-PACKAGE": {
+        "summary": "Packages are created with an explicit licence choice, inspected statically, imported only against the reviewed plan digest; agent install, update and removal apply steps require single-use owner grants bound to the projection plan, package digest and catalogue status, with complete owner review of files, executable/hooks flags, rights and findings; packages are projected project-locally for two hosts (Claude Code, OpenCode) with an exact lock and a project package record; updates show licence/capability changes and preserve local edits unless the owner chooses; removal deletes only lock-owned unmodified files; failed installs roll back; exports carry lock, notices and modification records and re-import to the same digest; unresolved rights block distributable export and adaptation; adaptation records its parent and undeclared modifications are flagged; verify detects tampering; revocation refuses use until an owner restores trust. Recipes validate inputs/outputs against JSON Schema and runs record host-reported progress (order, checks, skip permission, visible artifacts) through the transaction engine, over CLI and MCP; runs change only through workflow commands.",
+        "commands": {
+          "packages": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_packages.py"
+          ],
+          "workflows": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_workflows.py"
+          ],
+          "cli-mcp": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_cli.py",
+            "tests/test_cp3_mcp.py"
+          ],
+          "e02-setup": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_e02_setup.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ],
+          "package-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_review_regressions.py",
+            "-k",
+            "m1_ or m2_ or m4_ or m5_ or m6_ or m8_ or m11_ or m3b or m4b or entry_artifacts"
+          ],
+          "package-review-round2": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_review_round2.py",
+            "-k",
+            "n1 or n1b or n2b or n3 or n5 or cp3_"
+          ]
+        }
+      },
+      "C04-HOSTILE": {
+        "summary": "Archives and folders with traversal, absolute/drive paths, reserved device names, alternate data streams, control characters, symlinks, junctions, case-aliased duplicates, encrypted members, compression bombs and oversize/too-many members are refused before anything is written; install hooks and scripts are never executed (sentinel never appears) and are disclosed; packages with executable content and unresolved rights are quarantined and approval text inside them grants nothing; undeclared or altered files have unknown rights; a tampered lock cannot steer removal outside host skill folders; existing unrelated files and home/global locations are never written.",
+        "commands": {
+          "hostile": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_hostile.py"
+          ],
+          "clean-install": [
+            "uv",
+            "run",
+            "python",
+            "tools/clean_install_check.py"
+          ],
+          "hostile-review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_review_regressions.py",
+            "-k",
+            "b1_ or m3_ or m7_ or minor or m2b or m5b"
+          ],
+          "hostile-review-round2": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp4_review_round2.py",
+            "-k",
+            "n2_ or n6"
+          ]
+        }
+      }
+    },
+    "CP5": {
+      "C05-HUB": {
+        "summary": "The installed hub serves the four destinations (Now, Notebook, Knowledge, Papers) from the shipped assets over the typed loopback API backed by the same services: a paired owner orients on Now, reviews the meeting beside its evidence and adopts the commitment through preview -> approve -> digest-bound apply (exactly one linked action; the question stays unowned), audits a notebook entry to the highlighted retained source lines, applies the pending correction (claim superseded, next context reflects it), previews a project-local skill install without writing anything, and captures notes; real records change once and are re-read through the API; shipped assets match their sources and are in the wheel.",
+        "commands": {
+          "api": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp5_api.py"
+          ],
+          "assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ],
+          "browser-journeys": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-journeys-evidence",
+            "e2e/02-journeys.spec.ts",
+            "e2e/03-audit.spec.ts",
+            "e2e/04-skills.spec.ts",
+            "e2e/05-capture.spec.ts"
+          ],
+          "clean-install": [
+            "uv",
+            "run",
+            "python",
+            "tools/clean_install_check.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ]
+        }
+      },
+      "C05-SECURITY": {
+        "summary": "An untrusted origin gets nothing from the loopback hub: unpaired requests are 401 without content, the one-use pairing code works only once from a POST body and expires, CSRF and exact Origin are required for every mutation, hostile Host headers are refused (DNS rebinding), cross-site fetches are refused, responses carry the exact pinned CSP/frame policy and no-store, record markup stays inert text in the real browser with no CSP violations, and ordinary browser responses carry no local filesystem paths, with A03's narrow exception for typed root_changes fields in paired-owner decision/approval previews guarded by principal, route and field: every hub GET route, enumerated from the application, is walked against marked synthetic folders; ordinary responses exclude the marker, while the guarded typed owner root preview preserves only the exact reviewed old/new paths.",
+        "commands": {
+          "security": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp5_security.py",
+            "tests/test_hub_no_local_paths.py"
+          ],
+          "browser-security": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-security-evidence",
+            "e2e/10-security.spec.ts",
+            "e2e/01-pairing.spec.ts"
+          ]
+        }
+      },
+      "C05-UX": {
+        "summary": "Keyboard-only navigation, visible states for empty/loading/error/offline/stale(409, draft kept)/unpaired/expired, 390px stacked and 1024x768 layouts, axe (no serious/critical violations) on pairing, Now, Notebook, Knowledge, Papers, meeting review and the open context panel, and measured response targets on this Windows machine (context p95 < 1 s over 1,000 entries, writes p95 < 500 ms, hub update p95 < 2 s).",
+        "commands": {
+          "browser-ux": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-ux-evidence",
+            "e2e/06-states.spec.ts",
+            "e2e/07-keyboard.spec.ts",
+            "e2e/08-responsive.spec.ts",
+            "e2e/09-a11y.spec.ts"
+          ],
+          "perf": [
+            "uv",
+            "run",
+            "python",
+            "tools/hub_perf.py"
+          ],
+          "hub-styles": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_hub_styles.py"
+          ]
+        }
+      }
+    },
+    "CP6": {
+      "C06-AUDIO": {
+        "summary": "S14 against real stores and synthetic WAV bytes (no microphone, no live device): WAV and compressed-audio import (restricted by default, hostile headers bounded: rate, channels, width, size, 12 h, length from the bytes present), resumable and cancellable local transcription (deterministic chunk merge, resume only against the same input and configuration, one execution per run, caches removed or swept, a completed run never downgraded), transcripts as derived versions with transformation provenance and millisecond locators validated against the transcript or the real recording, corrections as new versions labelled by who made them, meeting from a transcript with audio-cited proposals and a visible note when the cited words were later corrected, recording sessions with a scripted device and a stand-in vendor module (mixing, 30 s PCM segments, pause, cancel, device loss, torn files, killed process, recover, confirmed discard, creator-rank authority, terminal states), the speech-model manager against a fake transport (plan digest, pinned digests, host allow-list, proxy named), purge reach and restricted-canary tests, and CLI, MCP (inventory table in decision 0013) and hub parity including the browser journeys (visible recorder, cancel and recover, transcribe, playback with bounded byte ranges, correction, reconcile choices, axe, 390 px). Real-engine tests (marker real_model: the installed faster-whisper base model on a synthetic spoken sample; marker audio_extra: PyAV decoding of mp3 and flac) FAIL, never skip, when selected. Live microphone and loopback capture is the external gate E04, not this check.",
+        "commands": {
+          "audio-core": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp6_audio_core.py",
+            "tests/test_cp6_audio_capture.py",
+            "tests/test_cp6_audio_models.py",
+            "tests/test_cp6_audio_meeting.py",
+            "tests/test_cp6_review_round1.py"
+          ],
+          "audio-transports": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp6_audio_cli.py",
+            "tests/test_cp6_audio_mcp.py",
+            "tests/test_cp6_hub.py",
+            "tests/test_cp3_mcp.py"
+          ],
+          "audio-real-model": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "-m",
+            "real_model",
+            "tests/test_cp6_real.py"
+          ],
+          "audio-extra-decoding": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "-m",
+            "audio_extra",
+            "tests/test_cp6_real.py"
+          ],
+          "audio-real-guards": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "-m",
+            "not real_model and not audio_extra",
+            "tests/test_cp6_real.py"
+          ],
+          "browser-audio": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-audio-evidence",
+            "e2e/13-audio.spec.ts"
+          ],
+          "hub-styles": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_hub_styles.py"
+          ],
+          "gate-ruff-audio": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format-audio": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy-audio": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts-audio": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps-audio": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package-audio": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets-audio": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        }
+      },
+      "C06-AI": {
+        "summary": "S15 with a scripted transport and a loopback model server (no network, no real credential): the capability interface (generation, embedding, transcription, classification; unsupported ones refused by name), the per-project routing policy no-ai / local-only / remote-allowed with the route decided by the endpoint only and no fallback between routes, no proxy ever used for provider calls, owner capabilities bound to the exact configuration, preview or payload digest (single use, spent atomically with the budget reservation), a preview that is pure and shows exactly what would be sent, bytes sent equal to the bytes approved, restricted inputs excluded by default and sent only with a separate egress grant (outputs inherit their sensitivity, hidden counts and ledger rows concealed from agent scope), secrets kept in the credential store (a real Windows Credential Manager round trip with a throw-away entry) and never returned or logged, a spend cap and call count enforced at the reservation before anything is sent, strict structured output through the task gate with at most one repair, an altered quantity or a truncated reply never recorded, unknown outcomes never repeated and blocked until acknowledged, and a model-free fallback that leaves the prepared task for an external agent while capture, notebook, search, context and tasks keep working. CLI, MCP (status and preview, configuration/run approval requests and granted resume) and hub parity, and the browser journeys (off by default, local server preview and run, outage with fallback). Credentials enter only through an explicit interactive owner CLI act (hidden prompt or reviewed environment input); no HTTP/MCP credential input exists.",
+        "commands": {
+          "provider-core": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp6_provider.py",
+            "tests/test_cp6_provider_cli.py",
+            "tests/test_cp6_provider_review.py",
+            "tests/test_cp6_hub.py"
+          ],
+          "capability-digests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp6_capabilities.py"
+          ],
+          "browser-provider": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-provider-evidence",
+            "e2e/13-audio.spec.ts"
+          ],
+          "gate-ruff-ai": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format-ai": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy-ai": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts-ai": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps-ai": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package-ai": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets-ai": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "The unavailable-model browser journey uses an explicit empty synthetic component folder; required actual speech-model tests use the approved staged model directory. Synthetic audio/browser evidence does not close the real recording or live-host researcher gates."
+        ]
+      }
+    },
+    "CP7": {
+      "C07-PAPER": {
+        "summary": "S16 against real stores: a paper cites an overbroad claim and a manuscript anchor binds the exact sentence; running paper check twice gives identical findings with no sequence, audit, record or request change; applying the owner-authorised correction moves the anchor (current or resolved) to needs_review in the same commit, the check then reports the corrected claim in use, an agent cannot clear the flag and the owner's rebinding to the replacement claim commits with the clearing. Paper status rules (creation limited to early statuses, one-step forward moves, reasons for backward moves and withdrawal, submitted/accepted as owner decisions), review rounds that keep every recorded comment and never count 'drafted' or self-citation as resolution, venue requirements drawn from list items of a dated venue source with exact line locators and quote digests that stay unknown until checked, a new manuscript version that rebinds anchors only on a unique exact match (Markdown and LaTeX) and flags the rest, agent-scope concealment of restricted inputs and inherited sensitivity, the MCP paper_check tool (read-only) and the hub routes and Papers pages driven in the browser (record a requirement check, approve an anchor review, previews with their own policy, axe).",
+        "commands": {
+          "paper-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp7_paper.py",
+            "tests/test_cp7_review_regressions.py",
+            "tests/test_cp7_review_round2.py"
+          ],
+          "hub-paper-api": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp7_hub.py"
+          ],
+          "mcp-inventory": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_mcp.py"
+          ],
+          "browser-papers": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-papers-evidence",
+            "e2e/11-papers.spec.ts"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ],
+          "gate-clean-install": [
+            "uv",
+            "run",
+            "python",
+            "tools/clean_install_check.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ]
+        }
+      },
+      "C07-JOBS": {
+        "summary": "S17: weekly slots in an explicit IANA zone skip a nonexistent local time and run a repeated one once at its first occurrence (Europe/London and America/New_York, dates computed from the zone database); a backlog coalesces to one run with the missed slots recorded as skipped; one scheduler lease per project (renewed by every handler heartbeat) and a claim that takes only a pending slot of a job with no running slot give exactly one run under four simultaneous ticks (the claim is also tested directly); a process killed after marking an external request leaves the slot running, a second tick is refused while leases are current, and after expiry the slot becomes unknown with a decision notification and is never repeated; a crash before any side effect is retried; failing local handlers retry with backoff and fail after three attempts; cancellation (pending and running, with and without an external mark), disable/re-enable without back-fill, quiet unchanged runs, findings recorded once per slot, usage never invented, purge of job remnants, digests limited to the job's visibility, lost leases reported as such, no external mark (and so no external call) once a slot or scheduler lease is lost or expired, and handlers that read at their job's own visibility.",
+        "commands": {
+          "jobs-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp7_jobs.py",
+            "tests/test_cp7_review_regressions.py",
+            "tests/test_cp7_review_round2.py"
+          ]
+        }
+      },
+      "C07-EXPORT": {
+        "summary": "The local bundle zip holds the chosen manuscript version and every retained file the paper uses, each bound in manifest.json to source, version, SHA-256 and length that match the archived bytes; reference-only and corrupt inputs are listed, never invented; agent scope withholds restricted files without naming them; an existing output is never overwritten and exporting records nothing. The handoff into a researcher-chosen folder is planned purely, refuses changed plans, never overwrites an unnamed conflict, never deletes or touches other files (including .git and pre-existing temp-like names) and refuses before writing anything. The paper, job and export modules import no network, process or browser-launch module, so they hold no cloud write, compile run or publication path; the Tectonic compile and the owner-approved Overleaf push live in the CP9 modules and are evidenced by C09-COMPILE and C09-SYNC.",
+        "commands": {
+          "export-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp7_export.py",
+            "tests/test_cp7_review_regressions.py",
+            "tests/test_cp7_review_round2.py"
+          ]
+        }
+      }
+    },
+    "CP9": {
+      "C09-COMPILE": {
+        "summary": "S19 against the real pinned Tectonic 0.17.0 (digest-verified install) and real stores: a staged multi-file workspace with a .bib file and a figure compiles offline from the bundle cache; an undefined reference and an error map to workspace file and line; the failing compile keeps the previous PDF, which status still shows with its own older inputs; every PDF, log and SyncTeX map is a generated version whose conversion provenance lists the exact input versions; SyncTeX forward and inverse round-trip; a restricted paper compiles only at owner scope. Engine install plan, digest verification and tamper detection against a loopback server; pure diagnostics/SyncTeX tests from captured engine output. Real-engine tests are selected with -m tectonic and fail when the engine is missing.",
+        "commands": {
+          "compile-real-engine": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "-m",
+            "tectonic",
+            "tests/test_cp9_compile.py"
+          ],
+          "engine-and-units": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp9_engine.py",
+            "tests/test_cp9_latex_units.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets-compile": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        }
+      },
+      "C09-EDITOR": {
+        "summary": "S20 in the Chromium headless shell against the built hub: edit main.tex, an external process changes the file, the save is refused with the draft kept, the disk version is reloaded, a citation key is completed by keyboard and saved, the workspace compiles, the claim shows in the anchor gutter beside its line, source-to-PDF highlights the line and a PDF click opens the matching source line; diagnostics jump, outline and claims navigation work by keyboard; the anchor's stored version and state and the compile inputs match disk; no CSP violation and no serious axe finding. Backend workspace rules (bounded listing without links, confined reads, digest-guarded atomic writes, snapshots and anchor remap, structure query, evidence insertion, owner scope for restricted papers) and CLI/MCP/hub parity.",
+        "commands": {
+          "workspace-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp9_workspace.py",
+            "tests/test_cp9_transports.py",
+            "tests/test_cp9_review_cp9a.py",
+            "tests/test_cp9_review_cp9a_r2.py"
+          ],
+          "mcp-inventory": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp3_mcp.py"
+          ],
+          "browser-workspace-editor": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-workspace-editor-evidence",
+            "e2e/12-workspace.spec.ts"
+          ],
+          "gate-hub-assets-editor": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        }
+      },
+      "C09-SYNC": {
+        "summary": "S21 against local bare repositories standing in for Overleaf: link (clone and bind), fast-forward pull and clean merge after a digest-bound preview, divergence and overlapping local edits stop with both sides intact, stale previews refused, push only with an exact-plan overleaf_push owner capability (missing, wrong or other-plan capabilities refused; a changed plan or moved remote refused), never forced, no tags, fetched from and pushed to exactly the one origin URL bound in the plan, which the CLI and hub confirmations show with invisible characters escaped in every field others can write (destination, branch, commit subjects and authors, file names), and verified after the push to hold the pushed commit, else, or when that check itself fails, reported as an unknown outcome; anchors follow the exact remap rules after pull; the hub pull/commit/push flow in the browser.",
+        "commands": {
+          "sync-tests": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp9_sync.py",
+            "tests/test_cp9_review_cp9a_r3.py",
+            "tests/test_cp9_integration_fixes.py",
+            "tests/test_cp9_integration_fixes_r2.py"
+          ],
+          "browser-workspace-sync": [
+            "uv",
+            "run",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-workspace-sync-evidence",
+            "e2e/12-workspace.spec.ts"
+          ]
+        }
+      },
+      "C09-SAFETY": {
+        "summary": "S22: hostile LaTeX against the real engine (literal and hidden \\write18, literal path escapes refused with file and line, macro-built absolute and parent-directory reads detected by the read audit with every output discarded, endless loop and page bomb stopped by the limits, a canary outside the workspace read through a macro-built path in failed, successful and timed-out compiles reaching no stored version, response, status, context, search or MCP reply because only proven compiles keep their raw log and unproven ones keep sanitized diagnostics, no local path in stored logs or SyncTeX); an offline compile from the populated cache makes no connection; the runner's clean environment, time/output limits and child-process ban; credential-bearing and unsafe remote URLs refused without echo and absent from the store; repository-local executable Git configuration refused, and neutralised by the overrides even when the refusal is bypassed (with a live control). Review regressions: restricted-file scope, hidden and VCS path refusals (including the .git/config token canary on import and search), 8.3 canonicalisation, scoped Git views and agent-commit refusal, the remote-bound digest, rename parsing, and the destination guarantee: every fetch and push names the one origin URL, never the remote name; refused from every scope, matched on the parsed section, subsection and key (an empty subsection included), read once per check, fail-closed and checked again right before the push: push URLs, every URL rewrite, a remote named like a URL or path (any key), a second origin URL (with the scopes that hold the values), transport programs and promisor remotes; the clone's own program refusal covers the worktree scope and reads info/attributes where git does; the command scope may hold only PrometheOS's overrides; refused setting names never echo a URL; link checks every scope before it clones; a push the approved destination does not then hold is not reported as done; URLs with invisible characters, or non-ASCII ones, are refused; UNC and device paths and file URLs with a host or a network path are refused before any filesystem or git access; owner prompts and CLI JSON output escape invisible characters; git older than 2.45 is refused; no lazy fetch, bundle URI or tag push; environment config ignored.",
+        "commands": {
+          "safety-real-engine": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "-m",
+            "tectonic",
+            "tests/test_cp9_safety.py"
+          ],
+          "runner-and-git": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp9_engine.py",
+            "tests/test_cp9_sync.py",
+            "-k",
+            "runner or engine or refused or neutralise or tampered or clean"
+          ],
+          "review-regressions": [
+            "uv",
+            "run",
+            "pytest",
+            "-q",
+            "tests/test_cp9_review_cp9a.py",
+            "tests/test_cp9_review_cp9a_r2.py",
+            "tests/test_cp9_review_cp9a_r3.py",
+            "tests/test_cp9_integration_fixes.py",
+            "tests/test_cp9_integration_fixes_r2.py"
+          ]
+        }
+      }
+    },
+    "CP10": {
+      "C10-PARITY": {
+        "summary": "Integrated decisions 0015-0024: the 157-operation registry and bidirectional inventory report zero gaps, forward problems and unmapped CLI/MCP/HTTP entry points. Operation-family inputs and fixed result objects have exact per-member schemas, including closed nested models and typed maps; dynamic researcher documents remain governed by their published record/recipe/contract schemas. Equivalent synthetic service/MCP/HTTP sessions, CLI pure reads, advertised SDK contracts, authority annotations, pagination, snapshot bindings, root confinement and path redaction are checked. Provider owner HTTP routes have concrete request/result contracts; only interactive owner credential entry has the reviewed no_http exception. The real recovery and parity app routes and standing implementation gates are exercised.",
+        "commands": {
+          "parity-inventory": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/parity_inventory.py"
+          ],
+          "parity-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_parity_inventory.py",
+            "tests/test_cp10_contracts.py",
+            "tests/test_cp10_continuity_transports.py",
+            "tests/test_cp3_mcp.py"
+          ],
+          "parity-transports": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_parity_transports.py",
+            "tests/test_cp10_agentops.py",
+            "tests/test_cp10_nested_results.py",
+            "tests/test_cp10_walk_r2.py"
+          ],
+          "parity-mcp-paths": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_mcp_paths.py",
+            "tests/test_hub_no_local_paths.py",
+            "tests/test_cp10_shared_redaction.py"
+          ],
+          "parity-browser": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/parity-browser-evidence",
+            "e2e/17-parity.spec.ts"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ],
+          "c10-parity-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "Fixed operation result shapes are closed. Researcher-authored record, recipe and JSON Schema documents use their separately published contracts; schema-show returns those documents rather than pretending their arbitrary document keys are fixed operation fields.",
+          "Agent replies are redacted. A03 allows only typed root_changes in the paired-owner project-update decision preview and approval-get routes; all other fields and routes remain redacted."
+        ]
+      },
+      "C10-AUTH": {
+        "summary": "A request needing authority the caller lacks answers approval_required with the exact canonical plan digest and changes nothing; only an owner-granted plan executes, once; edited, denied, expired and withdrawn plans fail; the agent token reaches only the registry's agent routes and none of them returns restricted content (canary sweep over every agent route, CP10.3 and CP10.4 routes included); owner-only effects (engine install, Overleaf push bound to the owner's view of the one origin URL, recordings) need an owner act; hostile imported, retrieved or generated text changes nothing beyond its role as data (S24). The hub's security and no-local-path checks walk every route, the CP10 runs and approvals routes with real runs and a real approval request among them. Skill install/update/remove grants bind the reviewed plan, package and catalogue state; maintenance grants bind the source and final verified targets. The paired-owner typed root-change preview is tested against agent, route and field bypasses.",
+        "commands": {
+          "auth-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_authority.py",
+            "tests/test_cp10_authority_r2.py",
+            "tests/test_cp10_authority_r3.py",
+            "tests/test_cp10_authority_r4.py",
+            "tests/test_cp10_untrusted.py",
+            "tests/test_cp10_walk_r2.py",
+            "tests/test_cp10_integration.py"
+          ],
+          "browser-approvals": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-approvals-evidence",
+            "e2e/14-approvals.spec.ts"
+          ],
+          "hub-security": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp5_security.py",
+            "tests/test_hub_no_local_paths.py"
+          ],
+          "browser-security": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-security-evidence",
+            "e2e/10-security.spec.ts",
+            "e2e/01-pairing.spec.ts"
+          ]
+        }
+      },
+      "C10-RUNS": {
+        "summary": "Long operations return one durable oprun_ ID at once and keep it through kill, restart and resume; resume continues after the last completed stage only with unchanged inputs, parameters, configuration, model and workflow version; budget exhaustion pauses and resumes; an external call with an unknown outcome becomes unknown_external and is never repeated; cancellation is recorded until the worker confirms; store migrations 6 -> 7 -> 8 fold CP6 transcription runs into operation runs; run text carries no local path on any transport, by the hub's shared free-text rule (S25).",
+        "commands": {
+          "runs-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_runs.py",
+            "tests/test_cp10_runs_r2.py",
+            "tests/test_cp10_shared_redaction.py",
+            "tests/test_cp10_runs_r3.py"
+          ],
+          "runs-kill": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_runs_kill.py"
+          ],
+          "runs-migrations": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_migrations.py",
+            "tests/test_cp10_runs_migration.py",
+            "tests/test_migrations.py"
+          ],
+          "browser-runs": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-runs-evidence",
+            "e2e/15-runs.spec.ts"
+          ]
+        }
+      },
+      "C10-CONTINUITY": {
+        "summary": "An applied correction flags its affected closure (findings, actions, anchors) in the same commit; an agent's apply answers approval_required; observe-only executions wait in awaiting interpretation until an assessment or reviewed entry cites them; a dismissed receipt leaves the queue; Now shows changed, due, running, awaiting and approval items with reasons; artifact coverage reports reference-only and removed bytes as unavailable and not backed up (S26).",
+        "commands": {
+          "continuity-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_continuity.py",
+            "tests/test_cp10_continuity_transports.py"
+          ],
+          "browser-continuity": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-continuity-evidence",
+            "e2e/15-continuity.spec.ts"
+          ]
+        }
+      },
+      "C10-WALK": {
+        "summary": "Integrated decision 0022 and repairs: The CP10 walk, KERS scenarios K1-K4, runs on the actual built app against a fresh store made from the synthetic fixtures (baseline, plant result, meeting, manuscript): the owner's browser steps (Knowledge, Approvals, Now, Runs) and an agent's bearer-token steps assert stored state after each step; the walk then repeats on a second fresh store through the official MCP SDK client against a real stdio server with the hub stopped. K2 commits nothing between the owner's grant and the agent's resume (decision 0020). The normalised stored outcomes (records, states, relations, flags, queues, approvals, runs), every step's outcome (so the agent's authority results) and the answers to ten pure reads are equal, and the transcript (each step, operation, response digests, store assertions) is printed and retained; the walk's judgement is mutation-tested; the E09 session script is prepared and its pure parts tested. The two walks bind the same five-field PLANTB scope. E09 pure verification requires an actual stored completed resume, checked by positive and forged-state negatives; the live-host owner hold is still unavailable until a real researcher exercises it.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp10.py",
+            "--print-transcript",
+            "--out",
+            "{run_dir}/walk"
+          ],
+          "walk-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_walk.py",
+            "tests/test_cp10_e09_script.py",
+            "tests/test_cp10_walk_r2.py"
+          ],
+          "c10-walk-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "The owner's steps of the MCP half run through the service in the harness (a synthetic owner channel; no hub runs): the real owner channel for a real coding host is E09, whose session script (tools/live_host_e09.py) is prepared and not run.",
+          "The browser half drives Playwright's Chromium headless shell inside the loopback-only boundary of decision 0028 (its negative controls run first and must pass); the pytest copy of the browser half is skipped, never passed, and this walk command fails, where Node or the shell is absent.",
+          "The independent review of the retained transcript is part of acceptance and is not claimed here."
+        ]
+      },
+      "C10-RECOVERY": {
+        "summary": "S27 with disposable stores: missing, truncated, corrupt and newer-schema databases return typed recovery pointers and remain byte-preserved; normal backup/restore, verified scratch inspection and hot rollback-journal recovery create verified NEW stores. Agent restore locations and healthy-store switches are refused. Owner grants bind source identity, digest, health, backup, target contents/location, verified media and SQLite side files, with final rechecks after locking; edits, substitutions, side-file injection and unreadable digests refuse before effects. Scratch/quarantine containment and stage reuse refuse unsafe links. Migrate grants omit inapplicable backup/target fields and require a verified pre-migration backup. Registry-only maintenance mode never opens a project database or settings for redaction; both MCP modes scrub typed/generic errors, and HTTP explicitly refuses backups and orphan collection before store opening. Owner rollback preview failures refuse before confirmation. CLI/MCP/HTTP and the actual recovery screen exercise restore, approval, resume and preserved evidence.",
+        "commands": {
+          "c10-recovery-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_recovery.py",
+            "tests/test_cp10_recovery_r2.py",
+            "tests/test_cp10_recovery_r3.py",
+            "tests/test_cp10_integration.py",
+            "tests/test_cp10_migrations.py",
+            "tests/test_cp10_runs_migration.py",
+            "tests/test_receipts.py"
+          ],
+          "c10-recovery-browser": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/c10-recovery-browser-evidence",
+            "e2e/16-recovery.spec.ts"
+          ],
+          "c10-recovery-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "All stores and owner-channel principals in these automated checks are synthetic. No real researcher store or live coding host is used; E09 and RPA-HEADLESS remain external gates.",
+          "Unreadable source digests yield typed io_error refusals; no unreadable binding sentinel or automatic acceptance of damaged bytes is introduced."
+        ]
+      }
+    },
+    "CP11": {
+      "C11-IMPORT": {
+        "summary": "Decisions 0060-0063, 0069 and 0070: PDFs under an approved research folder become located, searchable works (page text with character offsets, identifiers on page 1, pages without a text layer shown as such, refusals with reasons for encrypted, malformed, truncated and hostile files); BibTeX, RIS and CSV files are kept as retained source versions and every field has a located provenance record; the read-only Zotero adapter (a capability probe that never raises: available, not_running, local_api_disabled, unexpected; the library, a collection or named item keys planned and committed as operation runs; loopback host only, GET only, no key, no account, no Origin header, bounded sizes) retains each item's JSON as an adapter source version and maps it to a work with provenance naming the item key and a JSON pointer; the same bytes create nothing; hostile files and an abstract with injected instructions stay inert text; exports round-trip; the hub's Library page (folders, import, Zotero panel, search, reader, export) is exercised in the browser and checked against stored state.",
+        "commands": {
+          "import-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp11_library.py",
+            "tests/test_cp11_bibliography.py",
+            "tests/test_cp11_zotero.py"
+          ],
+          "browser-library": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-library-evidence",
+            "e2e/21-library.spec.ts",
+            "e2e/22-bibliography.spec.ts",
+            "e2e/25-zotero.spec.ts"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ],
+          "gate-hub-typecheck": [
+            "node",
+            "hub/node_modules/typescript/bin/tsc",
+            "-p",
+            "hub/tsconfig.json",
+            "--noEmit",
+            "--diagnostics"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ]
+        },
+        "limitations": [
+          "Zotero is a stub of the documented local API (tools/zotero_stub.py, invented items); the owner's real Zotero, its installed version and its settings are the external gate E10 (not run).",
+          "Page text only: tables, formulas and layout-aware extraction wait for the follow-up slice CP11-F1 (decision 0069), which needs the owner's labelled PDFs.",
+          "Attachments, annotations, full-text download, sync cursors and write-back to Zotero are CP16 and not part of this check."
+        ]
+      },
+      "C11-DEDUP": {
+        "summary": "Decisions 0062, 0063 and 0070: identifiers (DOI, arXiv without its version, PMID, PMCID, ISBN) are normalised and an invalid one is refused per field; exact identifier duplicates are one work within an import, across imports, against PDF works and across BibTeX, a PDF and Zotero, in either order, holding every provenance record under one recorded precedence that does not depend on the order of imports; a preprint and its published version are related as versions and never merged; similar titles are only proposed and merge, keep-separate and related-versions are the owner's decisions (approval_required from an agent); re-importing the same file or the same Zotero library creates nothing and a newer Zotero item version revises its work.",
+        "commands": {
+          "dedup-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp11_bibliography.py",
+            "tests/test_cp11_zotero.py"
+          ]
+        },
+        "limitations": [
+          "Similarity is a title key plus first-author family and year; there is no network lookup or fuzzier matching (CP13)."
+        ]
+      },
+      "C11-GROUNDING": {
+        "summary": "Decisions 0064, 0065, 0066 and 0067: matrix and extraction records ground every non-unsupported cell in verified evidence (an existing source and version of the row's work, a located PDF span or text lines with its quote digest, a basis that fits the work's access state, quantities and numbers as whole tokens of the quoted span, no tolerance); a fabricated source, a page beyond the PDF, an altered quote and a missing citation are refused with the cell named; review is the owner's act; access states appear in the matrix, context and every export; a correction to an assumption a row relies on flags the row and the briefs it is used in; the full flow (folder, import, search, matrix, rules, citing a span, review, brief, correction, re-review) runs in the hub and over the service; MCP, CLI and HTTP agree on every registered operation.",
+        "commands": {
+          "grounding-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp11_matrix.py",
+            "tests/test_cp11_owner_flow.py"
+          ],
+          "parity-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp3_mcp.py",
+            "tests/test_cp10_parity_inventory.py",
+            "tests/test_cp10_parity_transports.py"
+          ],
+          "browser-matrix": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-matrix-evidence",
+            "e2e/23-matrix.spec.ts",
+            "e2e/24-cp11-owner-flow.spec.ts"
+          ],
+          "hub-unit": [
+            "node",
+            "--test",
+            "hub/unit/codepoints.test.ts",
+            "hub/unit/lineview.test.ts"
+          ]
+        },
+        "limitations": [
+          "Model extraction is accepted only as a proposal (no provider call in CP11); rules are deterministic keyword and pattern rules.",
+          "A Zotero abstract is retained with a JSON pointer, which a cell cannot cite yet: a cell on an abstract-only Zotero work is unsupported until the evidence rules accept JSON pointers (decision 0070, for the next amendment)."
+        ]
+      },
+      "C11-NOACCOUNT": {
+        "summary": "Decisions 0069 section 2.2 and 0070: on a fresh PrometheOS home with every PROMETHEOS_* variable and every key, token, secret and Zotero variable removed, the hub (a subprocess, a paired owner session over HTTP) and the MCP server (a subprocess, the official SDK client) each import PDFs and a bibliography from a research folder, search, build a matrix with a grounded cell, link an action to it through source_refs, and export the brief and a BibTeX file; every step succeeds and a test-only guard, loaded as sitecustomize into those subprocesses and never part of the product, logs no outbound connection or name lookup. The guard is proved: a deliberate outbound connect by IP, by name, by urllib and by asyncio is refused and logged, loopback is not, and each subprocess wrote the guard's start-up line.",
+        "commands": {
+          "noaccount-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-m",
+            "noaccount",
+            "tests/test_cp11_noaccount.py"
+          ]
+        },
+        "limitations": [
+          "The guard patches Python's socket, name lookup and asyncio connect paths in the two subprocesses; it does not observe other processes or the operating system's network stack. The browser's own boundary is C11-WALK and decision 0028."
+        ]
+      },
+      "C11-WALK": {
+        "summary": "Decisions 0069 section 2.3 and 0070: on the built app with a fresh project that has no research folder, the owner adds the papers folder in the hub, imports its PDFs and bibliography, imports selected Zotero items (read-only, from the stub), searches and reads a page, builds a source-linked matrix over a full-text, a second full-text and an abstract-only Zotero work, classifies by a rule and by a manual choice label, cites a verified span (two misquotes are refused verbatim) and reviews; an agent session over the real MCP stdio server (official SDK client) reads the same library and matrix, records an assumption, a finding relying on it and a correction; the owner exports the brief, applies the correction (the row and the brief are flagged) and re-reviews (the row's flag clears); a last agent session reads the outcome. The walk repeats on a second fresh store through MCP alone with the hub stopped; the normalised stored outcomes, every step's outcome and every agent answer are equal; the Zotero stub saw only GET requests without an Origin header or a key; the transcript (steps, digests, assertions) is retained; the walk's judgement is mutation-tested.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp11.py",
+            "--print-transcript",
+            "--out",
+            "{run_dir}/walk"
+          ],
+          "walk-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp11_walk.py"
+          ],
+          "c11-walk-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "The MCP half's owner steps run through the service in the harness (a synthetic owner channel; the correction is applied with a SYNTHETIC-TEST owner decision bound to its digest). The hub half's owner steps are the real browser.",
+          "The agent is a scripted MCP client; real agent behaviour and the owner's real library are observed with real use and the external gate E10.",
+          "The browser half drives Playwright's Chromium headless shell inside the loopback-only boundary of decision 0028; the pytest copy of the browser half is skipped, never passed, and the walk command fails, where Node or the shell is absent.",
+          "The independent review of the retained transcript is part of acceptance and is not claimed here."
+        ]
+      }
+    },
+    "CP17": {
+      "C17-INVENTORY": {
+        "summary": "Decision 0039: on seeded synthetic corpora (seeds 17-21, generator 1.6.0) and small sample folders the inventory records stat, content digest, normalised-text digest and container type for every file, skips cloud placeholders and placeholder folders without hydrating them (attribute-based, tested with the placeholder stat provider), handles paths over 260 characters, lists archives through the end-of-central-directory record with member, depth, size and ratio limits that stop bombs, never writes into the adopted tree (tree digest before and after; root digest equal or the scan fails) and reports what it could not read and why; analyzers open only files the inventory read (decision 0044 section 1).",
+        "commands": {
+          "inventory-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp17_inventory.py",
+            "tests/test_cp17_inventory_edges.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ],
+          "gate-hub-typecheck": [
+            "node",
+            "hub/node_modules/typescript/bin/tsc",
+            "-p",
+            "hub/tsconfig.json",
+            "--noEmit",
+            "--diagnostics"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ]
+        },
+        "limitations": [
+          "Placeholders are simulated by the test stat provider (a cloud client's attributes cannot be set from user mode); a real OneDrive or Dropbox folder is the external gate E15/E16."
+        ]
+      },
+      "C17-LINEAGE": {
+        "summary": "Decisions 0040, 0041 and 0044: builtin and declarative analyzers (profile.status_terms, profile.version_tokens) produce typed evidence with tiers T1-T8 (T0 only from the owner); MATLAB and Simulink are read without MATLAB; fusion keeps contradictions, never ranks by file time (perturbation test) or by FINAL/BEST names, and decides only on PrometheOS's own evidence; the scorer meets every target recorded before the first measurement (tools/adoption_targets.json, never lowered) on seeds 17-21 including the review traps, and mutation tests show the traps catch broken rules. MATLAB parsing is the optional adoption-parsers extra (decision 0053): the suite's environment has it (the dev group pins the same versions) and a test fails without it; with the parser hidden, code.matlab does not run, its cached outputs are not replayed, and the scan summary and analyzer list name it with the install hint on the service, MCP, CLI and hub alike.",
+        "commands": {
+          "lineage-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp17_analyzers.py",
+            "tests/test_cp17_lineage.py",
+            "tests/test_cp17_review_r2.py",
+            "tests/test_cp17_parsers.py"
+          ],
+          "score": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/adoption_score.py",
+            "--out",
+            "{run_dir}/adoption-score.json"
+          ]
+        },
+        "limitations": [
+          "Ranking accuracy on the owner's real folder needs the owner's blind labels first (E15); until then the dogfood folder is used for inventory, robustness and analyzer coverage only."
+        ]
+      },
+      "C17-PLAN": {
+        "summary": "Decision 0043: the consolidation plan is typed steps (digested inputs, allowed and forbidden actions, closed result schemas with actions_taken, acceptance criteria) created as proposed CP18 work items without duplicates; agent results are validated against the inventory; deletes and dedupes are only proposed; choosing a family's current file, accepting a baseline and writing the baseline note are owner acts an agent reaches only as approval requests; the hub shows the plan, the decision and the baseline; the bundled adopt-folder skill names only real operations.",
+        "commands": {
+          "plan-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp17_plan.py"
+          ],
+          "browser-adoption": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-adoption-evidence",
+            "e2e/20-adoption.spec.ts"
+          ]
+        },
+        "limitations": [
+          "The agent in tests is scripted; real agent behaviour is E15."
+        ]
+      },
+      "C17-AI": {
+        "summary": "Decisions 0042 and 0044: agent_task and ai_task results have closed schemas; quotes are re-read verbatim against the file's visible text by digest and must carry the claim (referent, status word, date); hidden text (comments, link definitions, hidden elements, invisible and tag characters) is never quoted or read; two-sample agreement needs two different models; samples are append-only and evidence follows the current outcome; proposals and agent reports never decide; results replay offline and stop on a changed file, template or referent; credential files never leave in a bundle; default tests make no model or network call (guarded).",
+        "commands": {
+          "ai-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp17_assist.py",
+            "tests/test_cp17_review_r2.py"
+          ]
+        },
+        "limitations": [
+          "Agreement among samples one submitter sends proves repeatability, not independence (decision 0044 section 8); the owner decides what matters."
+        ]
+      },
+      "C17-INCREMENTAL": {
+        "summary": "Decision 0045: re-adoption records generations and classifies added, changed, moved and deleted files by content digest against the previous scan or an accepted baseline (with what became of each accepted current file), re-analysing only changed content; old generations are pruned except baselines; vault import plans notes as sources without writing to the vault; the baseline exports as a self-checking package and re-imports into a fresh store (owner routes only) with equal families, members, currents and bands; the one-way fenced Markdown note keeps the owner's text outside its block.",
+        "commands": {
+          "incremental-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp17_incremental.py"
+          ],
+          "transports": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_parity_transports.py",
+            "tests/test_cp10_parity_inventory.py",
+            "tests/test_hub_no_local_paths.py",
+            "tests/test_cp3_mcp.py"
+          ]
+        },
+        "limitations": [
+          "Tests write notes only into temporary folders; the owner's vault (a folder in the owner's home) is written only on the owner's act."
+        ]
+      },
+      "C17-WALK": {
+        "summary": "On the built app with fresh stores and the seeded corpus: the owner scans, reviews a family and makes the plan in the hub; the agent reads the plan, reports two steps and asks for a baseline over MCP (an approval request); the owner decides a family and accepts the baseline; the folder changes and the owner rescans and sees the changes; the agent reads the drift from the baseline; repeated on a second fresh store through MCP with equal normalised outcomes.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp17.py",
+            "--out",
+            "{run_dir}/walk",
+            "--print-transcript"
+          ],
+          "c17-walk-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "The MCP half's owner steps run through the service in the harness (a synthetic owner channel); the hub half's owner steps are the real browser.",
+          "The agent is a scripted MCP client following the adopt-folder skill; real agent behaviour and the owner's real folder are E15.",
+          "The independent review of the retained transcript is part of acceptance and is not claimed here."
+        ]
+      }
+    },
+    "CP18": {
+      "C18-ITEMS": {
+        "summary": "Decision 0034: work items are actions with optional due_at, description (at most 20,000 characters, untrusted text) and labels (at most 16 of 1-40 characters); the owner adds them in the hub through the owner-decision review (create proposed, adopt ready in one transaction), edits them (revise) and moves them through the existing transitions on every interface (CLI, MCP, HTTP, hub); deadlines are stored in UTC and shown in the project's zone (or the browser's) with the zone and offset named, with one daylight-saving policy tested in five zones; the description is shown as text; no parallel task store exists.",
+        "commands": {
+          "items-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp18_work_items.py"
+          ],
+          "hub-deadline-unit": [
+            "node",
+            "--test",
+            "hub/unit/deadline.test.ts"
+          ],
+          "browser-work-items": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-work-items-evidence",
+            "e2e/18-work-items.spec.ts"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ],
+          "gate-hub-typecheck": [
+            "node",
+            "hub/node_modules/typescript/bin/tsc",
+            "-p",
+            "hub/tsconfig.json",
+            "--noEmit",
+            "--diagnostics"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ]
+        },
+        "limitations": [
+          "All stores are synthetic and fresh; the owner's real use of work items is the external gate E18."
+        ]
+      },
+      "C18-EVENTS": {
+        "summary": "Decision 0035 items 1-6 and 11: store schema 9 (events outbox, detector state); the event catalogue is the contract schema `event` (ten types, closed data with no record text or paths, append-only per-type pins), checked by check_contracts; every emitting operation writes its event in the same transaction as its change, with one scenario and one rollback test per emitting site and mutation proofs (emission patched out, fault between change and commit); the deadline (14, 7, 2 days), awaiting-interpretation, backup-gap and source-unavailable detectors fire once per condition across restarts and concurrent passes; detectors run only at server start and in a jobs tick, never in a read or on a timer; events are acknowledged (never deleted except by an owner purge that counts them), and no event executes an operation; the Now inbox shows and acknowledges them.",
+        "commands": {
+          "events-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp18_events.py",
+            "tests/test_migrations.py",
+            "tests/test_cp10_migrations.py",
+            "tests/test_cp10_runs_migration.py"
+          ],
+          "browser-events": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/run_hub_e2e.py",
+            "--evidence",
+            "{run_dir}/browser-events-evidence",
+            "e2e/19-events-inbox.spec.ts"
+          ]
+        }
+      },
+      "C18-QUEUE": {
+        "summary": "Decision 0035 items 7-9: work_queue, event_list and event_acknowledge on CLI, MCP and HTTP (parity inventory, closed result models); reading the queue or the summary leaves the store digest unchanged, including with an expired approval and a dead run seeded, and an impure control changes it; the work-items skill, the MCP instruction sentence and the three tool descriptions pass the C18-QUEUE text rules, are pinned by SHA-256, and mutated variants that start work or press the researcher are rejected; an agent's acknowledgement is an approval request; a static AST scan, a runtime pass with every launch primitive refusing, and the package manifest show that PrometheOS launches, schedules and wakes no agent.",
+        "commands": {
+          "queue-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp18_queue.py",
+            "tests/test_cp18_queue_text.py",
+            "tests/test_cp18_no_launch.py",
+            "tests/test_cp3_skills.py"
+          ],
+          "queue-transports": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_parity_transports.py",
+            "tests/test_cp10_nested_results.py",
+            "tests/test_cp3_mcp.py",
+            "tests/test_cp10_parity_inventory.py"
+          ],
+          "parity-inventory": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/parity_inventory.py"
+          ]
+        },
+        "limitations": [
+          "Not repeating a declined suggestion is an instruction in the summary text, checked with it; real agent behaviour is observed in E18."
+        ]
+      },
+      "C18-WALK": {
+        "summary": "Decision 0036: on the built app with a fresh store, the owner adds four work items in the hub (three with deadlines, one without), runs the checks from Now's inbox and sees the 14-, 7- and 2-day deadline events; an agent session over the real MCP stdio server (official SDK client) reads the queue without changing the store, summarises it and asks one question that passes the C18-QUEUE text rules; the owner accepts one item; the agent moves it ready -> in_progress, records its output (import, retained, pinned by digest) and completes it with that output as evidence; the owner sees it done and acknowledges its deadline event; a fresh session finds no duplicate event. The walk repeats on a second fresh store through MCP alone with the hub stopped (deadline events from the MCP server's start pass); the normalised stored outcomes, every step's outcome and every agent answer (order kept) are equal; the transcript (steps, digests, assertions, the agent's message and the owner's answer) is retained; the walk's judgement is mutation-tested.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp18.py",
+            "--print-transcript",
+            "--out",
+            "{run_dir}/walk"
+          ],
+          "walk-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp18_walk.py"
+          ],
+          "c18-walk-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "The MCP half's owner steps run through the service in the harness (a synthetic owner channel; W1.x applies the hub's exact add request with a SYNTHETIC-TEST owner decision bound to its digest). The hub half's owner steps are the real browser.",
+          "The agent is a scripted MCP client following the bundled work-items skill; real agent behaviour is observed in E18.",
+          "The browser half drives Playwright's Chromium headless shell inside the loopback-only boundary of decision 0028; the pytest copy of the browser half is skipped, never passed, and the walk command fails, where Node or the shell is absent.",
+          "The independent review of the retained transcript is part of acceptance and is not claimed here."
+        ]
+      }
+    },
+    "CP19": {
+      "C19-SPIKE": {
+        "summary": "Decisions 0047, 0049 and 0050: the spike's retained evidence (development/receipts/CP19/s3b-spike-20261016) holds a working prototype per candidate (Tauri 2, pywebview, Electron) for the tray, notification and hotkey, measured three times, with measured idle memory and installer size and a per-user install without elevation; the decisions cover every stated criterion; Electron is registered in spec/09 and development/dependencies.json and the shipped shell uses it.",
+        "commands": {
+          "spike-record": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp19_spike.py"
+          ]
+        },
+        "limitations": [
+          "The spike's measurements ran once (S3b) and are not repeated here; this check reads their retained record."
+        ]
+      },
+      "C19-SHELL": {
+        "summary": "Decision 0054: the bundled core (pinned CPython 3.14.2, lock-hashed wheels, isolated -I) and the per-user NSIS installer are built offline (Electron from node_modules, electron-builder's tools from the project-local cache; a download fails the build) and the build outputs stay outside the candidate tree; the installer installs without elevation (HKCU only, Start-menu shortcut with the app's AUMID), the installed app passes the shell test (hub over loopback in the window, sidecar started and stopped gracefully, tray state, notifications announced once across restarts, the global hotkey opens capture, one instance per user, the hub's pairing, CSRF and loopback rules kept, navigation outside the hub's origin refused, no test hooks without the explicit test switch), and uninstall removes the app and keeps the home; the sidecar protocol tests and the repository gates pass.",
+        "commands": {
+          "build-core": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "desktop/app/build_core.py"
+          ],
+          "build-installer": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "desktop/app/build_app.py"
+          ],
+          "install-check": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "desktop/app/test/install_check.py",
+            "{run_dir}/install-check"
+          ],
+          "shell-dev": [
+            "node",
+            "desktop/app/node_modules/@playwright/test/cli.js",
+            "test",
+            "--config",
+            "desktop/app/playwright.config.ts"
+          ],
+          "sidecar-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp19_sidecar.py"
+          ],
+          "build-outputs-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_tree_manifest_ignored.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-deps": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/dependency_register.py"
+          ],
+          "gate-package": [
+            "python",
+            "tools/verify_package.py"
+          ],
+          "gate-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ],
+          "gate-full-suite": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-n",
+            "12",
+            "-m",
+            "not serial"
+          ],
+          "gate-full-suite-serial": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "-p",
+            "no:xdist",
+            "-m",
+            "serial"
+          ]
+        },
+        "limitations": [
+          "The installer is unsigned (Authenticode signing and a public update feed are release work, E08); the Electron fuse for Node's inspector stays enabled for Playwright's driver.",
+          "The tray click is emitted in the app's own process (an OS tray click cannot be scripted); the hotkey is a real key press (SendInput).",
+          "Windows 11 on this PC only."
+        ]
+      },
+      "C19-PACKAGE": {
+        "summary": "Decision 0046: the agent package installs the MCP server, skills and session-start summary as a Claude Code plugin and as a documented OpenCode configuration only through the owner's opt-in setup; a scripted MCP client session per supported host configuration lists the same tools and completes the same read and request flow; no host-specific operation exists.",
+        "commands": {
+          "package-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp19_package.py",
+            "tests/test_cp18_queue_text.py"
+          ]
+        },
+        "limitations": [
+          "Real agent hosts (Claude Code, OpenCode) are the external gates E01 and E02."
+        ]
+      },
+      "C19-WALK": {
+        "summary": "Decision 0055: on the built desktop app with a fresh store, the owner opens the app from its tray (it pairs), saves a note through the global hotkey's quick capture, receives the agent's approval request as a system notification, reviews and grants it in the window and sees the agent resume it over the real MCP stdio server (official SDK client); quitting and restarting loses nothing and announces nothing again; a fresh agent session finds no repeated event. The walk repeats on a second fresh store through MCP alone with the desktop app stopped; the normalised stored outcomes, every step's outcome and every agent answer are equal; the transcript is retained; the walk's judgement is mutation-tested.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp19.py",
+            "--print-transcript",
+            "--out",
+            "{run_dir}/walk"
+          ],
+          "walk-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp19_walk.py"
+          ]
+        },
+        "limitations": [
+          "The MCP leg's owner steps run through the service in the harness (a synthetic owner channel); the desktop leg's owner steps are the real app.",
+          "The agent is a scripted MCP client; real agent behaviour is observed in E01 and E02.",
+          "The walk drives the app built by C19-SHELL's build-installer (dist/win-unpacked) and refuses one whose main.js is not the checkout's.",
+          "The independent review of the retained transcript is part of acceptance and is not claimed here."
+        ]
+      }
+    },
+    "CP20": {
+      "C20-STATUS": {
+        "summary": "Decisions 0082, 0106: one derived status per claim with all its causes by the precedence withdrawn, superseded, stale, conflicting, settling, unverified, corrected, holds; holds and corrected name their basis, decided by who recorded the assessment; every stale cause (a newer producer version, a run before an applied correction or assumption revision, a changed origin), stale before corrected, conflicting only for two bindings with the same name and definition; checks carry expected, measured and tolerance; the file locator renders path, digest and size; paper readiness reads the derived status; a mutation check per rule.",
+        "commands": {
+          "status-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp20_claim_status.py",
+            "tests/test_cp20_status_causes.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "Adoption generated_by producers are used by the status but not yet shown in a claim's details (decision 0107)."
+        ]
+      },
+      "C20-STRUCTURE": {
+        "summary": "Decisions 0083, 0106, 0107: track entries and the answers, addresses and draws_on relations through the request protocol, promoting nothing; derived deliverable stages with what blocks each; Now leads with the objective, the deliverables and their stages, cards and planned checks; the same reads through MCP and HTTP; the map in context_get and now_get; the hub's map reads (verifiables, agent-placed links).",
+        "commands": {
+          "structure-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp20_structure.py",
+            "tests/test_cp20_hub_reads.py",
+            "tests/test_cp20_congruence.py"
+          ]
+        },
+        "limitations": [
+          "The hub's own rendering is exercised by hub/e2e 27-29 and by C20-WALK's hub leg."
+        ]
+      },
+      "C20-VERIFY": {
+        "summary": "Decision 0084: detector-proposed checks with kind and estimate, deduplicated and cheapest first; the owner's read-only verification budget changed only by the owner; an agent's start of a budget-eligible check accepted without an approval and every other start approval_required; decision cards with what, why, recommendation and default; a passed default changes no record, file or anchor; apply-all-recommended is one digest-bound approval applied in one transaction or not at all; the agent texts state the one budget exception (decision 0107).",
+        "commands": {
+          "verify-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp20_verify.py"
+          ],
+          "queue-text-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp18_queue_text.py"
+          ]
+        },
+        "limitations": [
+          "PrometheOS starts no check itself; real agent behaviour is observed in E18."
+        ]
+      },
+      "C20-ADOPT": {
+        "summary": "Decisions 0085, 0106, 0107: every family classed by deterministic rules first, failing toward compete; owner items only for compete and undecided succession defaults; checks become verification actions; the outline (tracks, deliverables, questions, results with producers, stale candidates) cites file and line and is confirmed once; a baseline file cited as a reference-only version shown unverified until checked; the layer's outline and class proposals stay proposals.",
+        "commands": {
+          "adopt-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp20_adopt.py",
+            "tests/test_cp20_adopt_checks.py",
+            "tests/test_cp20_outline.py",
+            "tests/test_cp20_layer.py"
+          ]
+        },
+        "limitations": [
+          "Per-class precision and recall are measured on the synthetic corpus (development/impact/cp20-4); the layer's tasks have no trust until an acceptance record is measured (decision 0105)."
+        ]
+      },
+      "C20-WALK": {
+        "summary": "Decisions 0106, 0107: on a fresh store from the synthetic forking repository (tools/research_map_fixture.py: per-track forks, a stale run, a definitional pair, a corrected number) the owner scans the folder in the hub, corrects the outline and confirms it once; the agent (official MCP SDK client over the real stdio server) imports the cited outputs and records claims under the question, the pair, its assessments and the correction; the owner reads each claim's status, basis and causes under its question and the deliverable's stage, and opens the stale claim's cause and verifiables; the agent starts the budget-eligible read-only check with no approval and records expected, measured and tolerance (a pass without a measured value refused), its rerun answers approval_required, and it asks for two carded decisions; the owner sees a card's passed default in effect with the record digest and the folder unchanged, grants the other card and the agent resumes it (the 18.2 % claim superseded, the 17.4 % one corrected). Repeated on a second fresh store with the owner's steps through the service; the normalised stored outcomes, every step's outcome and every agent answer are equal; the walk's judgement is mutation-tested.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp20.py",
+            "--print-transcript",
+            "--out",
+            "{run_dir}/walk"
+          ],
+          "walk-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp20_walk.py"
+          ],
+          "c20-walk-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "The MCP leg's owner steps run through the service in the harness (the hub owner's act); the hub leg's owner steps are the real hub in a browser.",
+          "The agent's steps are scripted calls over MCP, not a coding agent's own choices; real agent behaviour is observed in E18.",
+          "An approval request binds the project's exact state, so the agent asks for the card it wants answered by a grant last; a card granted after later writes answers revision_conflict on resume, while apply-all-recommended re-checks base revisions.",
+          "The independent review of the retained transcript is part of acceptance and is not claimed here."
+        ]
+      }
+    },
+    "CP21": {
+      "C21-LAUNCH": {
+        "summary": "Decisions 0088 and 0090: `prometheos start | stop | status` keep one hub per home through an OS-held lock that every hub process takes (a second start opens a paired browser on the running hub; a second hub process refuses; forged advisory metadata takes nothing over; a killed hub's lock is released by the OS and the next start keeps the port); MCP and CLI writes keep working while the hub runs; a taken port and the pre-CP21 desktop app are refused; the registry migrates only after a verified copy and a store needing migration is refused until the owner migrates it; `status` reports a stale agent package and only the owner's setup command writes it; the PWA's manifest and hub-written service worker (cache named by the build digest, no /api, pages network-first) and the CSP additions; installability is the installed Edge's own report, empty for the hub and naming errors for the manifest-less control; the parity inventory, the security headers and the repository gates pass.",
+        "commands": {
+          "launcher-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp21_launcher.py"
+          ],
+          "pwa-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp21_pwa.py"
+          ],
+          "package-status-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp21_package.py"
+          ],
+          "registry-and-security-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp10_parity_inventory.py",
+            "tests/test_cp5_security.py",
+            "tests/test_cp18_no_launch.py",
+            "tests/test_cp10_migrations.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ],
+          "gate-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "Installability is checked in the installed Microsoft Edge (headless, fresh temporary profile): Playwright's headless shell reports no installability errors even without a manifest (decision 0090). On a PC without Edge the PWA browser test is skipped, which this check reports as unavailable, not passed.",
+          "The owner's trial week beside the desktop build is an observation, not part of this check."
+        ]
+      },
+      "C21-PAIRING": {
+        "summary": "Decisions 0088 and 0089: launch codes only over the owner channel (refusing whatever a browser could send), 60 seconds, one use, only in the URL fragment and never printed; the hub at the home's own host name; the remembered-device credential (host-only per-home cookie, digest-only store, rotation with a 60-second grace, 14-day idle and 90-day expiry, revocation from the hub and the CLI ending the device's sessions, sign-out forgets) and hostile Host, Origin, port, other-home and replay tests.",
+        "commands": {
+          "device-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp21_devices.py"
+          ],
+          "launch-code-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp21_launcher.py",
+            "-k",
+            "code or owner_channel"
+          ],
+          "hub-security-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp5_security.py"
+          ]
+        },
+        "limitations": [
+          "Browsers do not isolate cookies by port: another program serving the same home host name on another port would receive the cookie (spec/08, residual exposure)."
+        ]
+      },
+      "C21-WALK": {
+        "summary": "Decision 0091: the core installed as a uv tool (editable, pinned to the lockfile) and `prometheos start` on a fresh home; a second start opens a paired browser on the running hub and the page pairs from the fragment at the home's own host name (Playwright's headless shell in the loopback boundary admitting only that host name); the owner captures a note, reviews and grants the agent's approval request, and the agent (official MCP SDK client over the real stdio server) resumes it; the core restarts and a reload resumes the session from the remembered browser; then forged metadata, replayed and expired codes, the credential with a hostile Origin, on 127.0.0.1 and at another home's hub, a killed hub and a revocation on the Recovery page each behave as specified and change no record; no launch code reaches a request line, the history entry or the hub's log. The walk repeats on a second fresh store through MCP alone with no hub running; the normalised stored outcomes, every step's outcome and every agent answer are equal; the walk's judgement is mutation-tested.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp21.py",
+            "--print-transcript",
+            "--out",
+            "{run_dir}/walk"
+          ],
+          "walk-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp21_walk.py"
+          ],
+          "c21-walk-hub-assets": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_hub_assets.py"
+          ]
+        },
+        "limitations": [
+          "The MCP leg's owner steps run through the service in the harness (a synthetic owner channel); the hub leg's owner steps are the real hub in a browser.",
+          "The launcher's browser is a stand-in that records the URL `start` opens; the spec loads it in Playwright's headless shell.",
+          "The uv tool install reads uv's cache first and the package index for a pinned wheel the cache lacks; the transcript records which.",
+          "The independent review of the retained transcript is part of acceptance and is not claimed here."
+        ]
+      }
+    },
+    "CP22": {
+      "C22-GATEWAY": {
+        "summary": "Decisions 0092, 0096-0099: the OpenRouter gateway over the CP6.3 transport with zero retention, data collection denied, parameters required and a strict wire schema; per-model profiles; fallback only inside the evaluated pairs; 402/403 and 429 stop a batch with finished items kept; an unknown or interrupted call is held and never repeated; every call that left has a receipt with its bundle's digest; a true upper estimate, the home's monthly, run and task caps and an over-budget stop; the key's remaining limit read first; the standing policy granted and revoked only by the owner, bound to its digest and the provider revision, re-checked before every send; restricted input denied; a run outside the policy is the CP6.3 per-call route.",
+        "commands": {
+          "gateway-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp22_gateway.py"
+          ],
+          "operations-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp22_ops.py",
+            "tests/test_cp22_review.py"
+          ],
+          "gate-ruff": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "check",
+            "."
+          ],
+          "gate-format": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "ruff",
+            "format",
+            "--check",
+            "."
+          ],
+          "gate-mypy": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "mypy",
+            "src"
+          ],
+          "gate-contracts": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/check_contracts.py"
+          ]
+        },
+        "limitations": [
+          "Fake transports and recorded replies only; the A2 spike and E21 (real models) need the owner's key, OK and cap.",
+          "Advisories left open are listed in decisions 0096, 0098 and 0099."
+        ]
+      },
+      "C22-TASKS": {
+        "summary": "Decisions 0092, 0096: the task registry (strict output with an abstain branch, template digest over instructions, version and wire schema); the wire schema derived from the strict model; validators rejecting a wrong quote, a changed digest (re-read through the inventory's guarded read), an unbound number, an unoffered id and a disagreement; the ai_results cache never altered; cassette replay.",
+        "commands": {
+          "task-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp22_tasks.py"
+          ]
+        },
+        "limitations": [
+          "Two tasks are registered (the CP17.4 family assist); the others are later slices."
+        ]
+      },
+      "C22-EVAL": {
+        "summary": "Decisions 0093, 0096, 0099: evaluation records fixed by digest before measuring (the golden set may only grow, targets never fall); the exact one-sided 95% Clopper-Pearson bound overall and per outcome; trust only from gateway replies bound to their receipts, served by the requested model on the evaluated list, per task version, template, wire schema, model and provider set; replayed replies never trusted; tools/ai_eval.py replays cassettes.",
+        "commands": {
+          "eval-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp22_eval.py"
+          ]
+        },
+        "limitations": [
+          "The family-assist golden set (owner-labelled roles) is not built; E21 measures a real model with the owner's OK."
+        ]
+      },
+      "C22-USE": {
+        "summary": "Decisions 0094, 0095, 0099: the family assist on all executors through the layer's operations (CLI, MCP, HTTP) on CP17-style corpora with recorded replies; the hub's AI page shows the policy, key health, spend, root sensitivity, results with their source tag and trust, and the owner's 'Use as evidence' (one owner action).",
+        "commands": {
+          "use-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp22_ops.py"
+          ]
+        },
+        "limitations": [
+          "Shown on the AI page; the adoption page's own fallback line is a later polish."
+        ]
+      },
+      "C22-RETRIEVAL": {
+        "summary": "Decisions 0095, 0098, 0099: candidates are the caller's visible records; FTS5 BM25 inside the allowed records; a fixture embedder and reciprocal-rank fusion; a retrieval record fixed by digest per name and per query set; the fusion enabled only when it meets its target and the lower bound of the share of improved queries is above one half.",
+        "commands": {
+          "retrieval-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp22_retrieval.py"
+          ]
+        },
+        "limitations": [
+          "Only the fixture embedder exists; a real local model needs the owner's OK for its download, and its digest goes in the receipt."
+        ]
+      },
+      "C22-WALK": {
+        "summary": "Decision 0099: with no key the hub says what runs instead; an agent's run with no provider says what to configure; with a recorded policy and replayed replies the family assist proposes tagged hints, the restricted root's file is denied and never sent, the agent's widening answers approval_required and its revocation policy_denied; the owner uses a proposal as evidence and revokes the policy in the hub; a later run is outside the policy; repeated through MCP alone with equal outcomes; no model call.",
+        "commands": {
+          "walk": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "python",
+            "tools/walk_cp22.py",
+            "--print-transcript",
+            "--out",
+            "{run_dir}/walk"
+          ],
+          "walk-tests": [
+            "uv",
+            "run",
+            "--offline",
+            "--no-sync",
+            "pytest",
+            "-q",
+            "tests/test_cp22_walk.py"
+          ]
+        },
+        "limitations": [
+          "Replayed replies stand in for a model (no key); real hosts and models are external gates (E20, E21)."
+        ]
+      }
+    }
+  }
+}

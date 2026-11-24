@@ -1,0 +1,50 @@
+{
+  "$id": "https://prometheos.local/contracts/capability_revoke_receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval_request_id": {
+      "anyOf": [
+        {
+          "pattern": "^apreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Approval Request Id"
+    },
+    "revoked": {
+      "title": "Revoked",
+      "type": "boolean"
+    },
+    "state": {
+      "anyOf": [
+        {
+          "enum": [
+            "pending",
+            "granted",
+            "denied",
+            "withdrawn",
+            "expired",
+            "revoked",
+            "used"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "State"
+    }
+  },
+  "required": [
+    "revoked"
+  ],
+  "title": "CapabilityRevokeReceipt",
+  "type": "object"
+}

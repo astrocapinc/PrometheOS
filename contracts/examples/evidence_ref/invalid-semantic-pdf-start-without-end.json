@@ -1,0 +1,11 @@
+{
+  "source_id": "source_00000000-0000-4000-8000-000000000001",
+  "version_id": "version_00000000-0000-4000-8000-000000000001",
+  "locator": {
+    "type": "pdf",
+    "page": 2,
+    "bbox": null,
+    "start": 14
+  },
+  "quote_sha256": "a676e3bd6ee6328d190cdceb0b241193c40b5226237dd71586f80097c5fd1ca6"
+}

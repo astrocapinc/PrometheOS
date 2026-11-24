@@ -1,0 +1,200 @@
+{
+  "$defs": {
+    "Marker": {
+      "additionalProperties": false,
+      "properties": {
+        "glob": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Glob",
+          "type": "string"
+        },
+        "weight": {
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Weight",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "glob",
+        "weight"
+      ],
+      "title": "Marker",
+      "type": "object"
+    },
+    "Vocabulary": {
+      "additionalProperties": false,
+      "description": "A profile's words (declarative analyzers, review cp17-234-a F14). No regular expressions:\na status term is plain words matched whole; a version token is letters, digits, ``_`` or\n``-``, where ``#`` stands for a number (``rev#`` matches ``rev12``). Both compile to bounded\npatterns that cannot backtrack badly.",
+      "properties": {
+        "status_terms": {
+          "maxProperties": 100,
+          "patternProperties": {
+            "^[A-Za-z][A-Za-z' \\-]{0,38}[A-Za-z]$": {
+              "enum": [
+                "current",
+                "superseded",
+                "invalidated",
+                "withdrawn",
+                "draft",
+                "final_claimed",
+                "archived",
+                "failed",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "title": "Status Terms",
+          "type": "object"
+        },
+        "version_tokens": {
+          "items": {
+            "pattern": "^[A-Za-z0-9_\\-]{0,20}#?[A-Za-z0-9_\\-]{0,20}$",
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Version Tokens",
+          "type": "array"
+        }
+      },
+      "title": "Vocabulary",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/adoption_profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "An adoption profile: declarative preset of markers, zones, noise, analyzers, vocabulary\nand ranking rule order (R4 3.6). Profiles are data, stored in the PrometheOS store or\nshipped with the release, never in the adopted tree.",
+  "properties": {
+    "analyzers": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_]*(\\.[a-z0-9_]+)+$",
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Analyzers",
+      "type": "array"
+    },
+    "extends": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9-]{0,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Extends"
+    },
+    "id": {
+      "pattern": "^[a-z][a-z0-9-]{0,63}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "markers": {
+      "items": {
+        "$ref": "#/$defs/Marker"
+      },
+      "maxItems": 50,
+      "title": "Markers",
+      "type": "array"
+    },
+    "noise": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 200,
+      "title": "Noise",
+      "type": "array"
+    },
+    "ranking": {
+      "items": {
+        "enum": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6",
+          "R7",
+          "R8"
+        ],
+        "type": "string"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "title": "Ranking",
+      "type": "array"
+    },
+    "summary": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "threshold": {
+      "default": 0,
+      "maximum": 1000,
+      "minimum": 0,
+      "title": "Threshold",
+      "type": "integer"
+    },
+    "version": {
+      "pattern": "^\\d{1,4}\\.\\d{1,4}\\.\\d{1,6}$",
+      "title": "Version",
+      "type": "string"
+    },
+    "vocabulary": {
+      "$ref": "#/$defs/Vocabulary"
+    },
+    "zones": {
+      "additionalProperties": {
+        "items": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "propertyNames": {
+        "enum": [
+          "source_code",
+          "notebooks",
+          "data_raw",
+          "data_derived",
+          "results",
+          "models_sim",
+          "manuscript",
+          "deliverable",
+          "notes",
+          "literature",
+          "instrument_data",
+          "tracking_records",
+          "agent_memory",
+          "tool_output",
+          "env_cache_noise",
+          "vendored",
+          "backup_copy",
+          "archive",
+          "unknown"
+        ]
+      },
+      "title": "Zones",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "extends",
+    "summary",
+    "vocabulary",
+    "ranking"
+  ],
+  "title": "AdoptionProfile",
+  "type": "object"
+}

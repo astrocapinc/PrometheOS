@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "observation": "reported",
+  "reporter": "coding agent via MATLAB MCP",
+  "command": "run('e06_build_and_run.m')",
+  "working_root": "e06",
+  "environment": {
+    "os": "Windows 11 x64",
+    "tools": [
+      {
+        "name": "MATLAB",
+        "version": "R2025b Update 5"
+      },
+      {
+        "name": "Simulink",
+        "version": "25.2"
+      }
+    ]
+  },
+  "started_at": "2026-10-05T06:36:30Z",
+  "ended_at": "2026-10-05T06:36:41.25Z",
+  "exit_status": 0,
+  "outcome": "succeeded",
+  "inputs": [
+    {
+      "source_id": "source_00000000-0000-4000-8000-000000000011",
+      "version_id": "version_00000000-0000-4000-8000-000000000012",
+      "sha256": "8f2a8f8c5c6f1d7d1e7c4f8c0b9f3e2d1c0b9a8f7e6d5c4b3a291807f6e5d4c3",
+      "role": "script"
+    }
+  ],
+  "outputs": [
+    {
+      "source_id": "source_00000000-0000-4000-8000-000000000013",
+      "version_id": "version_00000000-0000-4000-8000-000000000014",
+      "sha256": "9a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef",
+      "role": "model"
+    }
+  ],
+  "limitations": [
+    "First-order plant; not a validated motor model."
+  ],
+  "approved_by": "researcher"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "apreq_00000000-0000-4000-8000-000000000082",
+  "project_id": "project_00000000-0000-4000-8000-000000000001",
+  "operation": "apply",
+  "caller_rank": 0,
+  "actor": "mcp",
+  "request_id": "00000000-0000-4000-8000-000000000083",
+  "plan": {
+    "schema_version": 1,
+    "project_id": "project_00000000-0000-4000-8000-000000000001",
+    "expected_seq": 4,
+    "operations": [
+      {
+        "op": "correction_apply",
+        "id": "correction_00000000-0000-4000-8000-000000000081",
+        "base_rev": 1
+      }
+    ]
+  },
+  "plan_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+  "required_scope": "exact_request",
+  "owner_route_hub": "/approvals/apreq_00000000-0000-4000-8000-000000000082",
+  "owner_route_cli": "prometheos decision review --approval apreq_00000000-0000-4000-8000-000000000082",
+  "summary": [
+    "apply correction"
+  ],
+  "state": "pending",
+  "created_at": "2026-10-06T10:00:00Z",
+  "expires_at": "2026-10-06T11:00:00Z",
+  "decided_at": null,
+  "decided_by": null,
+  "decision_note": null,
+  "capability_id": null,
+  "used_at": null,
+  "used_seq": null,
+  "result": null,
+  "closed_at": null
+}

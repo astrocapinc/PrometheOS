@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "spec_version": "1.7.0",
+  "spec_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "run_id": "TEMPLATE-DO-NOT-SUBMIT",
+  "checkpoint_id": "CP0",
+  "created_at": "2026-10-04T00:00:00Z",
+  "candidate": {
+    "git_revision": null,
+    "tree_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "tree_manifest_path": "REPLACE-WITH-REAL-TREE-MANIFEST.json",
+    "dirty": true
+  },
+  "implementer_id": "REPLACE",
+  "environment": {
+    "os": "REPLACE",
+    "architecture": "REPLACE",
+    "python": "REPLACE",
+    "tool_versions": []
+  },
+  "technical_status": "in_progress",
+  "checks": [],
+  "external_checks": [],
+  "evidence": [],
+  "review": {
+    "status": "pending",
+    "reviewer_id": null,
+    "evidence_paths": [],
+    "summary": "No review performed."
+  },
+  "limitations": [
+    "Template only. No product checks have been run."
+  ],
+  "next_task": "CP0.1"
+}

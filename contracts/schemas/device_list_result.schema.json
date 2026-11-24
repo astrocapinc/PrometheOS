@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "DeviceView": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "device_id": {
+          "pattern": "^dev_[0-9a-f]{16}$",
+          "title": "Device Id",
+          "type": "string"
+        },
+        "expires_at": {
+          "title": "Expires At",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 80,
+          "title": "Label",
+          "type": "string"
+        },
+        "last_used_at": {
+          "title": "Last Used At",
+          "type": "string"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Revoked At"
+        },
+        "state": {
+          "enum": [
+            "active",
+            "expired",
+            "revoked"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "device_id",
+        "label",
+        "state",
+        "created_at",
+        "last_used_at",
+        "expires_at",
+        "revoked_at"
+      ],
+      "title": "DeviceView",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/device_list_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "devices": {
+      "items": {
+        "$ref": "#/$defs/DeviceView"
+      },
+      "title": "Devices",
+      "type": "array"
+    }
+  },
+  "required": [
+    "devices"
+  ],
+  "title": "DeviceListResult",
+  "type": "object"
+}

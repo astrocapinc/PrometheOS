@@ -1,0 +1,32 @@
+{
+  "$id": "https://prometheos.local/contracts/capability_unavailable_details.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Details of ``capability_unavailable``: which capability and what blocks it.",
+  "properties": {
+    "blocker": {
+      "enum": [
+        "offline",
+        "not_installed",
+        "not_configured",
+        "quota_exhausted",
+        "unsupported_platform",
+        "disabled_by_policy",
+        "not_built"
+      ],
+      "title": "Blocker",
+      "type": "string"
+    },
+    "capability": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+      "title": "Capability",
+      "type": "string"
+    }
+  },
+  "required": [
+    "capability",
+    "blocker"
+  ],
+  "title": "CapabilityUnavailableDetails",
+  "type": "object"
+}

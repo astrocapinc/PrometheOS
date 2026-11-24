@@ -1,0 +1,37 @@
+{
+  "scan_gen": 2,
+  "family_id": "fam_0123456789abcdef",
+  "key": "model:plant",
+  "kind": "model",
+  "members": [
+    {
+      "path": "models/plant.slx",
+      "outcome": "candidate",
+      "copy_of": null,
+      "rank": 1,
+      "reasons": []
+    },
+    {
+      "path": "models/plant_backup_2026_01_10.slx",
+      "outcome": "candidate",
+      "copy_of": null,
+      "rank": 2,
+      "reasons": []
+    }
+  ],
+  "current": null,
+  "band": "undecided",
+  "deciding_rule": null,
+  "conflicts": [
+    {
+      "kind": "statement_conflict",
+      "text": "statements of the same date name different current members",
+      "evidence": [
+        "ev_0123456789abcdef0123456789abcdef"
+      ],
+      "paths": [
+        "models/plant.slx"
+      ]
+    }
+  ]
+}

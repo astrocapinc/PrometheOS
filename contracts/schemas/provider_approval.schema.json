@@ -1,0 +1,28 @@
+{
+  "$id": "https://prometheos.local/contracts/provider_approval.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The owner approves one previewed provider request or configuration: the operation and\nthe digest `provider preview` or `provider configure --preview` showed. The CLI prints a\nsingle-use capability for it once (stderr); the hub spends one in the same step.",
+  "properties": {
+    "digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Digest",
+      "type": "string"
+    },
+    "operation": {
+      "enum": [
+        "provider_run",
+        "provider_egress",
+        "provider_configure"
+      ],
+      "title": "Operation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "operation",
+    "digest"
+  ],
+  "title": "ProviderApproval",
+  "type": "object"
+}

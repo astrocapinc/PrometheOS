@@ -1,0 +1,240 @@
+{
+  "$defs": {
+    "DigestParams": {
+      "additionalProperties": false,
+      "properties": {},
+      "title": "DigestParams",
+      "type": "object"
+    },
+    "IntervalSchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "minutes": {
+          "maximum": 10080,
+          "minimum": 15,
+          "title": "Minutes",
+          "type": "integer"
+        },
+        "start_utc": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Start Utc",
+          "type": "string"
+        },
+        "type": {
+          "const": "interval",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "minutes",
+        "start_utc"
+      ],
+      "title": "IntervalSchedule",
+      "type": "object"
+    },
+    "JobBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_concurrent_runs": {
+          "const": 1,
+          "title": "Max Concurrent Runs",
+          "type": "integer"
+        },
+        "max_inputs": {
+          "maximum": 500,
+          "minimum": 1,
+          "title": "Max Inputs",
+          "type": "integer"
+        },
+        "max_output_chars": {
+          "maximum": 64000,
+          "minimum": 100,
+          "title": "Max Output Chars",
+          "type": "integer"
+        },
+        "max_provider_calls": {
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Max Provider Calls",
+          "type": "integer"
+        },
+        "spend_cap_estimate_usd": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{1,6}(\\.\\d{1,2})?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Spend Cap Estimate Usd"
+        }
+      },
+      "required": [
+        "max_inputs",
+        "max_output_chars",
+        "max_provider_calls",
+        "max_concurrent_runs",
+        "spend_cap_estimate_usd"
+      ],
+      "title": "JobBudget",
+      "type": "object"
+    },
+    "PaperCheckParams": {
+      "additionalProperties": false,
+      "properties": {
+        "paper_id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Paper Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paper_id"
+      ],
+      "title": "PaperCheckParams",
+      "type": "object"
+    },
+    "SourceRefreshParams": {
+      "additionalProperties": false,
+      "properties": {
+        "source_ids": {
+          "items": {
+            "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_ids"
+      ],
+      "title": "SourceRefreshParams",
+      "type": "object"
+    },
+    "WeeklySchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "day": {
+          "enum": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ],
+          "title": "Day",
+          "type": "string"
+        },
+        "time": {
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+          "title": "Time",
+          "type": "string"
+        },
+        "type": {
+          "const": "weekly",
+          "title": "Type",
+          "type": "string"
+        },
+        "zone": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Zone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "day",
+        "time",
+        "zone"
+      ],
+      "title": "WeeklySchedule",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/job_body.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A fixed-handler schedule (spec/08). Slots and leases live in their own tables.",
+  "properties": {
+    "budget": {
+      "$ref": "#/$defs/JobBudget"
+    },
+    "enabled": {
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "handler": {
+      "enum": [
+        "source_refresh",
+        "paper_check",
+        "digest"
+      ],
+      "title": "Handler",
+      "type": "string"
+    },
+    "last_slot": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Slot"
+    },
+    "parameters": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SourceRefreshParams"
+        },
+        {
+          "$ref": "#/$defs/PaperCheckParams"
+        },
+        {
+          "$ref": "#/$defs/DigestParams"
+        }
+      ],
+      "title": "Parameters"
+    },
+    "schedule": {
+      "discriminator": {
+        "mapping": {
+          "interval": "#/$defs/IntervalSchedule",
+          "weekly": "#/$defs/WeeklySchedule"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/IntervalSchedule"
+        },
+        {
+          "$ref": "#/$defs/WeeklySchedule"
+        }
+      ],
+      "title": "Schedule"
+    }
+  },
+  "required": [
+    "handler",
+    "parameters",
+    "schedule",
+    "enabled",
+    "budget",
+    "last_slot"
+  ],
+  "title": "JobBody",
+  "type": "object"
+}

@@ -1,0 +1,8 @@
+{
+  "credential": {
+    "reference": "openai-key",
+    "present": true,
+    "store": "windows-credential-manager",
+    "value": "sk-test"
+  }
+}

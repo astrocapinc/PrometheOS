@@ -1,0 +1,17 @@
+{
+  "event_id": "evt_0b9c6f1e-1d2a-4c3b-9a8f-0123456789ab",
+  "type": "run.outcome_unknown",
+  "subject_ref": {
+    "kind": "operation_run",
+    "id": "oprun_0b9c6f1e-1d2a-4c3b-9a8f-0123456789ab"
+  },
+  "occurred_at": "2026-10-14T10:00:00.123456Z",
+  "project_seq": 12,
+  "data": {
+    "operation": "provider_run",
+    "stage": "generate"
+  },
+  "acknowledged_at": null,
+  "acknowledged_by": null,
+  "acknowledged_note": null
+}

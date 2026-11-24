@@ -1,0 +1,755 @@
+{
+  "$defs": {
+    "ApprovalWait": {
+      "additionalProperties": false,
+      "description": "The run waits for the owner's decision on an approval request (CP10.2).",
+      "properties": {
+        "approval_request_id": {
+          "pattern": "^apreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Approval Request Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "approval",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "approval_request_id"
+      ],
+      "title": "ApprovalWait",
+      "type": "object"
+    },
+    "BudgetReservation": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^\\d{1,9}(\\.\\d{1,6})?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "usd_estimate",
+            "provider_calls",
+            "seconds"
+          ],
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "amount"
+      ],
+      "title": "BudgetReservation",
+      "type": "object"
+    },
+    "ErrorInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "validation_error",
+            "not_found",
+            "revision_conflict",
+            "request_key_conflict",
+            "policy_denied",
+            "stale_task",
+            "source_unavailable",
+            "budget_exceeded",
+            "busy",
+            "io_error",
+            "unsupported",
+            "approval_required",
+            "capability_unavailable"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "message": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "details"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    },
+    "ExternalCall": {
+      "additionalProperties": false,
+      "description": "The external request a run started (a provider call, a remote push, a download):\nenough to show what is uncertain and to never send it again blindly. Never a credential:\n``external_ref`` is the provider's request or job label.",
+      "properties": {
+        "external_ref": {
+          "anyOf": [
+            {
+              "maxLength": 300,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "External Ref"
+        },
+        "provider": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "request_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Request Sha256"
+        },
+        "started_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Started At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "external_ref",
+        "request_sha256",
+        "started_at"
+      ],
+      "title": "ExternalCall",
+      "type": "object"
+    },
+    "InputDigest": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "sha256"
+      ],
+      "title": "InputDigest",
+      "type": "object"
+    },
+    "InputWait": {
+      "additionalProperties": false,
+      "description": "The run waits for input from the caller (a file, a choice, text or a confirmation).",
+      "properties": {
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "input_kind": {
+          "enum": [
+            "file",
+            "choice",
+            "text",
+            "confirmation"
+          ],
+          "title": "Input Kind",
+          "type": "string"
+        },
+        "kind": {
+          "const": "input",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "input_kind",
+        "description"
+      ],
+      "title": "InputWait",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "RunArtifact": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "rev": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Rev",
+          "type": "integer"
+        },
+        "role": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "rev",
+        "role"
+      ],
+      "title": "RunArtifact",
+      "type": "object"
+    },
+    "RunBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "charged": {
+          "pattern": "^\\d{1,9}(\\.\\d{1,6})?$",
+          "title": "Charged",
+          "type": "string"
+        },
+        "reservation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BudgetReservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "reservation",
+        "charged"
+      ],
+      "title": "RunBudget",
+      "type": "object"
+    },
+    "RunLogLine": {
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "At",
+          "type": "string"
+        },
+        "idx": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Idx",
+          "type": "integer"
+        },
+        "level": {
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "message": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "idx",
+        "at",
+        "level",
+        "message"
+      ],
+      "title": "RunLogLine",
+      "type": "object"
+    },
+    "RunProgress": {
+      "additionalProperties": false,
+      "properties": {
+        "done": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Done",
+          "type": "integer"
+        },
+        "total": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total"
+        },
+        "unit": {
+          "maxLength": 32,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "done",
+        "total",
+        "unit"
+      ],
+      "title": "RunProgress",
+      "type": "object"
+    },
+    "RunStageView": {
+      "additionalProperties": false,
+      "properties": {
+        "charged": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{1,9}(\\.\\d{1,6})?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Charged"
+        },
+        "completed_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z][a-z0-9_:.-]{0,99}$",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "completed_at",
+        "charged"
+      ],
+      "title": "RunStageView",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/operation_run_view.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "What every transport (hub, CLI, MCP, HTTP) shows of one operation run: the same\ndocument everywhere (decision 0017). ``cancel_confirmed`` is true only once the run is\n``cancelled``: a recorded ``cancel_requested_at`` is a request, not proof of a stop.\n``result`` is the operation's result document once it completed. The latest 50 log lines\nand stages are included; the lease owner (host and process) is not.",
+  "properties": {
+    "actor": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Actor",
+      "type": "string"
+    },
+    "artifacts": {
+      "items": {
+        "$ref": "#/$defs/RunArtifact"
+      },
+      "maxItems": 200,
+      "title": "Artifacts",
+      "type": "array"
+    },
+    "attempts": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Attempts",
+      "type": "integer"
+    },
+    "budget": {
+      "$ref": "#/$defs/RunBudget"
+    },
+    "caller_rank": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Caller Rank",
+      "type": "integer"
+    },
+    "cancel_confirmed": {
+      "title": "Cancel Confirmed",
+      "type": "boolean"
+    },
+    "cancel_requested_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Cancel Requested At"
+    },
+    "config_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Config Digest",
+      "type": "string"
+    },
+    "created_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Created At",
+      "type": "string"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ErrorInfo"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "external_call": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExternalCall"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "external_effect": {
+      "enum": [
+        "none",
+        "started",
+        "confirmed",
+        "uncertain"
+      ],
+      "title": "External Effect",
+      "type": "string"
+    },
+    "finished_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Finished At"
+    },
+    "heartbeat_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Heartbeat At"
+    },
+    "input_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Input Digest",
+      "type": "string"
+    },
+    "input_digests": {
+      "items": {
+        "$ref": "#/$defs/InputDigest"
+      },
+      "maxItems": 200,
+      "title": "Input Digests",
+      "type": "array"
+    },
+    "job_due_utc": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Job Due Utc"
+    },
+    "job_id": {
+      "anyOf": [
+        {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Job Id"
+    },
+    "lease_expires_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Lease Expires At"
+    },
+    "limitations": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "logs": {
+      "items": {
+        "$ref": "#/$defs/RunLogLine"
+      },
+      "maxItems": 50,
+      "title": "Logs",
+      "type": "array"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Model"
+    },
+    "operation": {
+      "pattern": "^[a-z][a-z0-9_]{0,63}$",
+      "title": "Operation",
+      "type": "string"
+    },
+    "params": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Params",
+      "type": "object"
+    },
+    "params_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Params Digest",
+      "type": "string"
+    },
+    "progress": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RunProgress"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "result": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Result"
+    },
+    "result_seq": {
+      "anyOf": [
+        {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Result Seq"
+    },
+    "resumable": {
+      "title": "Resumable",
+      "type": "boolean"
+    },
+    "run_id": {
+      "pattern": "^oprun_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "stage": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Stage"
+    },
+    "stages": {
+      "items": {
+        "$ref": "#/$defs/RunStageView"
+      },
+      "maxItems": 50,
+      "title": "Stages",
+      "type": "array"
+    },
+    "stages_completed": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Stages Completed",
+      "type": "integer"
+    },
+    "state": {
+      "enum": [
+        "queued",
+        "running",
+        "waiting_for_input",
+        "paused_budget",
+        "completed",
+        "failed",
+        "cancelled",
+        "unknown_external"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "updated_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "waiting_on": {
+      "anyOf": [
+        {
+          "discriminator": {
+            "mapping": {
+              "approval": "#/$defs/ApprovalWait",
+              "input": "#/$defs/InputWait"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ApprovalWait"
+            },
+            {
+              "$ref": "#/$defs/InputWait"
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Waiting On"
+    },
+    "workflow_version": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Workflow Version"
+    }
+  },
+  "required": [
+    "run_id",
+    "operation",
+    "state",
+    "stage",
+    "progress",
+    "actor",
+    "caller_rank",
+    "params",
+    "params_digest",
+    "input_digests",
+    "input_digest",
+    "config_digest",
+    "workflow_version",
+    "model",
+    "budget",
+    "external_effect",
+    "external_call",
+    "waiting_on",
+    "cancel_requested_at",
+    "cancel_confirmed",
+    "heartbeat_at",
+    "lease_expires_at",
+    "attempts",
+    "error",
+    "limitations",
+    "artifacts",
+    "result_seq",
+    "result",
+    "resumable",
+    "job_id",
+    "job_due_utc",
+    "stages_completed",
+    "stages",
+    "logs",
+    "created_at",
+    "updated_at",
+    "finished_at"
+  ],
+  "title": "RunView",
+  "type": "object"
+}

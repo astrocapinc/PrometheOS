@@ -1,0 +1,227 @@
+{
+  "$defs": {
+    "ContextDefaults": {
+      "additionalProperties": false,
+      "properties": {
+        "budget_chars": {
+          "maximum": 64000,
+          "minimum": 2000,
+          "title": "Budget Chars",
+          "type": "integer"
+        },
+        "reserve_chars": {
+          "maximum": 16000,
+          "minimum": 0,
+          "title": "Reserve Chars",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "budget_chars",
+        "reserve_chars"
+      ],
+      "title": "ContextDefaults",
+      "type": "object"
+    },
+    "RecordRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "rev": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Rev",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "rev"
+      ],
+      "title": "RecordRef",
+      "type": "object"
+    },
+    "ResearchRoot": {
+      "additionalProperties": false,
+      "properties": {
+        "alias": {
+          "pattern": "^[a-z][a-z0-9_-]{0,39}$",
+          "title": "Alias",
+          "type": "string"
+        },
+        "path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "alias",
+        "path"
+      ],
+      "title": "ResearchRoot",
+      "type": "object"
+    },
+    "RetentionPrefs": {
+      "additionalProperties": false,
+      "properties": {
+        "default_retention": {
+          "enum": [
+            "copy",
+            "reference"
+          ],
+          "title": "Default Retention",
+          "type": "string"
+        },
+        "max_media_bytes": {
+          "maximum": 68719476736,
+          "minimum": 1,
+          "title": "Max Media Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "default_retention",
+        "max_media_bytes"
+      ],
+      "title": "RetentionPrefs",
+      "type": "object"
+    },
+    "VerificationBudget": {
+      "additionalProperties": false,
+      "description": "A06.1 (CP20.3, decision 0084): the owner's budget for read-only checks an agent may start\nwithout a per-item question. Changed only by the owner (a settings change is protected).",
+      "properties": {
+        "max_minutes_each": {
+          "default": 15,
+          "maximum": 1440,
+          "minimum": 1,
+          "title": "Max Minutes Each",
+          "type": "integer"
+        },
+        "max_minutes_per_day": {
+          "default": 60,
+          "maximum": 1440,
+          "minimum": 1,
+          "title": "Max Minutes Per Day",
+          "type": "integer"
+        },
+        "output_path": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Path"
+        },
+        "output_root_alias": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_-]{0,39}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Root Alias"
+        }
+      },
+      "title": "VerificationBudget",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/project_settings.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_roots": {
+      "items": {
+        "$ref": "#/$defs/ResearchRoot"
+      },
+      "maxItems": 50,
+      "title": "Allowed Roots",
+      "type": "array"
+    },
+    "context_defaults": {
+      "$ref": "#/$defs/ContextDefaults"
+    },
+    "current_objective": {
+      "maxLength": 65536,
+      "minLength": 1,
+      "title": "Current Objective",
+      "type": "string"
+    },
+    "objective_entry_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RecordRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "policy_version": {
+      "const": 1,
+      "title": "Policy Version",
+      "type": "integer"
+    },
+    "retention": {
+      "$ref": "#/$defs/RetentionPrefs"
+    },
+    "timezone": {
+      "anyOf": [
+        {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Timezone"
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "verification_budget": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/VerificationBudget"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "title",
+    "current_objective",
+    "objective_entry_ref",
+    "timezone",
+    "allowed_roots",
+    "retention",
+    "context_defaults",
+    "policy_version"
+  ],
+  "title": "ProjectSettings",
+  "type": "object"
+}

@@ -1,0 +1,85 @@
+{
+  "title": "Synthetic KERS manuscript",
+  "objective": "Report the simplified comparison within its stated regime.",
+  "claim_refs": [
+    {
+      "id": "claim_00000000-0000-4000-8000-000000000003",
+      "rev": 2
+    }
+  ],
+  "manuscript_source_id": "source_00000000-0000-4000-8000-000000000005",
+  "venue_source_refs": [
+    {
+      "id": "version_00000000-0000-4000-8000-000000000012",
+      "rev": 1
+    }
+  ],
+  "status": "drafting",
+  "deadline": "2026-12-01T17:00:00Z",
+  "requirements": [
+    {
+      "id": "r1",
+      "text": "Manuscripts must not exceed eight pages including references.",
+      "source_ref": {
+        "source_id": "source_00000000-0000-4000-8000-000000000011",
+        "version_id": "version_00000000-0000-4000-8000-000000000012",
+        "locator": {
+          "type": "text",
+          "start_line": 5,
+          "end_line": 5
+        },
+        "quote_sha256": null
+      },
+      "applicability": "unknown",
+      "last_checked_at": "2026-10-04T10:00:00Z",
+      "status": "todo",
+      "evidence": []
+    }
+  ],
+  "contribution": "A scoped comparison on synthetic events.",
+  "related_papers": [
+    {
+      "paper_id": "paper_00000000-0000-4000-8000-000000000021",
+      "relationship": "potential_overlap",
+      "explanation": "Shares the SIMPLIFIED-A event; similarity only, not a judgement."
+    }
+  ],
+  "review_rounds": [
+    {
+      "id": "round-a",
+      "label": "Internal review A",
+      "source_refs": [
+        {
+          "id": "version_00000000-0000-4000-8000-000000000013",
+          "rev": 1
+        }
+      ],
+      "received_at": "2026-10-01T09:00:00Z",
+      "items": [
+        {
+          "id": "c1",
+          "comment_source_ref": {
+            "source_id": "source_00000000-0000-4000-8000-000000000014",
+            "version_id": "version_00000000-0000-4000-8000-000000000013",
+            "locator": {
+              "type": "text",
+              "start_line": 3,
+              "end_line": 3
+            },
+            "quote_sha256": null
+          },
+          "text": "The general claim is not supported by PLANT-B.",
+          "response_text": "We narrowed the claim to SIMPLIFIED-A.",
+          "change_refs": [
+            {
+              "id": "anchor_00000000-0000-4000-8000-000000000030",
+              "rev": 2
+            }
+          ],
+          "status": "resolved",
+          "resolution_evidence": []
+        }
+      ]
+    }
+  ]
+}

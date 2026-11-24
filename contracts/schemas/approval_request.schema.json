@@ -1,0 +1,240 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "$id": "https://prometheos.local/contracts/approval_request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One row of ``approval_requests``: an agent's exact protected plan awaiting the owner.\n\nThe grant is an exact-plan capability held by the server (``capability_id`` names a row\nof ``capabilities``; its secret is never returned to the agent) and used once, in the\ntransaction that executes the stored plan (spec/04 \"Pending approvals\").",
+  "properties": {
+    "actor": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Actor",
+      "type": "string"
+    },
+    "caller_rank": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Caller Rank",
+      "type": "integer"
+    },
+    "capability_id": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Capability Id"
+    },
+    "closed_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Closed At"
+    },
+    "created_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Created At",
+      "type": "string"
+    },
+    "decided_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decided At"
+    },
+    "decided_by": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decided By"
+    },
+    "decision_note": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decision Note"
+    },
+    "expires_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^apreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "operation": {
+      "pattern": "^[a-z][a-z0-9_]{0,63}$",
+      "title": "Operation",
+      "type": "string"
+    },
+    "owner_route_cli": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Owner Route Cli",
+      "type": "string"
+    },
+    "owner_route_hub": {
+      "pattern": "^/[A-Za-z0-9/_.:-]{0,299}$",
+      "title": "Owner Route Hub",
+      "type": "string"
+    },
+    "plan": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Plan",
+      "type": "object"
+    },
+    "plan_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "project_id": {
+      "pattern": "^project_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "request_id": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Request Id"
+    },
+    "required_scope": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+      "title": "Required Scope",
+      "type": "string"
+    },
+    "result": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Result"
+    },
+    "state": {
+      "enum": [
+        "pending",
+        "granted",
+        "denied",
+        "withdrawn",
+        "expired",
+        "revoked",
+        "used"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "summary": {
+      "items": {
+        "maxLength": 300,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "title": "Summary",
+      "type": "array"
+    },
+    "used_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Used At"
+    },
+    "used_seq": {
+      "anyOf": [
+        {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Used Seq"
+    }
+  },
+  "required": [
+    "id",
+    "project_id",
+    "operation",
+    "caller_rank",
+    "actor",
+    "request_id",
+    "plan",
+    "plan_sha256",
+    "required_scope",
+    "owner_route_hub",
+    "owner_route_cli",
+    "summary",
+    "state",
+    "created_at",
+    "expires_at",
+    "decided_at",
+    "decided_by",
+    "decision_note",
+    "capability_id",
+    "used_at",
+    "used_seq",
+    "result",
+    "closed_at"
+  ],
+  "title": "ApprovalRequest",
+  "type": "object"
+}

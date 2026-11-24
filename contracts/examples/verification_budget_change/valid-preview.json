@@ -1,0 +1,8 @@
+{
+  "budget": {
+    "max_minutes_each": 20,
+    "max_minutes_per_day": 90,
+    "output_root_alias": "research",
+    "output_path": "checks/out"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "$defs": {
+    "ReceiptArtifact": {
+      "additionalProperties": false,
+      "description": "One input or output, pinned to an exact stored version by its digest.",
+      "properties": {
+        "role": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "source_id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "version_id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Version Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "version_id",
+        "sha256",
+        "role"
+      ],
+      "title": "ReceiptArtifact",
+      "type": "object"
+    },
+    "ReceiptEnvironment": {
+      "additionalProperties": false,
+      "properties": {
+        "os": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Os",
+          "type": "string"
+        },
+        "tools": {
+          "items": {
+            "$ref": "#/$defs/ReceiptTool"
+          },
+          "maxItems": 50,
+          "title": "Tools",
+          "type": "array"
+        }
+      },
+      "required": [
+        "os",
+        "tools"
+      ],
+      "title": "ReceiptEnvironment",
+      "type": "object"
+    },
+    "ReceiptTool": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "ReceiptTool",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/execution_receipt_v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "What an external agent reports it ran. PrometheOS records it; it never upgrades a\nreport to an observation, and intact bytes do not establish scientific validity.",
+  "properties": {
+    "command": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Command",
+      "type": "string"
+    },
+    "ended_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Ended At"
+    },
+    "environment": {
+      "$ref": "#/$defs/ReceiptEnvironment"
+    },
+    "exit_status": {
+      "anyOf": [
+        {
+          "maximum": 4294967295,
+          "minimum": -2147483648,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Exit Status"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/ReceiptArtifact"
+      },
+      "maxItems": 200,
+      "title": "Inputs",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "observation": {
+      "const": "reported",
+      "title": "Observation",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "succeeded",
+        "failed",
+        "unknown"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "outputs": {
+      "items": {
+        "$ref": "#/$defs/ReceiptArtifact"
+      },
+      "maxItems": 200,
+      "title": "Outputs",
+      "type": "array"
+    },
+    "reporter": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Reporter",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "started_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Started At"
+    },
+    "working_root": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Working Root"
+    }
+  },
+  "required": [
+    "schema_version",
+    "observation",
+    "reporter",
+    "command",
+    "working_root",
+    "environment",
+    "started_at",
+    "ended_at",
+    "exit_status",
+    "outcome",
+    "inputs",
+    "outputs",
+    "limitations"
+  ],
+  "title": "ExecutionReceiptV1",
+  "type": "object"
+}

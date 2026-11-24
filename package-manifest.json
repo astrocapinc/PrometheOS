@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "spec_version": "1.7.0",
+  "description": "Design artifact integrity only; not product acceptance.",
+  "files": [
+    {
+      "path": "acceptance/README.md",
+      "sha256": "161da77bab53c671a8384ab95e9f4275470ad4ccbbc69901f6d26a69918cb08c"
+    },
+    {
+      "path": "acceptance/scenarios.json",
+      "sha256": "13d8fb101b181a27ca12ffb602a3367511467c7ef479c41cbc578065cd37f704"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "8cfe554428fab8a272dc24e8c530b94f68644028895d2d8d6508e89364609a08"
+    },
+    {
+      "path": "checkpoints.json",
+      "sha256": "1b7c9fec98279aa4d2bf84ae5080fdaa41980103e59f1b3b6d9d630d8fa17460"
+    },
+    {
+      "path": "design-inputs.json",
+      "sha256": "3f24ee2b416e58e6ade27b569c3fec55c798fa230c4b55368126d50c7bcda2c1"
+    },
+    {
+      "path": "fixtures/baseline.md",
+      "sha256": "fdf6c15b8c18bd29f68c1bf44a31d00bff48be374516d560ffa20b50120a7e82"
+    },
+    {
+      "path": "fixtures/manuscript.md",
+      "sha256": "29f8ca22d6a1bb4a9d7ec99db0bb882c2a4d8cfe0706ea1786b80abeb7374eaf"
+    },
+    {
+      "path": "fixtures/meeting.txt",
+      "sha256": "fb43de9c6d989bbb384532d5d0265dc0da8900be6c9ab08c059874ebb16fa2a1"
+    },
+    {
+      "path": "fixtures/plant-result.md",
+      "sha256": "ebd94a88abf6e93b2b23169437efea5e05cd9b5ef76e604b5a9e2d1b6b8e582e"
+    },
+    {
+      "path": "fixtures/README.md",
+      "sha256": "79507d1e16dd0ae2e6597d1cbc610bd3bb726f43877a45f6cf9c9cd186a7d992"
+    },
+    {
+      "path": "requirements.json",
+      "sha256": "aeb897a21dd8600a2654676e765265b4238c5256b9b9acefb76648d27b9a5deb"
+    },
+    {
+      "path": "schemas/impact.schema.json",
+      "sha256": "1babade95c999de8c279b378a0a1bc90340511b87b774f643eea106e7e4e9c1c"
+    },
+    {
+      "path": "schemas/receipt.schema.json",
+      "sha256": "8c85ecfee857d6ccdb1eddea58733382f4336c362e6918ad15444cd37759721d"
+    },
+    {
+      "path": "spec/00-decisions.md",
+      "sha256": "9d7ea04dda09051c7433bd2095d6cd86078542d50bc75c2854fdf823ac22515e"
+    },
+    {
+      "path": "spec/01-product.md",
+      "sha256": "8b82f1c4dfd44c55d0d094a020bb2dad114147ccb778f42b5011892143e1ac04"
+    },
+    {
+      "path": "spec/02-architecture.md",
+      "sha256": "2c9c5de45f7194895a0d730a3109aee35711e852467ef72e92b69cc6ba36576e"
+    },
+    {
+      "path": "spec/03-data.md",
+      "sha256": "5f527349ee0e4b0809144d9030dffe2eb86244e8e767f67e03feed45d94bf17a"
+    },
+    {
+      "path": "spec/04-interfaces.md",
+      "sha256": "5594417d943163b5bb83612ee8eca278969ba6606967be714f9dad6abbc95e61"
+    },
+    {
+      "path": "spec/05-workflows.md",
+      "sha256": "f28276aea8b25301a89183182e0c1800655ad5d310e168aac550fbfc3bf608a5"
+    },
+    {
+      "path": "spec/06-hub.md",
+      "sha256": "632e1b8553fb9dcec66dc5784c147056e7d5a2d68790e7857524f4d3a69d1558"
+    },
+    {
+      "path": "spec/07-skills.md",
+      "sha256": "d2b6a29b90e5040fec6e1bbef7daa341b09af62aae147738675f69f9876dfc57"
+    },
+    {
+      "path": "spec/08-operations.md",
+      "sha256": "32aecaa07a468e8986f9029f14aa070b69a3d7313fc7e7791e7031ec88ff4d4b"
+    },
+    {
+      "path": "spec/09-licensing-sources.md",
+      "sha256": "66bf707ae47abe4b4fff8d0ab95e8eced341f75e67ffa0c4b0f68d621e690fc9"
+    },
+    {
+      "path": "spec/10-delivery.md",
+      "sha256": "c5612961e66a42a6020e7070e75584b4bcef40a6a4e41331cdc531dd98576487"
+    },
+    {
+      "path": "START-HERE.md",
+      "sha256": "8e4911aa33f8b626ad5342aa03bc76155587a5100b8194114522f07b6579b75d"
+    },
+    {
+      "path": "templates/receipt-template.json",
+      "sha256": "34eed0aa4d97be90ac457136bf4fabf42830a40380f07101a62c8cd2492a7205"
+    },
+    {
+      "path": "tools/seal_package.py",
+      "sha256": "e8495ee599454cc57c5e464ff635db0af24eddd81267925f8040d4b05745088c"
+    },
+    {
+      "path": "tools/verify_package.py",
+      "sha256": "4f7b7bb2ebb1842f6842f12bd692b4090a27a32d27bdc49792394ad1449f3783"
+    },
+    {
+      "path": "schemas/spec-amendment.schema.json",
+      "sha256": "7ed4b9875f6a1a453ac7c1e4f9d89210212405a0182bfd196814545bbb41c391"
+    },
+    {
+      "path": "spec/README.md",
+      "sha256": "e7f4d42fa5397a52cb4f0b0c57be71d18a135fc456db3bff147cdce5e6ec40e1"
+    }
+  ]
+}

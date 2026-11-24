@@ -1,0 +1,15 @@
+{
+  "id": "quarantine_00000000-0000-4000-8000-000000000092",
+  "project_id": "project_00000000-0000-4000-8000-000000000001",
+  "damaged_store_path": "C:/Users/researcher/PrometheOS/stores/kers",
+  "damaged_db_sha256": "missing",
+  "damaged_schema_version": null,
+  "damaged_integrity": "missing",
+  "replacement_store_path": "C:/Users/researcher/PrometheOS/stores/kers-restored",
+  "backup_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+  "backup_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "maintenance_approval_id": "mapreq_00000000-0000-4000-8000-000000000091",
+  "switched_at": "2026-10-06T10:15:00Z",
+  "switched_by": "mcp-maintenance",
+  "reason": "record.sqlite was missing; restored from the 2026-10-06 backup"
+}

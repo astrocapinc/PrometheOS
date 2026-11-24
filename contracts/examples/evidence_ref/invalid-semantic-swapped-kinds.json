@@ -1,0 +1,10 @@
+{
+  "source_id": "version_00000000-0000-4000-8000-000000000006",
+  "version_id": "source_00000000-0000-4000-8000-000000000005",
+  "locator": {
+    "type": "text",
+    "start_line": 1,
+    "end_line": 2
+  },
+  "quote_sha256": null
+}

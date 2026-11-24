@@ -1,0 +1,20 @@
+{
+  "scan_gen": 3,
+  "path": "cloud/survey_raw.csv",
+  "parent": null,
+  "depth": 0,
+  "entry": "file",
+  "size": 412,
+  "mtime_us": 1767603600000000,
+  "attributes": 4194336,
+  "sha256": null,
+  "text_sha256": null,
+  "container": null,
+  "status": "placeholder",
+  "reason": null,
+  "zone": "data_derived",
+  "change": null,
+  "detail": {
+    "attributes": "0x00400020"
+  }
+}

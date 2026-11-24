@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewed specification amendment and historical receipt carry-forward",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "from_spec_version",
+    "from_manifest",
+    "from_manifest_sha256",
+    "to_spec_version",
+    "to_manifest",
+    "to_manifest_sha256",
+    "decision_record",
+    "changed_sealed_paths",
+    "affected_check_ids",
+    "rationale",
+    "author_id",
+    "reviewer_id",
+    "review_status",
+    "review_evidence_paths"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "prometheos-spec-amendment"
+    },
+    "from_spec_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "from_manifest": {
+      "type": "string",
+      "minLength": 1
+    },
+    "from_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "to_spec_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "to_manifest": {
+      "type": "string",
+      "minLength": 1
+    },
+    "to_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "decision_record": {
+      "type": "string",
+      "minLength": 1
+    },
+    "changed_sealed_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "affected_check_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "pending",
+        "changes_requested",
+        "accepted"
+      ]
+    },
+    "review_evidence_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

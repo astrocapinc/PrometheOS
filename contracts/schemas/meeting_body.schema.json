@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "RecordRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "rev": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Rev",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "rev"
+      ],
+      "title": "RecordRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/meeting_body.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "held_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Held At"
+    },
+    "participant_refs": {
+      "items": {
+        "$ref": "#/$defs/RecordRef"
+      },
+      "maxItems": 200,
+      "title": "Participant Refs",
+      "type": "array"
+    },
+    "processing": {
+      "enum": [
+        "captured",
+        "proposed",
+        "reviewed"
+      ],
+      "title": "Processing",
+      "type": "string"
+    },
+    "source_version_refs": {
+      "items": {
+        "$ref": "#/$defs/RecordRef"
+      },
+      "maxItems": 200,
+      "title": "Source Version Refs",
+      "type": "array"
+    },
+    "summary_entry_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RecordRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "held_at",
+    "participant_refs",
+    "source_version_refs",
+    "summary_entry_ref",
+    "processing"
+  ],
+  "title": "MeetingBody",
+  "type": "object"
+}

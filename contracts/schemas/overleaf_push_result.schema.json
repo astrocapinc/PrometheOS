@@ -1,0 +1,148 @@
+{
+  "$defs": {
+    "OpResult": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "op_index": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Op Index",
+          "type": "integer"
+        },
+        "rev": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rev"
+        }
+      },
+      "required": [
+        "op_index",
+        "id",
+        "rev"
+      ],
+      "title": "OpResult",
+      "type": "object"
+    },
+    "SuccessResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true,
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "project_id": {
+          "pattern": "^project_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Project Id",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "replayed": {
+          "title": "Replayed",
+          "type": "boolean"
+        },
+        "request_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/$defs/OpResult"
+          },
+          "title": "Results",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ok",
+        "schema_version",
+        "project_id",
+        "request_id",
+        "project_seq",
+        "results",
+        "replayed"
+      ],
+      "title": "SuccessResponse",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/overleaf_push_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "What a push of an authorised plan reports: the commits pushed, the remote head, the\ncommit that spent the authorisation and the limitations of the claim.",
+  "properties": {
+    "authorised": {
+      "$ref": "#/$defs/SuccessResponse"
+    },
+    "limitations": {
+      "items": {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "pushed": {
+      "items": {
+        "pattern": "^[0-9a-f]{40,64}$",
+        "type": "string"
+      },
+      "maxItems": 1000,
+      "title": "Pushed",
+      "type": "array"
+    },
+    "remote_head": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{40,64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Remote Head"
+    }
+  },
+  "required": [
+    "pushed",
+    "remote_head",
+    "authorised",
+    "limitations"
+  ],
+  "title": "OverleafPushResult",
+  "type": "object"
+}

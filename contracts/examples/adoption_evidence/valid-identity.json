@@ -1,0 +1,20 @@
+{
+  "evidence_id": "ev_0123456789abcdef0123456789abcdef",
+  "scan_gen": 3,
+  "analyzer": "opc.slx",
+  "analyzer_version": "1.0.0",
+  "subject": "models/plant.slx.r2024b",
+  "subject_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "predicate": "same_origin_as",
+  "object": {
+    "path": "models/plant.slx"
+  },
+  "locator": {
+    "kind": "part",
+    "part": "metadata/mwcorePropertiesExtension.xml"
+  },
+  "quote": null,
+  "quote_sha256": null,
+  "tier": "T1",
+  "determinism": "pure"
+}

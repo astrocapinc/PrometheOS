@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "OwnerRoute": {
+      "additionalProperties": false,
+      "description": "Where the owner reviews a pending approval: a hub page and an interactive command.",
+      "properties": {
+        "cli": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Cli",
+          "type": "string"
+        },
+        "hub": {
+          "pattern": "^/[A-Za-z0-9/_.:-]{0,299}$",
+          "title": "Hub",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hub",
+        "cli"
+      ],
+      "title": "OwnerRoute",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/approval_required_details.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Details of ``approval_required`` (spec/04 \"Pending approvals\"; decision 0015).\n\nNothing committed. The approval request stores the exact canonical plan; the agent\nresumes it once after the owner grants it through ``owner_route``. Never a secret.",
+  "properties": {
+    "approval_request_id": {
+      "pattern": "^(?:apreq|mapreq)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Approval Request Id",
+      "type": "string"
+    },
+    "expires_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "owner_route": {
+      "$ref": "#/$defs/OwnerRoute"
+    },
+    "plan_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "required_scope": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+      "title": "Required Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "approval_request_id",
+    "plan_sha256",
+    "required_scope",
+    "owner_route",
+    "expires_at"
+  ],
+  "title": "ApprovalRequiredDetails",
+  "type": "object"
+}

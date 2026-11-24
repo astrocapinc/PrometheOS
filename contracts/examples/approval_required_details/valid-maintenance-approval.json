@@ -1,0 +1,10 @@
+{
+  "approval_request_id": "mapreq_00000000-0000-4000-8000-000000000062",
+  "plan_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "required_scope": "registry_switch",
+  "owner_route": {
+    "hub": "/recovery/mapreq_00000000-0000-4000-8000-000000000062",
+    "cli": "prometheos maintenance review --approval mapreq_00000000-0000-4000-8000-000000000062"
+  },
+  "expires_at": "2026-10-06T12:00:00Z"
+}

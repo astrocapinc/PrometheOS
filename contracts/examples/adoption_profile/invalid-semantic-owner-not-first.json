@@ -1,0 +1,49 @@
+{
+  "id": "matlab-simulink",
+  "version": "1.0.0",
+  "extends": "generic",
+  "summary": "MATLAB and Simulink research folders",
+  "markers": [
+    {
+      "glob": "**/*.slx",
+      "weight": 3
+    },
+    {
+      "glob": "**/*.prj",
+      "weight": 2
+    }
+  ],
+  "threshold": 4,
+  "zones": {
+    "models_sim": [
+      "**/*.slx",
+      "**/*.mdl"
+    ],
+    "env_cache_noise": [
+      "**/slprj/**",
+      "**/*.slxc"
+    ]
+  },
+  "noise": [
+    "**/slprj/**"
+  ],
+  "analyzers": [
+    "opc.slx",
+    "code.matlab"
+  ],
+  "vocabulary": {
+    "status_terms": {
+      "SUPERSEDED": "superseded",
+      "FINAL": "final_claimed"
+    },
+    "version_tokens": [
+      "_v\\d+",
+      "(?i)final",
+      "(?i)best"
+    ]
+  },
+  "ranking": [
+    "R3",
+    "R1"
+  ]
+}

@@ -1,0 +1,10 @@
+# Pinned closure of [build-system] requires (decision 0057): `uv build` resolves build
+# dependencies itself, so without these pins an offline build floats to whatever the uv index
+# cache lists, even when only that version's metadata (not its wheel) is cached.
+# Used by desktop/app/build_core.py, tools/clean_install_check.py and tools/dependency_register.py.
+hatchling==1.32.4
+packaging==26.3
+pathspec==1.1.1
+pluggy==1.6.0
+tomlkit==0.15.1
+trove-classifiers==2026.9.21.13

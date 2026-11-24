@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "$id": "https://prometheos.local/contracts/record_envelope.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "body": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Body",
+      "type": "object"
+    },
+    "id": {
+      "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "project",
+        "source",
+        "version",
+        "entry",
+        "claim",
+        "assessment",
+        "correction",
+        "person",
+        "role",
+        "meeting",
+        "item",
+        "action",
+        "paper",
+        "anchor",
+        "task",
+        "job",
+        "package",
+        "run",
+        "execution",
+        "work",
+        "matrix",
+        "extraction"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "lifecycle": {
+      "enum": [
+        "active",
+        "archived",
+        "deleted"
+      ],
+      "title": "Lifecycle",
+      "type": "string"
+    },
+    "occurred_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Occurred At"
+    },
+    "recorded_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "rev": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "title": "Rev",
+      "type": "integer"
+    },
+    "sensitivity": {
+      "enum": [
+        "normal",
+        "restricted",
+        "private"
+      ],
+      "title": "Sensitivity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "rev",
+    "recorded_at",
+    "occurred_at",
+    "sensitivity",
+    "lifecycle",
+    "body"
+  ],
+  "title": "RecordEnvelope",
+  "type": "object"
+}

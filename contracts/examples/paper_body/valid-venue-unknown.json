@@ -1,0 +1,18 @@
+{
+  "title": "Synthetic KERS manuscript",
+  "objective": "Report the simplified comparison within its stated regime.",
+  "claim_refs": [
+    {
+      "id": "claim_00000000-0000-4000-8000-000000000003",
+      "rev": 2
+    }
+  ],
+  "manuscript_source_id": "source_00000000-0000-4000-8000-000000000005",
+  "venue_source_refs": [],
+  "status": "drafting",
+  "deadline": "2026-12-01T17:00:00Z",
+  "requirements": [],
+  "contribution": "A scoped comparison on synthetic events.",
+  "related_papers": [],
+  "review_rounds": []
+}

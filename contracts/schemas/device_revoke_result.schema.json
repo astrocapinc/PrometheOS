@@ -1,0 +1,22 @@
+{
+  "$id": "https://prometheos.local/contracts/device_revoke_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "device_id": {
+      "pattern": "^dev_[0-9a-f]{16}$",
+      "title": "Device Id",
+      "type": "string"
+    },
+    "revoked": {
+      "title": "Revoked",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "device_id",
+    "revoked"
+  ],
+  "title": "DeviceRevokeResult",
+  "type": "object"
+}

@@ -1,0 +1,9 @@
+{
+  "budget": {
+    "max_minutes_each": 15,
+    "max_minutes_per_day": 60,
+    "output_root_alias": null,
+    "output_path": null
+  },
+  "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

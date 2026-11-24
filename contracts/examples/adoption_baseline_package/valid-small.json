@@ -1,0 +1,204 @@
+{
+  "kind": "prometheos-adoption-baseline",
+  "format": 1,
+  "baseline": {
+    "baseline_id": "bl_e37fedc3e20d4f62bb3c3844",
+    "sha256": "0145c020bbb80416f5df4f556a2ec9deed1fca7d0b7c2707394df267d884426e",
+    "payload": {
+      "accepted_steps": [],
+      "decisions": {
+        "fam_533e76684198c565": "results/sweep_v2.csv"
+      },
+      "families": [
+        {
+          "band": "decided",
+          "current": "results/sweep_v2.csv",
+          "current_sha256": "1fa5d232b0bfd72f38f8deb8020d6e379e1c303fd6d32490e837be7b3d52f6d2",
+          "family_id": "fam_533e76684198c565",
+          "key": "data:sweep",
+          "members": [
+            [
+              "results/sweep_v1.csv",
+              "a8269d233961a69811ff20800eff4ac77991cd2c0b3cf70305aa96578fbbcb42"
+            ],
+            [
+              "results/sweep_v2.csv",
+              "1fa5d232b0bfd72f38f8deb8020d6e379e1c303fd6d32490e837be7b3d52f6d2"
+            ]
+          ]
+        }
+      ],
+      "files": 2,
+      "note": null,
+      "plan": {
+        "plan_id": "plan_dc9c5edb8b2d479e",
+        "version": 1
+      },
+      "root_alias": "tree",
+      "root_digest": "c73f7b93410623bf457535931776b1f05272b1e567605c990016d6e0fbd17431",
+      "scan_gen": 1,
+      "summary_sha256": "4c1c89f85f9f6e1445b8766f819519bec2a1503846d6d29557c492679eab8888"
+    },
+    "accepted_at": "2026-10-15T13:16:03.285851Z",
+    "accepted_by": "test-owner",
+    "plan_id": "plan_dc9c5edb8b2d479e",
+    "plan_version": 1
+  },
+  "scan": {
+    "scan_gen": 1,
+    "root_alias": "tree",
+    "run_id": "oprun_fc7eb78c-9103-4de3-a672-e1a918c69f20",
+    "state": "complete",
+    "config": {
+      "exclusions": [],
+      "limits": {
+        "max_members": 10000,
+        "max_depth": 2,
+        "max_member_bytes": 67108864,
+        "max_total_uncompressed": 2147483648,
+        "max_ratio": 200
+      },
+      "profile": "generic",
+      "previous_gen": null,
+      "rank": true
+    },
+    "started_at": "2026-10-15T13:16:03.057151Z",
+    "finished_at": "2026-10-15T13:16:03.196160Z",
+    "root_digest_before": "c73f7b93410623bf457535931776b1f05272b1e567605c990016d6e0fbd17431",
+    "root_digest_after": "c73f7b93410623bf457535931776b1f05272b1e567605c990016d6e0fbd17431",
+    "summary": {
+      "entries": 2,
+      "files_on_disk": 2,
+      "members": 0,
+      "bytes_on_disk": 42,
+      "by_status": {
+        "read": 2
+      },
+      "by_container": {
+        "text": 2
+      },
+      "by_zone": {
+        "data_derived": 2
+      },
+      "unreadable": 0,
+      "limited": 0,
+      "seconds": 0.002
+    },
+    "error": null,
+    "analysis": {
+      "evidence": 2,
+      "by_predicate": {
+        "facet": 2
+      },
+      "extracted": 0,
+      "replayed": 0,
+      "changed_since_inventory": 0,
+      "families": 1,
+      "by_band": {
+        "weak": 1
+      },
+      "conflicts": 0
+    }
+  },
+  "files": [
+    {
+      "scan_gen": 1,
+      "path": "results/sweep_v1.csv",
+      "parent": null,
+      "depth": 0,
+      "entry": "file",
+      "size": 21,
+      "mtime_us": 1792070162787415,
+      "attributes": 32,
+      "sha256": "a8269d233961a69811ff20800eff4ac77991cd2c0b3cf70305aa96578fbbcb42",
+      "text_sha256": "7aed0b064375de8259dfe8440350a9b25195ad219f0de4b725cd949fd4ce79d9",
+      "container": "text",
+      "status": "read",
+      "reason": null,
+      "zone": "data_derived",
+      "change": null,
+      "detail": null
+    },
+    {
+      "scan_gen": 1,
+      "path": "results/sweep_v2.csv",
+      "parent": null,
+      "depth": 0,
+      "entry": "file",
+      "size": 21,
+      "mtime_us": 1792070162788415,
+      "attributes": 32,
+      "sha256": "1fa5d232b0bfd72f38f8deb8020d6e379e1c303fd6d32490e837be7b3d52f6d2",
+      "text_sha256": "61117a227aab1ea06f40fb20ee9abf3da7ee9cd85805dce56f1932bf1aa524fa",
+      "container": "text",
+      "status": "read",
+      "reason": null,
+      "zone": "data_derived",
+      "change": null,
+      "detail": null
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev_76d70b1d486946e8d524afed3b0ae642",
+      "scan_gen": 1,
+      "analyzer": "name.conventions",
+      "analyzer_version": "1.0.0",
+      "subject": "results/sweep_v1.csv",
+      "subject_sha256": "a8269d233961a69811ff20800eff4ac77991cd2c0b3cf70305aa96578fbbcb42",
+      "predicate": "facet",
+      "object": {
+        "path": null,
+        "literal": {
+          "stem": "sweep",
+          "tokens": [
+            "v1"
+          ]
+        },
+        "external": null,
+        "facet": "name.stem"
+      },
+      "locator": null,
+      "quote": null,
+      "quote_sha256": null,
+      "tier": "T7",
+      "determinism": "pure"
+    },
+    {
+      "evidence_id": "ev_ba8f35afafcb1094df8349e95f00dfdf",
+      "scan_gen": 1,
+      "analyzer": "name.conventions",
+      "analyzer_version": "1.0.0",
+      "subject": "results/sweep_v2.csv",
+      "subject_sha256": "1fa5d232b0bfd72f38f8deb8020d6e379e1c303fd6d32490e837be7b3d52f6d2",
+      "predicate": "facet",
+      "object": {
+        "path": null,
+        "literal": {
+          "stem": "sweep",
+          "tokens": [
+            "v2"
+          ]
+        },
+        "external": null,
+        "facet": "name.stem"
+      },
+      "locator": null,
+      "quote": null,
+      "quote_sha256": null,
+      "tier": "T7",
+      "determinism": "pure"
+    }
+  ],
+  "decisions": [
+    {
+      "family_id": "fam_533e76684198c565",
+      "current_path": "results/sweep_v2.csv",
+      "current_sha256": "1fa5d232b0bfd72f38f8deb8020d6e379e1c303fd6d32490e837be7b3d52f6d2",
+      "note": "checked",
+      "decided_by": "test-owner",
+      "decided_at": "2026-10-15T13:16:03.263362Z"
+    }
+  ],
+  "sha256": "10df78606cc21873ea9a2d53e6dbc533c2fb1cca6eb57ea349fec058f499a838"
+}

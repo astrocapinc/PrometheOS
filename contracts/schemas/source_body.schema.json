@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "RootBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "alias": {
+          "pattern": "^[a-z][a-z0-9_-]{0,39}$",
+          "title": "Alias",
+          "type": "string"
+        },
+        "path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "alias",
+        "path"
+      ],
+      "title": "RootBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/source_body.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "maxLength": 65536,
+      "title": "Description",
+      "type": "string"
+    },
+    "origin": {
+      "enum": [
+        "file",
+        "url",
+        "typed",
+        "recording",
+        "agent_receipt",
+        "adapter"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "origin_uri": {
+      "anyOf": [
+        {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Origin Uri"
+    },
+    "retention": {
+      "enum": [
+        "copy",
+        "reference"
+      ],
+      "title": "Retention",
+      "type": "string"
+    },
+    "root_binding": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RootBinding"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "origin",
+    "origin_uri",
+    "root_binding",
+    "retention",
+    "description"
+  ],
+  "title": "SourceBody",
+  "type": "object"
+}

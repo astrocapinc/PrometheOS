@@ -1,0 +1,32 @@
+{
+  "$id": "https://prometheos.local/contracts/approval_decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The owner grants or denies exactly the plan the queue showed (its digest).",
+  "properties": {
+    "note": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    },
+    "plan_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "plan_sha256"
+  ],
+  "title": "ApprovalDecision",
+  "type": "object"
+}

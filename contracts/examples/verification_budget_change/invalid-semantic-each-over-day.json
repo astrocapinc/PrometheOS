@@ -1,0 +1,6 @@
+{
+  "budget": {
+    "max_minutes_each": 90,
+    "max_minutes_per_day": 60
+  }
+}

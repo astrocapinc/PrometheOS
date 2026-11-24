@@ -1,0 +1,200 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "$id": "https://prometheos.local/contracts/maintenance_approval.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One row of the registry's ``maintenance_approvals``: a registry switch an agent\nrequested while no project database was open (spec/04 \"Maintenance service\"). The grant\nis held in the registry (state ``granted`` until ``grant_expires_at``) and used once in\nthe registry transaction that performs the switch.\n\nDecision 0021: a ``migrate`` request (``plan[\"action\"]``) binds the store to migrate\n(``damaged_store_path``, the store whose database cannot be opened at the current schema)\nand its database digest; it names no backup manifest and no target store (the migration\nwrites its own verified pre-migration backup and migrates in place).",
+  "properties": {
+    "actor": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Actor",
+      "type": "string"
+    },
+    "backup_manifest_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Backup Manifest Sha256"
+    },
+    "caller_rank": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Caller Rank",
+      "type": "integer"
+    },
+    "closed_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Closed At"
+    },
+    "created_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Created At",
+      "type": "string"
+    },
+    "damaged_db_sha256": {
+      "pattern": "^(?:[0-9a-f]{64}|missing)$",
+      "title": "Damaged Db Sha256",
+      "type": "string"
+    },
+    "damaged_store_path": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Damaged Store Path",
+      "type": "string"
+    },
+    "decided_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decided At"
+    },
+    "decided_by": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decided By"
+    },
+    "expires_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "grant_expires_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Grant Expires At"
+    },
+    "id": {
+      "pattern": "^mapreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "plan": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Plan",
+      "type": "object"
+    },
+    "plan_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "project_id": {
+      "pattern": "^project_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "request_id": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Request Id"
+    },
+    "state": {
+      "enum": [
+        "pending",
+        "granted",
+        "denied",
+        "withdrawn",
+        "expired",
+        "revoked",
+        "used"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "target_store_path": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Target Store Path"
+    },
+    "used_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Used At"
+    }
+  },
+  "required": [
+    "id",
+    "project_id",
+    "damaged_store_path",
+    "damaged_db_sha256",
+    "backup_manifest_sha256",
+    "target_store_path",
+    "caller_rank",
+    "actor",
+    "request_id",
+    "plan",
+    "plan_sha256",
+    "state",
+    "created_at",
+    "expires_at",
+    "decided_at",
+    "decided_by",
+    "grant_expires_at",
+    "used_at",
+    "closed_at"
+  ],
+  "title": "MaintenanceApproval",
+  "type": "object"
+}

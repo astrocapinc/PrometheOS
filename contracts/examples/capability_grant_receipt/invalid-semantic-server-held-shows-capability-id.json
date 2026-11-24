@@ -1,0 +1,9 @@
+{
+  "capability_id": "00000000-0000-4000-8000-000000000072",
+  "operation": "exact_request",
+  "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "expires_at": "2026-10-06T10:10:00Z",
+  "max_uses": 1,
+  "server_held": true,
+  "approval_request_id": "apreq_00000000-0000-4000-8000-000000000071"
+}

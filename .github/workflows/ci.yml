@@ -1,0 +1,92 @@
+# Continuous integration for the public repository (decision 0072).
+#
+# Runs on every push to main and every pull request, with no secrets, credentials, devices,
+# models, Tectonic or real coding hosts. What needs them runs only on a developer's Windows
+# machine (docs/development.md, "What runs where"):
+#   - the hub's browser tests (npm run test:e2e) and the end-to-end walks (tools/walk_*.py);
+#   - the desktop shell test, the installer check and the release build (desktop/app/README.md);
+#   - tests marked slow, real_model or audio_extra;
+#   - the live gates: real coding hosts, MATLAB, microphones, Zotero, Overleaf.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python core (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    # Windows 11 is the tested platform. Linux is the secondary target and has not yet been
+    # exercised day to day, so its job reports without blocking until it has run green.
+    continue-on-error: ${{ matrix.os == 'ubuntu-latest' }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.10"
+      - name: Install the locked environment
+        run: uv sync --locked
+      - name: Lint
+        run: uv run ruff check .
+      - name: Format
+        run: uv run ruff format --check .
+      - name: Types
+        run: uv run mypy src
+      - name: Contracts
+        run: uv run python tools/check_contracts.py
+      - name: Specification package
+        run: uv run python tools/verify_package.py
+      - name: Dependency register
+        run: uv run python tools/dependency_register.py
+      - name: Shipped hub assets
+        run: uv run python tools/check_hub_assets.py
+      # The serial modules kill or race real worker processes against short delays, so they run
+      # alone after the parallel run, as the full suite does (decision 0037).
+      - name: Tests (fast subset, parallel)
+        run: uv run pytest -n auto -m "not serial and not slow and not real_model and not audio_extra"
+      - name: Tests (fast subset, serial modules)
+        run: uv run pytest -p no:xdist -m "serial and not slow and not real_model and not audio_extra"
+
+  hub:
+    name: Hub (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: hub
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24.13.0"
+          cache: npm
+          cache-dependency-path: hub/package-lock.json
+      - name: Install the locked packages
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm run test:unit
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.10"
+      - name: Third-party notices match the register and the installed licences
+        run: uv run --locked python ../tools/third_party_notices.py --check

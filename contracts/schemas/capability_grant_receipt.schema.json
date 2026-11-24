@@ -1,0 +1,75 @@
+{
+  "$id": "https://prometheos.local/contracts/capability_grant_receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "What was issued, never the secret. A grant made from the review queue is held by the\nserver: ``server_held`` is true and its approval request names it.",
+  "properties": {
+    "approval_request_id": {
+      "anyOf": [
+        {
+          "pattern": "^apreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Approval Request Id"
+    },
+    "capability_id": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Capability Id"
+    },
+    "digest": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Digest"
+    },
+    "expires_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "max_uses": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Max Uses",
+      "type": "integer"
+    },
+    "operation": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+      "title": "Operation",
+      "type": "string"
+    },
+    "server_held": {
+      "title": "Server Held",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "capability_id",
+    "operation",
+    "digest",
+    "expires_at",
+    "max_uses",
+    "server_held",
+    "approval_request_id"
+  ],
+  "title": "CapabilityGrantReceipt",
+  "type": "object"
+}

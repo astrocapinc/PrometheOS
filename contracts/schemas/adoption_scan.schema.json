@@ -1,0 +1,485 @@
+{
+  "$defs": {
+    "AnalysisSummary": {
+      "additionalProperties": false,
+      "description": "What the analyzer pack produced for a generation (CP17.2).",
+      "properties": {
+        "analyzers_unavailable": {
+          "items": {
+            "$ref": "#/$defs/AnalyzerUnavailable"
+          },
+          "maxItems": 20,
+          "title": "Analyzers Unavailable",
+          "type": "array"
+        },
+        "by_band": {
+          "additionalProperties": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "By Band",
+          "type": "object"
+        },
+        "by_predicate": {
+          "additionalProperties": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "By Predicate",
+          "type": "object"
+        },
+        "changed_since_inventory": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Changed Since Inventory",
+          "type": "integer"
+        },
+        "conflicts": {
+          "default": 0,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Conflicts",
+          "type": "integer"
+        },
+        "evidence": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Evidence",
+          "type": "integer"
+        },
+        "extracted": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Extracted",
+          "type": "integer"
+        },
+        "families": {
+          "default": 0,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Families",
+          "type": "integer"
+        },
+        "replayed": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Replayed",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "evidence",
+        "by_predicate",
+        "extracted",
+        "replayed",
+        "changed_since_inventory"
+      ],
+      "title": "AnalysisSummary",
+      "type": "object"
+    },
+    "AnalyzerUnavailable": {
+      "additionalProperties": false,
+      "description": "An analyzer this installation cannot run, why, and how to add it (decision 0053).",
+      "properties": {
+        "analyzer": {
+          "pattern": "^[a-z][a-z0-9_]*(\\.[a-z0-9_]+)+$",
+          "title": "Analyzer",
+          "type": "string"
+        },
+        "files": {
+          "default": 0,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Files",
+          "type": "integer"
+        },
+        "install": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Install",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "analyzer",
+        "reason",
+        "install"
+      ],
+      "title": "AnalyzerUnavailable",
+      "type": "object"
+    },
+    "ArchiveLimits": {
+      "additionalProperties": false,
+      "description": "Per-archive listing limits (decision 0039 section 4): beyond one, the archive or member\nis recorded as ``limited`` with the limit's name, and nothing more of it is read.",
+      "properties": {
+        "max_depth": {
+          "default": 2,
+          "maximum": 8,
+          "minimum": 0,
+          "title": "Max Depth",
+          "type": "integer"
+        },
+        "max_member_bytes": {
+          "default": 67108864,
+          "maximum": 1073741824,
+          "minimum": 0,
+          "title": "Max Member Bytes",
+          "type": "integer"
+        },
+        "max_members": {
+          "default": 10000,
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Max Members",
+          "type": "integer"
+        },
+        "max_ratio": {
+          "default": 200,
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Max Ratio",
+          "type": "integer"
+        },
+        "max_total_uncompressed": {
+          "default": 2147483648,
+          "maximum": 68719476736,
+          "minimum": 0,
+          "title": "Max Total Uncompressed",
+          "type": "integer"
+        }
+      },
+      "title": "ArchiveLimits",
+      "type": "object"
+    },
+    "ScanConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "exclusions": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 200,
+          "title": "Exclusions",
+          "type": "array"
+        },
+        "limits": {
+          "$ref": "#/$defs/ArchiveLimits"
+        },
+        "previous_gen": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous Gen"
+        },
+        "profile": {
+          "default": "generic",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$",
+          "title": "Profile",
+          "type": "string"
+        },
+        "rank": {
+          "default": true,
+          "title": "Rank",
+          "type": "boolean"
+        }
+      },
+      "title": "ScanConfig",
+      "type": "object"
+    },
+    "ScanSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "by_container": {
+          "additionalProperties": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "text",
+              "binary",
+              "zip",
+              "opc_slx",
+              "opc_mlx",
+              "opc_slxc",
+              "opc_office",
+              "opc_other",
+              "mat_v4",
+              "mat_v5",
+              "mat_v73",
+              "hdf5",
+              "pdf",
+              "png",
+              "jpeg",
+              "executable",
+              "empty",
+              "unknown"
+            ]
+          },
+          "title": "By Container",
+          "type": "object"
+        },
+        "by_status": {
+          "additionalProperties": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "read",
+              "listed",
+              "placeholder",
+              "excluded",
+              "noise",
+              "link",
+              "unreadable",
+              "limited"
+            ]
+          },
+          "title": "By Status",
+          "type": "object"
+        },
+        "by_zone": {
+          "additionalProperties": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "source_code",
+              "notebooks",
+              "data_raw",
+              "data_derived",
+              "results",
+              "models_sim",
+              "manuscript",
+              "deliverable",
+              "notes",
+              "literature",
+              "instrument_data",
+              "tracking_records",
+              "agent_memory",
+              "tool_output",
+              "env_cache_noise",
+              "vendored",
+              "backup_copy",
+              "archive",
+              "unknown"
+            ]
+          },
+          "title": "By Zone",
+          "type": "object"
+        },
+        "bytes_on_disk": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Bytes On Disk",
+          "type": "integer"
+        },
+        "entries": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Entries",
+          "type": "integer"
+        },
+        "files_on_disk": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Files On Disk",
+          "type": "integer"
+        },
+        "limited": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Limited",
+          "type": "integer"
+        },
+        "members": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Members",
+          "type": "integer"
+        },
+        "seconds": {
+          "maximum": 1000000000,
+          "minimum": 0,
+          "title": "Seconds",
+          "type": "number"
+        },
+        "unreadable": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Unreadable",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "entries",
+        "files_on_disk",
+        "members",
+        "bytes_on_disk",
+        "by_status",
+        "by_container",
+        "by_zone",
+        "unreadable",
+        "limited",
+        "seconds"
+      ],
+      "title": "ScanSummary",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/adoption_scan.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One scan generation of one root (table ``adoption_scans``).",
+  "properties": {
+    "analysis": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AnalysisSummary"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "config": {
+      "$ref": "#/$defs/ScanConfig"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "finished_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Finished At"
+    },
+    "root_alias": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Root Alias",
+      "type": "string"
+    },
+    "root_digest_after": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Root Digest After"
+    },
+    "root_digest_before": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Root Digest Before"
+    },
+    "run_id": {
+      "anyOf": [
+        {
+          "pattern": "^oprun_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Run Id"
+    },
+    "scan_gen": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "title": "Scan Gen",
+      "type": "integer"
+    },
+    "started_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Started At",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "running",
+        "complete",
+        "failed",
+        "pruned"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "summary": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ScanSummary"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "scan_gen",
+    "root_alias",
+    "run_id",
+    "state",
+    "config",
+    "started_at",
+    "finished_at",
+    "root_digest_before",
+    "root_digest_after",
+    "summary"
+  ],
+  "title": "AdoptionScan",
+  "type": "object"
+}

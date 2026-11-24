@@ -1,0 +1,11 @@
+{
+  "title": "baseline.md",
+  "origin": "url",
+  "origin_uri": "https://example.org/d.csv?token=abc",
+  "root_binding": {
+    "alias": "research",
+    "path": "baseline.md"
+  },
+  "retention": "copy",
+  "description": ""
+}

@@ -1,0 +1,37 @@
+{
+  "$id": "https://prometheos.local/contracts/recommended_request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A06.1, CP20.3 (decision 0084): the owner's \"apply all recommended\" over listed approval\nrequests; ``digest`` is the previewed one (required to apply).",
+  "properties": {
+    "approval_request_ids": {
+      "items": {
+        "maxLength": 80,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "title": "Approval Request Ids",
+      "type": "array"
+    },
+    "digest": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Digest"
+    }
+  },
+  "required": [
+    "approval_request_ids"
+  ],
+  "title": "RecommendedRequest",
+  "type": "object"
+}

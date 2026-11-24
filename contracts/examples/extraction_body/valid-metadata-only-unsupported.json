@@ -1,0 +1,32 @@
+{
+  "matrix_ref": {
+    "id": "matrix_00000000-0000-4000-8000-000000000051",
+    "rev": 2
+  },
+  "work_ref": {
+    "id": "work_00000000-0000-4000-8000-000000000032",
+    "rev": 2
+  },
+  "cells": [
+    {
+      "column_id": "windage",
+      "value_text": "not found: metadata only, no text to quote",
+      "quantities": [],
+      "evidence": [],
+      "basis": "metadata",
+      "state": "unsupported",
+      "method": "manual",
+      "transformation": null
+    },
+    {
+      "column_id": "method",
+      "value_text": "",
+      "quantities": [],
+      "evidence": [],
+      "basis": "metadata",
+      "state": "unsupported",
+      "method": "manual",
+      "transformation": null
+    }
+  ]
+}

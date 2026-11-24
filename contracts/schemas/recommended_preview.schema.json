@@ -1,0 +1,42 @@
+{
+  "$id": "https://prometheos.local/contracts/recommended_preview.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval_request_ids": {
+      "items": {
+        "maxLength": 80,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Approval Request Ids",
+      "type": "array"
+    },
+    "operations": {
+      "minimum": 1,
+      "title": "Operations",
+      "type": "integer"
+    },
+    "plan_sha256s": {
+      "items": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "title": "Plan Sha256S",
+      "type": "array"
+    },
+    "preview": {
+      "additionalProperties": true,
+      "title": "Preview",
+      "type": "object"
+    }
+  },
+  "required": [
+    "approval_request_ids",
+    "plan_sha256s",
+    "operations",
+    "preview"
+  ],
+  "title": "RecommendedPreview",
+  "type": "object"
+}

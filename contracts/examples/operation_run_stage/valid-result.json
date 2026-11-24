@@ -1,0 +1,11 @@
+{
+  "run_id": "oprun_00000000-0000-4000-8000-000000000081",
+  "idx": 9,
+  "name": "result",
+  "output": {
+    "plan_id": "x",
+    "items": []
+  },
+  "charged": null,
+  "completed_at": "2026-10-07T10:00:00Z"
+}

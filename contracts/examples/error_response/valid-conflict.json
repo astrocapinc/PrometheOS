@@ -1,0 +1,13 @@
+{
+  "ok": false,
+  "error": {
+    "code": "revision_conflict",
+    "message": "expected_seq 3 does not match project sequence 4",
+    "retryable": true,
+    "details": {
+      "expected_seq": 3,
+      "project_seq": 4
+    }
+  },
+  "project_seq": 4
+}

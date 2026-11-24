@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "VerificationBudget": {
+      "additionalProperties": false,
+      "description": "A06.1 (CP20.3, decision 0084): the owner's budget for read-only checks an agent may start\nwithout a per-item question. Changed only by the owner (a settings change is protected).",
+      "properties": {
+        "max_minutes_each": {
+          "default": 15,
+          "maximum": 1440,
+          "minimum": 1,
+          "title": "Max Minutes Each",
+          "type": "integer"
+        },
+        "max_minutes_per_day": {
+          "default": 60,
+          "maximum": 1440,
+          "minimum": 1,
+          "title": "Max Minutes Per Day",
+          "type": "integer"
+        },
+        "output_path": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Path"
+        },
+        "output_root_alias": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_-]{0,39}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Root Alias"
+        }
+      },
+      "title": "VerificationBudget",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/verification_budget_change.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The hub's budget control (A06.1, CP20.4; gap audit #16): the whole budget the owner\nwants, and for the apply the digest of the preview they saw. The hub builds the same\n``project_update`` as ``prometheos verify budget`` from the stored settings, so no research\nroot path travels through the browser.",
+  "properties": {
+    "budget": {
+      "$ref": "#/$defs/VerificationBudget"
+    },
+    "digest": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Digest"
+    }
+  },
+  "required": [
+    "budget"
+  ],
+  "title": "VerificationBudgetChange",
+  "type": "object"
+}

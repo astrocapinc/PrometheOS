@@ -1,0 +1,27 @@
+{
+  "$id": "https://prometheos.local/contracts/recommended_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "closed": {
+      "items": {
+        "maxLength": 80,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Closed",
+      "type": "array"
+    },
+    "result": {
+      "additionalProperties": true,
+      "title": "Result",
+      "type": "object"
+    }
+  },
+  "required": [
+    "result",
+    "closed"
+  ],
+  "title": "RecommendedResult",
+  "type": "object"
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "pdf_pages_v1",
+  "pdf_sha256": "7843ca9e0700ec9f7097cb1de079e7ac67132f739f132dafaa31575b349b9919",
+  "engine": {
+    "name": "pypdfium2",
+    "version": "5.13.0",
+    "pdfium": "153.0.7999.0"
+  },
+  "normalisation": "lf-controls-v1",
+  "page_count": 2,
+  "info": {
+    "title": null,
+    "author": null,
+    "subject": null,
+    "keywords": null,
+    "creator": null,
+    "producer": null
+  },
+  "pages": [
+    {
+      "page": 1,
+      "state": "no_text",
+      "chars": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    },
+    {
+      "page": 2,
+      "state": "no_text",
+      "chars": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    }
+  ]
+}

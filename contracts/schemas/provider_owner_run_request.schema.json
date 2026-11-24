@@ -1,0 +1,82 @@
+{
+  "$id": "https://prometheos.local/contracts/provider_owner_run_request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acknowledge_unknown": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Acknowledge Unknown"
+    },
+    "confirm_restricted": {
+      "default": false,
+      "title": "Confirm Restricted",
+      "type": "boolean"
+    },
+    "context_budget": {
+      "default": 12000,
+      "maximum": 200000,
+      "minimum": 1000,
+      "title": "Context Budget",
+      "type": "integer"
+    },
+    "digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Digest",
+      "type": "string"
+    },
+    "include_restricted": {
+      "default": false,
+      "title": "Include Restricted",
+      "type": "boolean"
+    },
+    "meeting_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Meeting Id"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "request_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Request Id"
+    },
+    "wait_seconds": {
+      "default": 0,
+      "maximum": 20,
+      "minimum": 0,
+      "title": "Wait Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "purpose",
+    "digest"
+  ],
+  "title": "ProviderOwnerRunRequest",
+  "type": "object"
+}

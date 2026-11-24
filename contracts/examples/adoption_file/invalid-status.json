@@ -1,0 +1,18 @@
+{
+  "scan_gen": 3,
+  "path": "analysis/compute_metrics.m",
+  "parent": null,
+  "depth": 0,
+  "entry": "file",
+  "size": 412,
+  "mtime_us": 1767603600000000,
+  "attributes": 32,
+  "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "text_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "container": "text",
+  "status": "skipped",
+  "reason": null,
+  "zone": "source_code",
+  "change": null,
+  "detail": null
+}

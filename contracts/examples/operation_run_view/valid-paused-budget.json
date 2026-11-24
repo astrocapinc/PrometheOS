@@ -1,0 +1,83 @@
+{
+  "run_id": "oprun_00000000-0000-4000-8000-000000000081",
+  "operation": "audio_transcribe",
+  "state": "paused_budget",
+  "stage": "chunk 4 of 9",
+  "progress": {
+    "done": 3,
+    "total": 9,
+    "unit": "chunks"
+  },
+  "actor": "mcp",
+  "caller_rank": 0,
+  "params": {
+    "version_id": "version_00000000-0000-4000-8000-000000000080",
+    "config": {
+      "engine": "synthetic"
+    }
+  },
+  "params_digest": "04950f04610f3cdc1bb118ed04f34bb118da43b0dd95f1dc4660a464e313bbd6",
+  "input_digests": [
+    {
+      "name": "audio",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    }
+  ],
+  "input_digest": "11959351af41f8fc6c14357597be8fb70dc6f390e450d68e6540c0a1c5fa209b",
+  "config_digest": "3333333333333333333333333333333333333333333333333333333333333333",
+  "workflow_version": "transcribe-v1",
+  "model": "synthetic",
+  "budget": {
+    "reservation": {
+      "unit": "seconds",
+      "amount": "180"
+    },
+    "charged": "176.000000"
+  },
+  "external_effect": "none",
+  "external_call": null,
+  "waiting_on": null,
+  "cancel_requested_at": null,
+  "cancel_confirmed": false,
+  "heartbeat_at": "2026-10-07T10:00:00.000000Z",
+  "lease_expires_at": null,
+  "attempts": 1,
+  "error": null,
+  "limitations": [],
+  "artifacts": [],
+  "result_seq": null,
+  "result": null,
+  "resumable": true,
+  "job_id": null,
+  "job_due_utc": null,
+  "stages_completed": 4,
+  "stages": [
+    {
+      "name": "decode",
+      "completed_at": "2026-10-07T09:59:00Z",
+      "charged": null
+    },
+    {
+      "name": "chunk:00000",
+      "completed_at": "2026-10-07T09:59:20Z",
+      "charged": "60.000000"
+    }
+  ],
+  "logs": [
+    {
+      "idx": 0,
+      "at": "2026-10-07T09:58:00Z",
+      "level": "info",
+      "message": "created by mcp"
+    },
+    {
+      "idx": 7,
+      "at": "2026-10-07T10:00:00Z",
+      "level": "info",
+      "message": "the run's budget is used up; resume with a larger budget"
+    }
+  ],
+  "created_at": "2026-10-07T09:58:00Z",
+  "updated_at": "2026-10-07T10:00:00Z",
+  "finished_at": null
+}

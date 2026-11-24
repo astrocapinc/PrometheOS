@@ -1,0 +1,13 @@
+{
+  "title": "Supervision",
+  "held_at": "2026-09-28T10:00:00Z",
+  "participant_refs": [],
+  "source_version_refs": [
+    {
+      "id": "version_00000000-0000-4000-8000-000000000006",
+      "rev": 1
+    }
+  ],
+  "summary_entry_ref": null,
+  "processing": "captured"
+}

@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "MatrixColumn": {
+      "additionalProperties": false,
+      "description": "One column of the rubric. ``choices`` (an additive member, decision 0064) lists the\nallowed values of a choice column; it is omitted for the other kinds.",
+      "properties": {
+        "choices": {
+          "anyOf": [
+            {
+              "items": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 50,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Choices"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_-]{0,39}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "instructions": {
+          "maxLength": 4000,
+          "title": "Instructions",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "value_kind": {
+          "enum": [
+            "text",
+            "quantity",
+            "choice"
+          ],
+          "title": "Value Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "value_kind",
+        "instructions"
+      ],
+      "title": "MatrixColumn",
+      "type": "object"
+    },
+    "RecordRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "rev": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Rev",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "rev"
+      ],
+      "title": "RecordRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/matrix_body.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "An evidence matrix (spec/03, CP11): a rubric of columns over a set of works. Its\n``rubric_version`` rises whenever the columns change; rows extracted under an older rubric\nare stale.",
+  "properties": {
+    "columns": {
+      "items": {
+        "$ref": "#/$defs/MatrixColumn"
+      },
+      "maxItems": 50,
+      "minItems": 1,
+      "title": "Columns",
+      "type": "array"
+    },
+    "question_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RecordRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rubric_version": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "title": "Rubric Version",
+      "type": "integer"
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "work_refs": {
+      "items": {
+        "$ref": "#/$defs/RecordRef"
+      },
+      "maxItems": 500,
+      "title": "Work Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "title",
+    "question_ref",
+    "columns",
+    "rubric_version",
+    "work_refs"
+  ],
+  "title": "MatrixBody",
+  "type": "object"
+}

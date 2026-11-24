@@ -1,0 +1,48 @@
+{
+  "scan_gen": 3,
+  "root_alias": "research",
+  "run_id": "oprun_7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "state": "complete",
+  "config": {
+    "exclusions": [
+      "**/private/**"
+    ],
+    "limits": {
+      "max_members": 10000,
+      "max_depth": 2,
+      "max_member_bytes": 67108864,
+      "max_total_uncompressed": 2147483648,
+      "max_ratio": 200
+    },
+    "profile": "generic",
+    "previous_gen": 2
+  },
+  "started_at": "2026-10-15T10:00:00.000000Z",
+  "finished_at": "2026-10-15T10:00:02.500000Z",
+  "root_digest_before": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "root_digest_after": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "summary": {
+    "entries": 4,
+    "files_on_disk": 3,
+    "members": 1,
+    "bytes_on_disk": 2048,
+    "by_status": {
+      "read": 2,
+      "listed": 1,
+      "placeholder": 1
+    },
+    "by_container": {
+      "text": 1,
+      "zip": 1
+    },
+    "by_zone": {
+      "notes": 2,
+      "archive": 1,
+      "data_derived": 1
+    },
+    "unreadable": 0,
+    "limited": 0,
+    "seconds": 0.12
+  },
+  "error": null
+}

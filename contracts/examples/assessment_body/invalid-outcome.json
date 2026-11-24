@@ -1,0 +1,29 @@
+{
+  "claim_ref": {
+    "id": "claim_00000000-0000-4000-8000-000000000007",
+    "rev": 1
+  },
+  "outcome": "proves",
+  "rationale": "Bound quantities match.",
+  "checks": [
+    {
+      "name": "quantity binding",
+      "result": "pass",
+      "evidence": [
+        {
+          "source_id": "source_00000000-0000-4000-8000-000000000005",
+          "version_id": "version_00000000-0000-4000-8000-000000000006",
+          "locator": {
+            "type": "text",
+            "start_line": 7,
+            "end_line": 7
+          },
+          "quote_sha256": null
+        }
+      ]
+    }
+  ],
+  "author_ref": null,
+  "method": "reported_agent",
+  "scope_match": true
+}

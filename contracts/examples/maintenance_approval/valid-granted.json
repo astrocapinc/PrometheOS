@@ -1,0 +1,28 @@
+{
+  "id": "mapreq_00000000-0000-4000-8000-000000000091",
+  "project_id": "project_00000000-0000-4000-8000-000000000001",
+  "damaged_store_path": "C:/Users/researcher/PrometheOS/stores/kers",
+  "damaged_db_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+  "backup_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "target_store_path": "C:/Users/researcher/PrometheOS/stores/kers-restored",
+  "caller_rank": 0,
+  "actor": "mcp-maintenance",
+  "request_id": "00000000-0000-4000-8000-000000000093",
+  "plan": {
+    "action": "registry_switch",
+    "project_id": "project_00000000-0000-4000-8000-000000000001",
+    "damaged_store_path": "C:/Users/researcher/PrometheOS/stores/kers",
+    "damaged_db_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+    "backup_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "target_store_path": "C:/Users/researcher/PrometheOS/stores/kers-restored"
+  },
+  "plan_sha256": "af369c3cff192e43c5b5e61b2fa2be48de61e8433f162d896d8a3dab4ee646c7",
+  "state": "granted",
+  "created_at": "2026-10-06T10:00:00Z",
+  "expires_at": "2026-10-06T11:00:00Z",
+  "decided_at": "2026-10-06T10:05:00Z",
+  "decided_by": "hub-owner-recovery",
+  "grant_expires_at": "2026-10-06T10:20:00Z",
+  "used_at": null,
+  "closed_at": null
+}

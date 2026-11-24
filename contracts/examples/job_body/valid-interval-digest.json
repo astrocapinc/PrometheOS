@@ -1,0 +1,18 @@
+{
+  "handler": "digest",
+  "parameters": {},
+  "schedule": {
+    "type": "interval",
+    "minutes": 60,
+    "start_utc": "2026-10-04T00:00:00Z"
+  },
+  "enabled": true,
+  "budget": {
+    "max_inputs": 20,
+    "max_output_chars": 4000,
+    "max_provider_calls": 0,
+    "max_concurrent_runs": 1,
+    "spend_cap_estimate_usd": null
+  },
+  "last_slot": null
+}

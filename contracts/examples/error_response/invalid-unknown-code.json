@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "error": {
+    "code": "oops",
+    "message": "x",
+    "retryable": false,
+    "details": {}
+  },
+  "project_seq": null
+}

@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "ErrorInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "validation_error",
+            "not_found",
+            "revision_conflict",
+            "request_key_conflict",
+            "policy_denied",
+            "stale_task",
+            "source_unavailable",
+            "budget_exceeded",
+            "busy",
+            "io_error",
+            "unsupported",
+            "approval_required",
+            "capability_unavailable"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "message": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "details"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    },
+    "JsonValue": {}
+  },
+  "$id": "https://prometheos.local/contracts/error_response.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorInfo"
+    },
+    "ok": {
+      "const": false,
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "project_seq": {
+      "anyOf": [
+        {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Project Seq"
+    }
+  },
+  "required": [
+    "ok",
+    "error",
+    "project_seq"
+  ],
+  "title": "ErrorResponse",
+  "type": "object"
+}

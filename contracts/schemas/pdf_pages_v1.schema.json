@@ -1,0 +1,219 @@
+{
+  "$defs": {
+    "PdfEngine": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "pypdfium2",
+          "title": "Name",
+          "type": "string"
+        },
+        "pdfium": {
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Pdfium",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "pdfium"
+      ],
+      "title": "PdfEngine",
+      "type": "object"
+    },
+    "PdfInfo": {
+      "additionalProperties": false,
+      "description": "The PDF information dictionary as text (untrusted; never instructions).",
+      "properties": {
+        "author": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Author"
+        },
+        "creator": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Creator"
+        },
+        "keywords": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Keywords"
+        },
+        "producer": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Producer"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subject"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "maxLength": 1000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title"
+        }
+      },
+      "required": [
+        "title",
+        "author",
+        "subject",
+        "keywords",
+        "creator",
+        "producer"
+      ],
+      "title": "PdfInfo",
+      "type": "object"
+    },
+    "PdfPage": {
+      "additionalProperties": false,
+      "properties": {
+        "chars": {
+          "description": "Length of text in Unicode code points (offsets count these)",
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Chars",
+          "type": "integer"
+        },
+        "page": {
+          "maximum": 2000,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "text",
+            "no_text",
+            "too_long"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 100000,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "state",
+        "chars",
+        "sha256",
+        "text"
+      ],
+      "title": "PdfPage",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/pdf_pages_v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "engine": {
+      "$ref": "#/$defs/PdfEngine"
+    },
+    "info": {
+      "$ref": "#/$defs/PdfInfo"
+    },
+    "normalisation": {
+      "const": "lf-controls-v1",
+      "title": "Normalisation",
+      "type": "string"
+    },
+    "page_count": {
+      "maximum": 2000,
+      "minimum": 1,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PdfPage"
+      },
+      "maxItems": 2000,
+      "minItems": 1,
+      "title": "Pages",
+      "type": "array"
+    },
+    "pdf_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Pdf Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "pdf_pages_v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "pdf_sha256",
+    "engine",
+    "normalisation",
+    "page_count",
+    "info",
+    "pages"
+  ],
+  "title": "PdfPagesV1",
+  "type": "object"
+}

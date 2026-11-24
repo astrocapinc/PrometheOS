@@ -1,0 +1,25 @@
+{
+  "statement": "Candidate recovered more energy in SIMPLIFIED-A.",
+  "scope": {
+    "system": "SIMPLIFIED-A",
+    "operating_regime": "constant deceleration",
+    "comparator": "reference controller",
+    "model_fidelity": "algebraic energy balance",
+    "validation_level": "none"
+  },
+  "evidence": [
+    {
+      "source_id": "source_00000000-0000-4000-8000-000000000005",
+      "version_id": "version_00000000-0000-4000-8000-000000000006",
+      "locator": {
+        "type": "text",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "quote_sha256": null
+    }
+  ],
+  "assessment_refs": [],
+  "state": "true",
+  "superseded_by": null
+}

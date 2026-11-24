@@ -1,0 +1,136 @@
+{
+  "abstract_ref": {
+    "locator": {
+      "pointer": "/data/abstractNote",
+      "type": "json"
+    },
+    "quote_sha256": "64cd46f3c493ce92791a872569e6dce7e070bff33afde64153ecf4e0a0b3c1ea",
+    "source_id": "source_00000000-0000-4000-8000-000000000001",
+    "version_id": "version_00000000-0000-4000-8000-000000000001"
+  },
+  "access_state": "abstract_only",
+  "contributors": [
+    {
+      "name": "Synthetic, A.",
+      "role": "author"
+    },
+    {
+      "name": "Example, B.",
+      "role": "author"
+    }
+  ],
+  "entry_type": "article",
+  "field_provenance": [
+    {
+      "basis": "zotero",
+      "entry": "DRAG0001",
+      "field": "abstract_ref",
+      "locator": {
+        "pointer": "/data/abstractNote",
+        "type": "json"
+      },
+      "value": "64cd46f3c493ce92791a872569e6dce7e070bff33afde64153ecf4e0a0b3c1ea",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000001",
+        "rev": 1
+      }
+    },
+    {
+      "basis": "zotero",
+      "entry": "DRAG0001",
+      "field": "contributors",
+      "locator": {
+        "pointer": "/data/creators",
+        "type": "json"
+      },
+      "value": "Synthetic, A.; Example, B.",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000001",
+        "rev": 1
+      }
+    },
+    {
+      "basis": "zotero",
+      "entry": "DRAG0001",
+      "field": "entry_type",
+      "locator": {
+        "pointer": "/data/itemType",
+        "type": "json"
+      },
+      "value": "article",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000001",
+        "rev": 1
+      }
+    },
+    {
+      "basis": "zotero",
+      "entry": "DRAG0001",
+      "field": "identifiers.doi",
+      "locator": {
+        "pointer": "/data/DOI",
+        "type": "json"
+      },
+      "value": "10.5555/synthetic.2026.001",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000001",
+        "rev": 1
+      }
+    },
+    {
+      "basis": "zotero",
+      "entry": "DRAG0001",
+      "field": "title",
+      "locator": {
+        "pointer": "/data/title",
+        "type": "json"
+      },
+      "value": "Aerodynamic Drag of a Flywheel Housing at Low Pressure",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000001",
+        "rev": 1
+      }
+    },
+    {
+      "basis": "zotero",
+      "entry": "DRAG0001",
+      "field": "venue",
+      "locator": {
+        "pointer": "/data/publicationTitle",
+        "type": "json"
+      },
+      "value": "Journal of Flywheel Studies",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000001",
+        "rev": 1
+      }
+    },
+    {
+      "basis": "zotero",
+      "entry": "DRAG0001",
+      "field": "year",
+      "locator": {
+        "pointer": "/meta/parsedDate",
+        "type": "json"
+      },
+      "value": "2026",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000001",
+        "rev": 1
+      }
+    }
+  ],
+  "full_text_refs": [],
+  "identifiers": {
+    "arxiv": null,
+    "doi": "10.5555/synthetic.2026.001",
+    "isbn": null,
+    "other": [],
+    "pmcid": null,
+    "pmid": null
+  },
+  "merged_into": null,
+  "title": "Aerodynamic Drag of a Flywheel Housing at Low Pressure",
+  "venue": "Journal of Flywheel Studies",
+  "year": 2026
+}

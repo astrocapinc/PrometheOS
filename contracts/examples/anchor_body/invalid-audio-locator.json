@@ -1,0 +1,18 @@
+{
+  "paper_id": "paper_00000000-0000-4000-8000-000000000020",
+  "manuscript_version_id": "version_00000000-0000-4000-8000-000000000006",
+  "locator": {
+    "type": "audio",
+    "start_ms": 0,
+    "end_ms": 10
+  },
+  "claim_refs": [
+    {
+      "id": "claim_00000000-0000-4000-8000-000000000003",
+      "rev": 2
+    }
+  ],
+  "evidence": [],
+  "status": "needs_review",
+  "reason": "correction correction_00000000-0000-4000-8000-000000000009 applied"
+}

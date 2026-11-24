@@ -1,0 +1,15 @@
+{
+  "title": "Plant sweep, controller gains 0.2-0.8",
+  "host_label": "lab workstation (MATLAB R2025b)",
+  "reporter": "claude-code",
+  "command_summary": "matlab -batch run_sweep",
+  "working_root_alias": "sim",
+  "external_ref": "sweep-2026-10-06-a",
+  "expected_outputs": [
+    "results/sweep.csv",
+    "figures/sweep.png"
+  ],
+  "state": "failed",
+  "last_reported_at": "2026-10-06T09:00:00Z",
+  "receipt_refs": []
+}

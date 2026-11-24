@@ -1,0 +1,43 @@
+{
+  "target_refs": [
+    {
+      "id": "claim_00000000-0000-4000-8000-000000000007",
+      "rev": 1
+    }
+  ],
+  "replacement_refs": [
+    {
+      "id": "claim_00000000-0000-4000-8000-000000000017",
+      "rev": 1
+    }
+  ],
+  "reason": "Overbroad.",
+  "evidence": [
+    {
+      "source_id": "source_00000000-0000-4000-8000-000000000005",
+      "version_id": "version_00000000-0000-4000-8000-000000000006",
+      "locator": {
+        "type": "text",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "quote_sha256": null
+    }
+  ],
+  "effects": [
+    {
+      "target_ref": {
+        "id": "claim_00000000-0000-4000-8000-000000000007",
+        "rev": 1
+      },
+      "effect": "supersede",
+      "replacement_ref": {
+        "id": "claim_00000000-0000-4000-8000-000000000017",
+        "rev": 1
+      },
+      "replacement_text": null
+    }
+  ],
+  "status": "done",
+  "applied_seq": null
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "project_id": "project_00000000-0000-4000-8000-000000000001",
+  "request_id": "00000000-0000-4000-8000-000000000002",
+  "expected_seq": 0,
+  "operations": [
+    {
+      "op": "create",
+      "kind": "project",
+      "id": "project_00000000-0000-4000-8000-000000000009",
+      "base_rev": 0,
+      "sensitivity": "normal",
+      "occurred_at": null,
+      "body": {
+        "title": "Initial research question",
+        "text": "Compare the proposed controller with the recorded baseline.",
+        "category": "question",
+        "evidence": [],
+        "claim_refs": [],
+        "author_ref": null,
+        "origin": "typed",
+        "quantities": [],
+        "review": "unreviewed"
+      }
+    }
+  ]
+}

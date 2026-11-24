@@ -1,0 +1,52 @@
+{
+  "title": "Flywheel losses",
+  "question_ref": {
+    "id": "entry_00000000-0000-4000-8000-000000000021",
+    "rev": 1
+  },
+  "columns": [
+    {
+      "id": "method",
+      "label": "Method",
+      "value_kind": "choice",
+      "instructions": "How the result was obtained.",
+      "choices": [
+        "experiment",
+        "simulation",
+        "review"
+      ]
+    },
+    {
+      "id": "pressure",
+      "label": "Pressure",
+      "value_kind": "quantity",
+      "instructions": "Housing pressure.",
+      "choices": [
+        "a"
+      ]
+    },
+    {
+      "id": "windage",
+      "label": "Windage loss",
+      "value_kind": "quantity",
+      "instructions": "Loss or drag coefficient at that pressure."
+    },
+    {
+      "id": "finding",
+      "label": "Key finding",
+      "value_kind": "text",
+      "instructions": ""
+    }
+  ],
+  "rubric_version": 1,
+  "work_refs": [
+    {
+      "id": "work_00000000-0000-4000-8000-000000000031",
+      "rev": 1
+    },
+    {
+      "id": "work_00000000-0000-4000-8000-000000000032",
+      "rev": 2
+    }
+  ]
+}

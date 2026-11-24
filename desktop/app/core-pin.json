@@ -1,0 +1,29 @@
+{
+  "name": "cpython",
+  "version": "3.14.2",
+  "distribution": "python-build-standalone cpython-3.14.2-windows-x86_64-none, installed by uv (checksum-verified)",
+  "python_exe_sha256": "c53694b79beaf529cda63eb7b57d7775a7073fd8c85535caeb4edbb4440401f2",
+  "license": "PSF-2.0",
+  "license_file": "LICENSE.txt",
+  "license_file_sha256": "e745807dbaab26bb1050dc9d12e655ca8d946c38d6cb59a593c2d9557830250c",
+  "notes": "Redistributed inside the desktop installer (resources/core). LICENSE.txt carries the notices of CPython (PSF-2.0 and its history, 0BSD for documentation code), bzip2, Zstandard and Tcl/Tk (Tcl/Tk itself is left out of the core). It does not carry the notices of the other libraries the distribution and the locked wheels bundle, among them OpenSSL (libssl/libcrypto, Apache-2.0, also inside the cryptography wheel), libffi (MIT), SQLite (public domain), zlib (Zlib), liblzma (0BSD), mpdecimal (BSD-2-Clause), expat (MIT) and HACL* (MIT); those must be collected into the installer's notices file before any public release (E08, decision 0054). This list is not exhaustive.",
+  "python_dll_sha256": "d13779978961ded84382c58175dccca78585f93f9007a186db42252719506299",
+  "installer_components": [
+    {
+      "name": "nsis",
+      "version": "3.0.4.1",
+      "source": "electron-builder's per-user cache (nsis-3.0.4.1), downloaded by electron-builder 26.17.0",
+      "role": "the installer's and uninstaller's runtime stubs, redistributed in PrometheOS Setup",
+      "license": "Zlib AND CPL-1.0",
+      "notes": "NSIS is under the zlib/libpng licence; its LZMA compression module is under CPL-1.0 with a linking exception."
+    },
+    {
+      "name": "elevate.exe",
+      "version": "electron-builder 26.17.0",
+      "source": "electron-builder's bundled elevate.exe (resources/elevate.exe)",
+      "role": "shipped in resources by electron-builder; unused because allowElevation is false",
+      "license": "MIT",
+      "notes": "Part of electron-builder (MIT)."
+    }
+  ]
+}

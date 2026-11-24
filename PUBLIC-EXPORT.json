@@ -1,0 +1,8 @@
+{
+  "kind": "prometheos-public-export",
+  "source_commit": "ba33858ec25de08b6dc6aec1cbdc1e4249c68686",
+  "source_dirty": true,
+  "files": 1138,
+  "tree_sha256": "6f5d9d3d8425a6a04e3d1c3e0840973643d9597656d496de1f8ba3819924cfcd",
+  "note": "A fresh export of the private repository by tools/public_export.py; the private repository keeps the history, the receipts and the evidence (development/)."
+}

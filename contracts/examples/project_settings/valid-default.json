@@ -1,0 +1,21 @@
+{
+  "title": "Synthetic KERS study",
+  "current_objective": "Undecided: choose between plant-model and simplified comparison.",
+  "objective_entry_ref": null,
+  "timezone": "Europe/London",
+  "allowed_roots": [
+    {
+      "alias": "research",
+      "path": "C:/research"
+    }
+  ],
+  "retention": {
+    "default_retention": "reference",
+    "max_media_bytes": 2147483648
+  },
+  "context_defaults": {
+    "budget_chars": 12000,
+    "reserve_chars": 2000
+  },
+  "policy_version": 1
+}

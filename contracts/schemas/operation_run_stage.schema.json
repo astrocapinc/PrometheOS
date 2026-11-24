@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "$id": "https://prometheos.local/contracts/operation_run_stage.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One completed stage of a run (store schema 8, decision 0017): the checkpoint a resume\ncontinues from. ``output`` is what later stages need (bounded); ``charged`` is what the\nstage cost in the run's budget unit, so a resumed run never charges it again. The stage\nnamed ``result`` holds the operation's result document.",
+  "properties": {
+    "charged": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{1,9}(\\.\\d{1,6})?$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Charged"
+    },
+    "completed_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "idx": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Idx",
+      "type": "integer"
+    },
+    "name": {
+      "pattern": "^[a-z][a-z0-9_:.-]{0,99}$",
+      "title": "Name",
+      "type": "string"
+    },
+    "output": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Output",
+      "type": "object"
+    },
+    "run_id": {
+      "pattern": "^oprun_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Run Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "idx",
+    "name",
+    "output",
+    "charged",
+    "completed_at"
+  ],
+  "title": "OperationRunStage",
+  "type": "object"
+}

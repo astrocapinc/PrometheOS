@@ -1,0 +1,6 @@
+Synthetic meeting held 2026-09-28, entered into the record 2026-10-04.
+Supervisor: Perhaps compare the controllers with actuator limits before deciding the paper's main claim.
+Researcher: I will attach the constrained-plant result to the notebook before our next meeting.
+Collaborator: Has anyone checked the venue's figure requirements?
+Supervisor: The simplified calculation is still useful, but it should not be presented as a full-vehicle validation.
+No exact deadline was agreed. The collaborator question has no agreed owner.

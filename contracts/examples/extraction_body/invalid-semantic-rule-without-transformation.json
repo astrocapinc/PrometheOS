@@ -1,0 +1,132 @@
+{
+  "matrix_ref": {
+    "id": "matrix_00000000-0000-4000-8000-000000000051",
+    "rev": 1
+  },
+  "work_ref": {
+    "id": "work_00000000-0000-4000-8000-000000000031",
+    "rev": 1
+  },
+  "cells": [
+    {
+      "column_id": "windage",
+      "value_text": "0.0042 at 10 Pa",
+      "quantities": [
+        {
+          "decimal": "0.0042",
+          "unit": "",
+          "source_ref": {
+            "source_id": "source_00000000-0000-4000-8000-000000000041",
+            "version_id": "version_00000000-0000-4000-8000-000000000042",
+            "locator": {
+              "type": "pdf",
+              "page": 2,
+              "bbox": null,
+              "start": 10,
+              "end": 51
+            },
+            "quote_sha256": "f0b066152d3cc4ac5e599e1b019301d572b0d9ea731fca48dddf2419899cc9fd"
+          },
+          "source_pointer": "pdf:35:41"
+        },
+        {
+          "decimal": "10",
+          "unit": "Pa",
+          "source_ref": {
+            "source_id": "source_00000000-0000-4000-8000-000000000041",
+            "version_id": "version_00000000-0000-4000-8000-000000000042",
+            "locator": {
+              "type": "pdf",
+              "page": 2,
+              "bbox": null,
+              "start": 10,
+              "end": 51
+            },
+            "quote_sha256": "f0b066152d3cc4ac5e599e1b019301d572b0d9ea731fca48dddf2419899cc9fd"
+          },
+          "source_pointer": "pdf:45:50"
+        }
+      ],
+      "evidence": [
+        {
+          "source_id": "source_00000000-0000-4000-8000-000000000041",
+          "version_id": "version_00000000-0000-4000-8000-000000000042",
+          "locator": {
+            "type": "pdf",
+            "page": 2,
+            "bbox": null,
+            "start": 10,
+            "end": 51
+          },
+          "quote_sha256": "f0b066152d3cc4ac5e599e1b019301d572b0d9ea731fca48dddf2419899cc9fd"
+        }
+      ],
+      "basis": "full_text",
+      "state": "reviewed",
+      "method": "manual",
+      "transformation": null
+    },
+    {
+      "column_id": "pressure",
+      "value_text": "10 Pa",
+      "quantities": [
+        {
+          "decimal": "10",
+          "unit": "Pa",
+          "source_ref": {
+            "source_id": "source_00000000-0000-4000-8000-000000000041",
+            "version_id": "version_00000000-0000-4000-8000-000000000042",
+            "locator": {
+              "type": "pdf",
+              "page": 2,
+              "bbox": null,
+              "start": 10,
+              "end": 51
+            },
+            "quote_sha256": "f0b066152d3cc4ac5e599e1b019301d572b0d9ea731fca48dddf2419899cc9fd"
+          },
+          "source_pointer": "pdf:45:50"
+        }
+      ],
+      "evidence": [
+        {
+          "source_id": "source_00000000-0000-4000-8000-000000000041",
+          "version_id": "version_00000000-0000-4000-8000-000000000042",
+          "locator": {
+            "type": "pdf",
+            "page": 2,
+            "bbox": null,
+            "start": 10,
+            "end": 51
+          },
+          "quote_sha256": "f0b066152d3cc4ac5e599e1b019301d572b0d9ea731fca48dddf2419899cc9fd"
+        }
+      ],
+      "basis": "full_text",
+      "state": "proposed",
+      "method": "rule",
+      "transformation": null
+    },
+    {
+      "column_id": "finding",
+      "value_text": "not found: no match",
+      "quantities": [],
+      "evidence": [],
+      "basis": "full_text",
+      "state": "unsupported",
+      "method": "rule",
+      "transformation": {
+        "type": "extraction",
+        "engine": "prometheos-matrix-rule:pressure",
+        "engine_version": "1",
+        "model": null,
+        "language": null,
+        "parameters_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "input_version_refs": [
+          "version_00000000-0000-4000-8000-000000000043"
+        ],
+        "run_id": null
+      }
+    }
+  ]
+}

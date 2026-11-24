@@ -1,0 +1,17 @@
+{
+  "event_id": "evt_1c2d3e4f-5a6b-4c7d-8e9f-0123456789ab",
+  "type": "claim.needs_review",
+  "subject_ref": {
+    "kind": "claim",
+    "id": "claim_1c2d3e4f-5a6b-4c7d-8e9f-0123456789ab"
+  },
+  "occurred_at": "2026-11-01T10:00:00.123456Z",
+  "project_seq": 21,
+  "data": {
+    "status": "stale",
+    "cause": "producer_changed"
+  },
+  "acknowledged_at": null,
+  "acknowledged_by": null,
+  "acknowledged_note": null
+}

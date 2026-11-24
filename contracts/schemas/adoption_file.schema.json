@@ -1,0 +1,251 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "$id": "https://prometheos.local/contracts/adoption_file.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One inventory row (table ``adoption_files``).",
+  "properties": {
+    "attributes": {
+      "anyOf": [
+        {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Attributes"
+    },
+    "change": {
+      "anyOf": [
+        {
+          "enum": [
+            "new",
+            "modified",
+            "unchanged",
+            "moved",
+            "restored",
+            "metadata_only"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Change"
+    },
+    "container": {
+      "anyOf": [
+        {
+          "enum": [
+            "text",
+            "binary",
+            "zip",
+            "opc_slx",
+            "opc_mlx",
+            "opc_slxc",
+            "opc_office",
+            "opc_other",
+            "mat_v4",
+            "mat_v5",
+            "mat_v73",
+            "hdf5",
+            "pdf",
+            "png",
+            "jpeg",
+            "executable",
+            "empty",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Container"
+    },
+    "depth": {
+      "maximum": 8,
+      "minimum": 0,
+      "title": "Depth",
+      "type": "integer"
+    },
+    "detail": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Detail"
+    },
+    "entry": {
+      "enum": [
+        "file",
+        "folder",
+        "link",
+        "member"
+      ],
+      "title": "Entry",
+      "type": "string"
+    },
+    "mtime_us": {
+      "anyOf": [
+        {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Mtime Us"
+    },
+    "parent": {
+      "anyOf": [
+        {
+          "maxLength": 32767,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parent"
+    },
+    "path": {
+      "maxLength": 32767,
+      "minLength": 1,
+      "title": "Path",
+      "type": "string"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 300,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Reason"
+    },
+    "scan_gen": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "title": "Scan Gen",
+      "type": "integer"
+    },
+    "sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Sha256"
+    },
+    "size": {
+      "anyOf": [
+        {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Size"
+    },
+    "status": {
+      "enum": [
+        "read",
+        "listed",
+        "placeholder",
+        "excluded",
+        "noise",
+        "link",
+        "unreadable",
+        "limited"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "text_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Text Sha256"
+    },
+    "zone": {
+      "enum": [
+        "source_code",
+        "notebooks",
+        "data_raw",
+        "data_derived",
+        "results",
+        "models_sim",
+        "manuscript",
+        "deliverable",
+        "notes",
+        "literature",
+        "instrument_data",
+        "tracking_records",
+        "agent_memory",
+        "tool_output",
+        "env_cache_noise",
+        "vendored",
+        "backup_copy",
+        "archive",
+        "unknown"
+      ],
+      "title": "Zone",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scan_gen",
+    "path",
+    "parent",
+    "depth",
+    "entry",
+    "size",
+    "mtime_us",
+    "attributes",
+    "sha256",
+    "text_sha256",
+    "container",
+    "status",
+    "reason",
+    "zone",
+    "change",
+    "detail"
+  ],
+  "title": "AdoptionFile",
+  "type": "object"
+}

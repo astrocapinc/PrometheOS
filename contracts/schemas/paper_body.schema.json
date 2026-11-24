@@ -1,0 +1,598 @@
+{
+  "$defs": {
+    "AudioLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "end_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "End Ms",
+          "type": "integer"
+        },
+        "start_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "type": {
+          "const": "audio",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_ms",
+        "end_ms"
+      ],
+      "title": "AudioLocator",
+      "type": "object"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "discriminator": {
+            "mapping": {
+              "audio": "#/$defs/AudioLocator",
+              "file": "#/$defs/FileLocator",
+              "json": "#/$defs/JsonLocator",
+              "pdf": "#/$defs/PdfLocator",
+              "text": "#/$defs/TextLocator"
+            },
+            "propertyName": "type"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/TextLocator"
+            },
+            {
+              "$ref": "#/$defs/PdfLocator"
+            },
+            {
+              "$ref": "#/$defs/AudioLocator"
+            },
+            {
+              "$ref": "#/$defs/JsonLocator"
+            },
+            {
+              "$ref": "#/$defs/FileLocator"
+            }
+          ],
+          "title": "Locator"
+        },
+        "quote_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Quote Sha256"
+        },
+        "source_id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "version_id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Version Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "version_id",
+        "locator",
+        "quote_sha256"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "FileLocator": {
+      "additionalProperties": false,
+      "description": "A whole artefact, bound by its version digest (A06.1, CP20.1): for binary artefacts such\nas ``.mat``, ``.slx`` or ``.png`` that have no lines, pages or pointers. It carries no quote\nand binds no quantity.",
+      "properties": {
+        "type": {
+          "const": "file",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "FileLocator",
+      "type": "object"
+    },
+    "JsonLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "pointer": {
+          "maxLength": 1024,
+          "pattern": "^(/([^~]|~[01])*)*$",
+          "title": "Pointer",
+          "type": "string"
+        },
+        "type": {
+          "const": "json",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "pointer"
+      ],
+      "title": "JsonLocator",
+      "type": "object"
+    },
+    "PdfLocator": {
+      "additionalProperties": false,
+      "description": "A page and an optional box. CP11 S11.1 (decision 0060) adds optional ``start``/``end``\ncharacter offsets into the page's extracted text (Unicode code points, end exclusive), so\na quotation is checkable exactly. Additive: a locator without offsets serialises exactly\nas before (no null members), and older records stay valid.",
+      "properties": {
+        "bbox": {
+          "anyOf": [
+            {
+              "maxItems": 4,
+              "minItems": 4,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bbox"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "End (exclusive) in the page's extracted text, in Unicode code points",
+          "title": "End"
+        },
+        "page": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "First character in the page's extracted text, in Unicode code points",
+          "title": "Start"
+        },
+        "type": {
+          "const": "pdf",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "page",
+        "bbox"
+      ],
+      "title": "PdfLocator",
+      "type": "object"
+    },
+    "RecordRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "rev": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Rev",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "rev"
+      ],
+      "title": "RecordRef",
+      "type": "object"
+    },
+    "RelatedPaper": {
+      "additionalProperties": false,
+      "properties": {
+        "explanation": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "paper_id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Paper Id",
+          "type": "string"
+        },
+        "relationship": {
+          "enum": [
+            "shares_evidence",
+            "extends",
+            "potential_overlap"
+          ],
+          "title": "Relationship",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paper_id",
+        "relationship",
+        "explanation"
+      ],
+      "title": "RelatedPaper",
+      "type": "object"
+    },
+    "Requirement": {
+      "additionalProperties": false,
+      "description": "One source-derived venue requirement row; unknown until someone checks it.",
+      "properties": {
+        "applicability": {
+          "enum": [
+            "unknown",
+            "applicable",
+            "not_applicable"
+          ],
+          "title": "Applicability",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "maxItems": 50,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "last_checked_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Last Checked At"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/EvidenceRef"
+        },
+        "status": {
+          "enum": [
+            "unknown",
+            "todo",
+            "met",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "source_ref",
+        "applicability",
+        "last_checked_at",
+        "status",
+        "evidence"
+      ],
+      "title": "Requirement",
+      "type": "object"
+    },
+    "ReviewItem": {
+      "additionalProperties": false,
+      "properties": {
+        "change_refs": {
+          "items": {
+            "$ref": "#/$defs/RecordRef"
+          },
+          "maxItems": 50,
+          "title": "Change Refs",
+          "type": "array"
+        },
+        "comment_source_ref": {
+          "$ref": "#/$defs/EvidenceRef"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "resolution_evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "maxItems": 50,
+          "title": "Resolution Evidence",
+          "type": "array"
+        },
+        "response_text": {
+          "maxLength": 65536,
+          "title": "Response Text",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "open",
+            "drafted",
+            "resolved"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 65536,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "comment_source_ref",
+        "text",
+        "response_text",
+        "change_refs",
+        "status",
+        "resolution_evidence"
+      ],
+      "title": "ReviewItem",
+      "type": "object"
+    },
+    "ReviewRound": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ReviewItem"
+          },
+          "maxItems": 200,
+          "title": "Items",
+          "type": "array"
+        },
+        "label": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "received_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Received At"
+        },
+        "source_refs": {
+          "items": {
+            "$ref": "#/$defs/RecordRef"
+          },
+          "maxItems": 50,
+          "title": "Source Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "source_refs",
+        "received_at",
+        "items"
+      ],
+      "title": "ReviewRound",
+      "type": "object"
+    },
+    "TextLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "end_line": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "End Line",
+          "type": "integer"
+        },
+        "start_line": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Start Line",
+          "type": "integer"
+        },
+        "type": {
+          "const": "text",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_line",
+        "end_line"
+      ],
+      "title": "TextLocator",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/paper_body.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claim_refs": {
+      "items": {
+        "$ref": "#/$defs/RecordRef"
+      },
+      "maxItems": 200,
+      "title": "Claim Refs",
+      "type": "array"
+    },
+    "contribution": {
+      "maxLength": 65536,
+      "title": "Contribution",
+      "type": "string"
+    },
+    "deadline": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Deadline"
+    },
+    "manuscript_source_id": {
+      "anyOf": [
+        {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Manuscript Source Id"
+    },
+    "objective": {
+      "maxLength": 65536,
+      "minLength": 1,
+      "title": "Objective",
+      "type": "string"
+    },
+    "related_papers": {
+      "items": {
+        "$ref": "#/$defs/RelatedPaper"
+      },
+      "maxItems": 50,
+      "title": "Related Papers",
+      "type": "array"
+    },
+    "requirements": {
+      "items": {
+        "$ref": "#/$defs/Requirement"
+      },
+      "maxItems": 200,
+      "title": "Requirements",
+      "type": "array"
+    },
+    "review_rounds": {
+      "items": {
+        "$ref": "#/$defs/ReviewRound"
+      },
+      "maxItems": 50,
+      "title": "Review Rounds",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "planning",
+        "drafting",
+        "internal_review",
+        "ready_for_submission",
+        "submitted",
+        "revision",
+        "accepted",
+        "withdrawn"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "venue_source_refs": {
+      "items": {
+        "$ref": "#/$defs/RecordRef"
+      },
+      "maxItems": 50,
+      "title": "Venue Source Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "title",
+    "objective",
+    "claim_refs",
+    "manuscript_source_id",
+    "venue_source_refs",
+    "status",
+    "deadline",
+    "requirements",
+    "contribution",
+    "related_papers",
+    "review_rounds"
+  ],
+  "title": "PaperBody",
+  "type": "object"
+}

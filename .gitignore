@@ -1,0 +1,40 @@
+# Environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+node_modules/
+hub/test-results/
+hub/playwright-report/
+hub/test-output.txt
+hub/e2e/.state/
+
+# Local application data, stores, recordings and secrets never enter Git
+*.sqlite
+*.sqlite-journal
+.prometheos-link.json
+.env
+*.secret
+/local/
+/scratch/
+
+# Owner dogfood research material (articles, models, executables): never committed
+/dogfood/
+
+# Agent worktrees and local agent settings
+/.claude/worktrees/
+/.claude/settings.local.json
+
+# CP19.1 desktop spike build outputs (decision 0050)
+desktop/spike/tauri/src-tauri/target/
+desktop/spike/tauri/src-tauri/gen/
+desktop/spike/pywebview/*.spec
+desktop/app/dist/
+
+# Public release build of the desktop app (build_app.py --release, decision 0072)
+desktop/app/dist-release/

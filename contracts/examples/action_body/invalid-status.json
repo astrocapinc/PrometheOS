@@ -1,0 +1,17 @@
+{
+  "title": "Attach plant result",
+  "reason": "Commitment.",
+  "source_refs": [
+    {
+      "id": "item_00000000-0000-4000-8000-000000000010",
+      "rev": 1
+    }
+  ],
+  "owner_ref": null,
+  "due_at": null,
+  "dependencies": [],
+  "status": "maybe",
+  "blocker": null,
+  "completion_evidence": [],
+  "commitment_item_id": "item_00000000-0000-4000-8000-000000000010"
+}

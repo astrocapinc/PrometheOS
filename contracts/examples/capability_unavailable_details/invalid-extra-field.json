@@ -1,0 +1,5 @@
+{
+  "capability": "latex.compile",
+  "blocker": "not_installed",
+  "endpoint": "https://api.example"
+}

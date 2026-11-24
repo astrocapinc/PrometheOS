@@ -1,0 +1,18 @@
+{
+  "approval_request_ids": [
+    "apreq_11111111-1111-4111-8111-111111111111",
+    "apreq_22222222-2222-4222-8222-222222222222"
+  ],
+  "plan_sha256s": [
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  ],
+  "operations": 2,
+  "preview": {
+    "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "would_apply": true,
+    "protected_effects": [
+      "correction apply"
+    ]
+  }
+}

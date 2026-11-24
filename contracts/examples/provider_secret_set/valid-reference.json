@@ -1,0 +1,4 @@
+{
+  "reference": "openai-key",
+  "from_env": "SYNTHETIC_CREDENTIAL"
+}

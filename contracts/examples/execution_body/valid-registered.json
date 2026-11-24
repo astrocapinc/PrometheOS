@@ -1,0 +1,12 @@
+{
+  "title": "Plant sweep, controller gains 0.2-0.8",
+  "host_label": "lab workstation (MATLAB R2025b)",
+  "reporter": "claude-code",
+  "command_summary": null,
+  "working_root_alias": null,
+  "external_ref": null,
+  "expected_outputs": [],
+  "state": "registered",
+  "last_reported_at": null,
+  "receipt_refs": []
+}

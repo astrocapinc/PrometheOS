@@ -1,0 +1,73 @@
+{
+  "$id": "https://prometheos.local/contracts/adoption_baseline_import.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "What importing a package created (``adoption_baseline_import``).",
+  "properties": {
+    "baseline_id": {
+      "pattern": "^bl_[0-9a-f]{24}$",
+      "title": "Baseline Id",
+      "type": "string"
+    },
+    "decisions": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Decisions",
+      "type": "integer"
+    },
+    "evidence": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Evidence",
+      "type": "integer"
+    },
+    "families": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Families",
+      "type": "integer"
+    },
+    "files": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Files",
+      "type": "integer"
+    },
+    "imported_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Imported At",
+      "type": "string"
+    },
+    "imported_by": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Imported By",
+      "type": "string"
+    },
+    "root_alias": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Root Alias",
+      "type": "string"
+    },
+    "scan_gen": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "title": "Scan Gen",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "baseline_id",
+    "scan_gen",
+    "root_alias",
+    "files",
+    "evidence",
+    "decisions",
+    "families",
+    "imported_by",
+    "imported_at"
+  ],
+  "title": "AdoptionBaselineImport",
+  "type": "object"
+}

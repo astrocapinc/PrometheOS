@@ -1,0 +1,163 @@
+{
+  "$id": "https://prometheos.local/contracts/backup_inventory_entry.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One verified backup known to this store. Metadata only: never backup bytes.\n\n``location`` is the owner's local path, used to verify or restore; readers outside the\nowner scope get ``label`` only. Covered media digests are in ``backup_inventory_media``;\nthe database (and so every retained payload) is covered up to ``project_seq``;\nreference-only bytes are never covered.",
+  "properties": {
+    "backup_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Backup Sha256",
+      "type": "string"
+    },
+    "created_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Created At",
+      "type": "string"
+    },
+    "database_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Database Sha256",
+      "type": "string"
+    },
+    "id": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "title": "Id",
+      "type": "integer"
+    },
+    "label": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Label",
+      "type": "string"
+    },
+    "last_checked_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Checked At"
+    },
+    "location": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Location",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "media_bytes": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Media Bytes",
+      "type": "integer"
+    },
+    "media_count": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Media Count",
+      "type": "integer"
+    },
+    "present": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Present"
+    },
+    "project_seq": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Project Seq",
+      "type": "integer"
+    },
+    "purpose": {
+      "enum": [
+        "manual",
+        "pre_migration",
+        "pre_restore"
+      ],
+      "title": "Purpose",
+      "type": "string"
+    },
+    "recorded_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "reference_only_count": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Reference Only Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "software_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Software Version",
+      "type": "string"
+    },
+    "verification": {
+      "enum": [
+        "verified",
+        "failed",
+        "unverified"
+      ],
+      "title": "Verification",
+      "type": "string"
+    },
+    "verified_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Verified At"
+    }
+  },
+  "required": [
+    "id",
+    "backup_sha256",
+    "manifest_sha256",
+    "location",
+    "label",
+    "purpose",
+    "project_seq",
+    "schema_version",
+    "software_version",
+    "created_at",
+    "database_sha256",
+    "media_count",
+    "media_bytes",
+    "reference_only_count",
+    "verification",
+    "verified_at",
+    "last_checked_at",
+    "present",
+    "recorded_at"
+  ],
+  "title": "BackupInventoryEntry",
+  "type": "object"
+}

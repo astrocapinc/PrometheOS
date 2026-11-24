@@ -1,0 +1,117 @@
+{
+  "title": "Aerodynamic drag of a flywheel housing at low pressure",
+  "contributors": [
+    {
+      "name": "A. Synthetic",
+      "role": "author"
+    },
+    {
+      "name": "B. Example",
+      "role": "author"
+    }
+  ],
+  "year": null,
+  "venue": null,
+  "identifiers": {
+    "doi": "10.5555/synthetic.2026.001",
+    "arxiv": "2601.01234",
+    "pmid": null,
+    "pmcid": null,
+    "isbn": null,
+    "other": []
+  },
+  "abstract_ref": {
+    "source_id": "source_00000000-0000-4000-8000-000000000002",
+    "version_id": "version_00000000-0000-4000-8000-000000000002",
+    "locator": {
+      "type": "pdf",
+      "page": 1,
+      "bbox": null,
+      "start": 138,
+      "end": 273
+    },
+    "quote_sha256": "0ec9bd78ac0f6c25cd080c6010d58e5d5b5f4ecff7dc2af2d651569ccf38d17a"
+  },
+  "access_state": "full_text",
+  "full_text_refs": [
+    {
+      "id": "version_00000000-0000-4000-8000-000000000002",
+      "rev": 1
+    }
+  ],
+  "field_provenance": [
+    {
+      "field": "title",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000002",
+        "rev": 1
+      },
+      "locator": {
+        "type": "json",
+        "pointer": "/info/title"
+      },
+      "basis": "pdf_info"
+    },
+    {
+      "field": "contributors",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000002",
+        "rev": 1
+      },
+      "locator": {
+        "type": "json",
+        "pointer": "/info/author"
+      },
+      "basis": "pdf_info"
+    },
+    {
+      "field": "identifiers.doi",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000002",
+        "rev": 1
+      },
+      "locator": {
+        "type": "pdf",
+        "page": 1,
+        "bbox": null,
+        "start": 85,
+        "end": 111
+      },
+      "basis": "first_page_text"
+    },
+    {
+      "field": "identifiers.arxiv",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000002",
+        "rev": 1
+      },
+      "locator": {
+        "type": "pdf",
+        "page": 1,
+        "bbox": null,
+        "start": 118,
+        "end": 128
+      },
+      "basis": "first_page_text"
+    },
+    {
+      "field": "abstract_ref",
+      "version_ref": {
+        "id": "version_00000000-0000-4000-8000-000000000002",
+        "rev": 1
+      },
+      "locator": {
+        "type": "pdf",
+        "page": 1,
+        "bbox": null,
+        "start": 138,
+        "end": 273
+      },
+      "basis": "first_page_text"
+    }
+  ],
+  "merged_into": {
+    "id": "paper_00000000-0000-4000-8000-000000000009",
+    "rev": 1
+  }
+}

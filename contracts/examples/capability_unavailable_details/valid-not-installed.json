@@ -1,0 +1,4 @@
+{
+  "capability": "latex.compile",
+  "blocker": "not_installed"
+}

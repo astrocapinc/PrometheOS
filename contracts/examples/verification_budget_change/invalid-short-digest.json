@@ -1,0 +1,7 @@
+{
+  "budget": {
+    "max_minutes_each": 15,
+    "max_minutes_per_day": 60
+  },
+  "digest": "abc"
+}

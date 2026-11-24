@@ -1,0 +1,114 @@
+{
+  "$id": "https://prometheos.local/contracts/store_quarantine.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One row of the registry's ``store_quarantine``: a damaged store kept for inspection\n(never overwritten) and the verified replacement the registry switched to.",
+  "properties": {
+    "backup_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Backup Manifest Sha256",
+      "type": "string"
+    },
+    "backup_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Backup Sha256",
+      "type": "string"
+    },
+    "damaged_db_sha256": {
+      "pattern": "^(?:[0-9a-f]{64}|missing)$",
+      "title": "Damaged Db Sha256",
+      "type": "string"
+    },
+    "damaged_integrity": {
+      "enum": [
+        "ok",
+        "corrupt",
+        "unreadable",
+        "missing"
+      ],
+      "title": "Damaged Integrity",
+      "type": "string"
+    },
+    "damaged_schema_version": {
+      "anyOf": [
+        {
+          "maximum": 10000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Damaged Schema Version"
+    },
+    "damaged_store_path": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Damaged Store Path",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^quarantine_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "maintenance_approval_id": {
+      "anyOf": [
+        {
+          "pattern": "^mapreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Maintenance Approval Id"
+    },
+    "project_id": {
+      "pattern": "^project_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "reason": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "replacement_store_path": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Replacement Store Path",
+      "type": "string"
+    },
+    "switched_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Switched At",
+      "type": "string"
+    },
+    "switched_by": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Switched By",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "project_id",
+    "damaged_store_path",
+    "damaged_db_sha256",
+    "damaged_schema_version",
+    "damaged_integrity",
+    "replacement_store_path",
+    "backup_sha256",
+    "backup_manifest_sha256",
+    "maintenance_approval_id",
+    "switched_at",
+    "switched_by",
+    "reason"
+  ],
+  "title": "StoreQuarantine",
+  "type": "object"
+}

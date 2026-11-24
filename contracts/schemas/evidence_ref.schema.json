@@ -1,0 +1,246 @@
+{
+  "$defs": {
+    "AudioLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "end_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "End Ms",
+          "type": "integer"
+        },
+        "start_ms": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Start Ms",
+          "type": "integer"
+        },
+        "type": {
+          "const": "audio",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_ms",
+        "end_ms"
+      ],
+      "title": "AudioLocator",
+      "type": "object"
+    },
+    "FileLocator": {
+      "additionalProperties": false,
+      "description": "A whole artefact, bound by its version digest (A06.1, CP20.1): for binary artefacts such\nas ``.mat``, ``.slx`` or ``.png`` that have no lines, pages or pointers. It carries no quote\nand binds no quantity.",
+      "properties": {
+        "type": {
+          "const": "file",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "FileLocator",
+      "type": "object"
+    },
+    "JsonLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "pointer": {
+          "maxLength": 1024,
+          "pattern": "^(/([^~]|~[01])*)*$",
+          "title": "Pointer",
+          "type": "string"
+        },
+        "type": {
+          "const": "json",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "pointer"
+      ],
+      "title": "JsonLocator",
+      "type": "object"
+    },
+    "PdfLocator": {
+      "additionalProperties": false,
+      "description": "A page and an optional box. CP11 S11.1 (decision 0060) adds optional ``start``/``end``\ncharacter offsets into the page's extracted text (Unicode code points, end exclusive), so\na quotation is checkable exactly. Additive: a locator without offsets serialises exactly\nas before (no null members), and older records stay valid.",
+      "properties": {
+        "bbox": {
+          "anyOf": [
+            {
+              "maxItems": 4,
+              "minItems": 4,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bbox"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "End (exclusive) in the page's extracted text, in Unicode code points",
+          "title": "End"
+        },
+        "page": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "First character in the page's extracted text, in Unicode code points",
+          "title": "Start"
+        },
+        "type": {
+          "const": "pdf",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "page",
+        "bbox"
+      ],
+      "title": "PdfLocator",
+      "type": "object"
+    },
+    "TextLocator": {
+      "additionalProperties": false,
+      "properties": {
+        "end_line": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "End Line",
+          "type": "integer"
+        },
+        "start_line": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Start Line",
+          "type": "integer"
+        },
+        "type": {
+          "const": "text",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_line",
+        "end_line"
+      ],
+      "title": "TextLocator",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/evidence_ref.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "locator": {
+      "discriminator": {
+        "mapping": {
+          "audio": "#/$defs/AudioLocator",
+          "file": "#/$defs/FileLocator",
+          "json": "#/$defs/JsonLocator",
+          "pdf": "#/$defs/PdfLocator",
+          "text": "#/$defs/TextLocator"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/TextLocator"
+        },
+        {
+          "$ref": "#/$defs/PdfLocator"
+        },
+        {
+          "$ref": "#/$defs/AudioLocator"
+        },
+        {
+          "$ref": "#/$defs/JsonLocator"
+        },
+        {
+          "$ref": "#/$defs/FileLocator"
+        }
+      ],
+      "title": "Locator"
+    },
+    "quote_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Quote Sha256"
+    },
+    "source_id": {
+      "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "version_id": {
+      "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Version Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "version_id",
+    "locator",
+    "quote_sha256"
+  ],
+  "title": "EvidenceRef",
+  "type": "object"
+}

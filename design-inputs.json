@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "description": "Provenance only. Original design files are not required by this portable package.",
+  "inputs": [
+    {
+      "design": "A",
+      "name": "00-INDEX.md",
+      "sha256": "7d0f9f6da1284b29ab9ea6e8d6129232d83e65c009c6dbf2eafe3a4f25c36291",
+      "bytes": 4484
+    },
+    {
+      "design": "A",
+      "name": "01-PRODUCT.md",
+      "sha256": "31ce993f29b1869886b9e50ea6024cb5776071a651204707050d0e555e4d4fd2",
+      "bytes": 6551
+    },
+    {
+      "design": "A",
+      "name": "02-RESEARCH-AND-SOURCES.md",
+      "sha256": "92be0d953e37cf8963b3789c290b3e04ab98775e355ce0aa4395d1a3271344e7",
+      "bytes": 10297
+    },
+    {
+      "design": "A",
+      "name": "03-REQUIREMENTS.md",
+      "sha256": "0165fa854edee1539cc5083edc78606d402b48c40b45a24ebd03eb75b9c61a83",
+      "bytes": 7348
+    },
+    {
+      "design": "A",
+      "name": "04-UX-AND-JOURNEYS.md",
+      "sha256": "ebd9308909a1eba6446f3cfe7c96377be55d8a0bba46d112ab29dff800d0868d",
+      "bytes": 3436
+    },
+    {
+      "design": "A",
+      "name": "05-ARCHITECTURE.md",
+      "sha256": "efcfe4548cd520620de327ec7c13b79ad59a411764babec0281f59502651cc62",
+      "bytes": 4100
+    },
+    {
+      "design": "A",
+      "name": "06-DOMAIN-MODEL.md",
+      "sha256": "1169891a52357a173377e22870c0ef15065d7121a62db0a9444c4c6be78e4e19",
+      "bytes": 4680
+    },
+    {
+      "design": "A",
+      "name": "07-CONTRACTS.md",
+      "sha256": "09223fd292da450f07c7678c35a1cf5343f23f70960409d6d93ad3f01d256b99",
+      "bytes": 4434
+    },
+    {
+      "design": "A",
+      "name": "08-NOTEBOOK-AND-AI.md",
+      "sha256": "f58fd7f09273984a1d1c3d0499f34a746665ae11594a8701e2ce0b6e0f0ce72b",
+      "bytes": 3074
+    },
+    {
+      "design": "A",
+      "name": "09-PEOPLE-AND-MEETINGS.md",
+      "sha256": "ac242b597e0601d6ab2985a9459b92e3b857e6447a0a88075f358837df897110",
+      "bytes": 2979
+    },
+    {
+      "design": "A",
+      "name": "10-INTEGRATIONS.md",
+      "sha256": "e663a3fafbe5c7e2c7d3d4ae71694fa9f5188f887a794aaf50710ec061f128ba",
+      "bytes": 2979
+    },
+    {
+      "design": "A",
+      "name": "11-SKILLS-AND-COMMUNITY.md",
+      "sha256": "c83f336371e69ae85b799b6299abc00371f2d4d74d91949110a623b6a6d8314d",
+      "bytes": 3931
+    },
+    {
+      "design": "A",
+      "name": "12-OPERATIONS.md",
+      "sha256": "93ae2d32ef4a4f2375edefa81cd2587cc44922dedde4cf648c0862572c47ea98",
+      "bytes": 2403
+    },
+    {
+      "design": "A",
+      "name": "13-SECURITY-PRIVACY.md",
+      "sha256": "fc912ae07e4a6e775ca731c3b0ab302938c2a81246fc6c1de162015ed1271b63",
+      "bytes": 1885
+    },
+    {
+      "design": "A",
+      "name": "14-LICENSING.md",
+      "sha256": "d19cfda3ec3727911ac81cfa2d31ffd7e7ced64c4237b98f88ae776a2dd9c0ba",
+      "bytes": 6129
+    },
+    {
+      "design": "A",
+      "name": "15-TESTING.md",
+      "sha256": "02f9eeefab091e4a16ef778023282348c5575fed045c5a54afd5d336c997cd8d",
+      "bytes": 1647
+    },
+    {
+      "design": "A",
+      "name": "16-ROADMAP.md",
+      "sha256": "f362ca6bcbca7d02620f79fd2e2be04b4c61db39beafee5d318b3b6d67da122f",
+      "bytes": 2734
+    },
+    {
+      "design": "A",
+      "name": "17-AGENT-BRIEF.md",
+      "sha256": "74f7420a6c36bf25cfec8322650b7777d32659ad9cc885c111ab11a08e487be8",
+      "bytes": 1728
+    },
+    {
+      "design": "A",
+      "name": "18-RISKS-AND-DECISIONS.md",
+      "sha256": "a3af0d594daae58d3488ddfb01853bdd632daed225fee8ee9676ea11424e134d",
+      "bytes": 1979
+    },
+    {
+      "design": "A",
+      "name": "19-TRACEABILITY.md",
+      "sha256": "63fc2cb86e9df824f7a80ee67c54a01c03251ba4c52ab6cf01c972f07c3183e7",
+      "bytes": 2210
+    },
+    {
+      "design": "A",
+      "name": "README.md",
+      "sha256": "298b6767b603ea738c31e2324b81e0c54a3c13b37cbb7b0e665a217e4706281a",
+      "bytes": 341
+    },
+    {
+      "design": "B",
+      "name": "00-INDEX.md",
+      "sha256": "33bf62f46ffdc125569965bb170b181312ec3c0896342985be3c5f989d0494c2",
+      "bytes": 6543
+    },
+    {
+      "design": "B",
+      "name": "01-product-definition.md",
+      "sha256": "eea654782bf0bd285d8a67067028327b5f0c555e06bb79048a044096bb31a900",
+      "bytes": 9864
+    },
+    {
+      "design": "B",
+      "name": "02-research-findings-and-sources.md",
+      "sha256": "9f8ad94f0ea4f0c6557e6828f0bc1f59c1802a25fb3aefb0bcce1c5eb558cc68",
+      "bytes": 20318
+    },
+    {
+      "design": "B",
+      "name": "03-requirements.md",
+      "sha256": "d241a5caa34af27a38f3c2611650c25c3423414b2019a45936b9858a33fa1f5d",
+      "bytes": 27533
+    },
+    {
+      "design": "B",
+      "name": "04-ux-and-journeys.md",
+      "sha256": "f8b07aca08ae4531623a88a940df39b706537c534b8d2fe6a615ef7ecae76ca3",
+      "bytes": 13156
+    },
+    {
+      "design": "B",
+      "name": "05-architecture-and-decisions.md",
+      "sha256": "bea8a4c82022525c839afbd53ff93171b2897207911963942ab21a185360ba7f",
+      "bytes": 17698
+    },
+    {
+      "design": "B",
+      "name": "06-domain-model-and-state.md",
+      "sha256": "b590faa99fd5c7fbd168fc8c4d39615f9ecbc2b370cd50171f790f179ba2de63",
+      "bytes": 23087
+    },
+    {
+      "design": "B",
+      "name": "07-interfaces-cli-mcp-events.md",
+      "sha256": "c2d2b7d9fc624adebfc6bf875df03bf4da49547d42569cfcc638b5122180c690",
+      "bytes": 16792
+    },
+    {
+      "design": "B",
+      "name": "08-notebook-knowledge-ai.md",
+      "sha256": "f0dc44fdf42ca002dbdf9509e8c57db61b1800340602a6b77ae2b1f9ecc5a96c",
+      "bytes": 12966
+    },
+    {
+      "design": "B",
+      "name": "09-people-meetings-actions.md",
+      "sha256": "80a3b391544bb96d47e2571e014d62e3a4946049d688e523d3a5e87d2b2e6bd6",
+      "bytes": 10921
+    },
+    {
+      "design": "B",
+      "name": "10-tools-manuscripts-academic.md",
+      "sha256": "167be90e11e2a15450a26f71e3c7427cc5fd8df951bf09ab5b1b8e8de40b3763",
+      "bytes": 10750
+    },
+    {
+      "design": "B",
+      "name": "11-packages-skills-community.md",
+      "sha256": "f155efc7f9aea9624137fbf296c18f622ff2e13da50a26d38c326dcbd65a7baf",
+      "bytes": 14959
+    },
+    {
+      "design": "B",
+      "name": "12-operations-security-privacy.md",
+      "sha256": "ca7f4d03c6d767ed11e78c512ede1f0e5ab40166b91a25dc38ead0350f585128",
+      "bytes": 10406
+    },
+    {
+      "design": "B",
+      "name": "13-licensing-and-reuse-register.md",
+      "sha256": "4abd55d0dc4524682caf069f4e55a0a4b8fb2f59512a1c091e958d0c91139d14",
+      "bytes": 16637
+    },
+    {
+      "design": "B",
+      "name": "14-testing-roadmap-traceability.md",
+      "sha256": "e5f9f911e5258d333c5c8acf591f716eb7736962bafc8f43eb48d04cfec2df8c",
+      "bytes": 27172
+    },
+    {
+      "design": "B",
+      "name": "AGENTS.md",
+      "sha256": "7b0bf2003775649e56eb78e9ba44afae5adb6cbb14671c459c2f73574a108cce",
+      "bytes": 8889
+    }
+  ]
+}

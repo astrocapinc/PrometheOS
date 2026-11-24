@@ -1,0 +1,8 @@
+{
+  "removed": false,
+  "credential": {
+    "reference": "openai-key",
+    "present": false,
+    "store": "windows-credential-manager"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "paper_id": "claim_00000000-0000-4000-8000-000000000003",
+  "manuscript_version_id": "version_00000000-0000-4000-8000-000000000006",
+  "locator": {
+    "type": "text",
+    "start_line": 3,
+    "end_line": 3
+  },
+  "claim_refs": [
+    {
+      "id": "claim_00000000-0000-4000-8000-000000000003",
+      "rev": 2
+    }
+  ],
+  "evidence": [],
+  "status": "needs_review",
+  "reason": "correction correction_00000000-0000-4000-8000-000000000009 applied"
+}

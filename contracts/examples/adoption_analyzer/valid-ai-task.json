@@ -1,0 +1,23 @@
+{
+  "id": "ai.status_statements",
+  "version": "1.0.0",
+  "kind": "ai_task",
+  "determinism": "proposed",
+  "summary": "Status statements located with verbatim quotes",
+  "selects": {
+    "containers": [
+      "text"
+    ]
+  },
+  "reads": "whole_file",
+  "max_bytes": 67108864,
+  "emits": [
+    "has_status",
+    "supersedes"
+  ],
+  "tiers": [
+    "T4",
+    "T8"
+  ],
+  "hydrates_placeholders": false
+}

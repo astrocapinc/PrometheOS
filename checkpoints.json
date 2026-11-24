@@ -1,0 +1,1133 @@
+{
+  "schema_version": 1,
+  "spec_version": "1.7.0",
+  "checkpoints": [
+    {
+      "id": "CP0",
+      "title": "Development contract and runnable shell",
+      "depends_on": [],
+      "tasks": [
+        "CP0.1",
+        "CP0.2",
+        "CP0.3",
+        "CP0.4"
+      ],
+      "required_checks": [
+        "C00-BOOT",
+        "C00-CONTRACT",
+        "C00-RECEIPT"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP1",
+      "title": "Durable capture and recovery",
+      "depends_on": [
+        "CP0"
+      ],
+      "tasks": [
+        "CP1.1",
+        "CP1.2",
+        "CP1.3",
+        "CP1.4"
+      ],
+      "required_checks": [
+        "C01-TXN",
+        "C01-SOURCE",
+        "C01-RECOVERY",
+        "C01-RESTORE",
+        "C01-PATH"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP2",
+      "title": "Useful research memory",
+      "depends_on": [
+        "CP1"
+      ],
+      "tasks": [
+        "CP2.1",
+        "CP2.2",
+        "CP2.3",
+        "CP2.4"
+      ],
+      "required_checks": [
+        "C02-CORRECTION",
+        "C02-NUMERIC",
+        "C02-MEETING",
+        "C02-PRIVACY",
+        "C02-CONTEXT"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP3",
+      "title": "First real agent integration",
+      "depends_on": [
+        "CP2"
+      ],
+      "tasks": [
+        "CP3.1",
+        "CP3.2",
+        "CP3.3",
+        "CP3.4"
+      ],
+      "required_checks": [
+        "C03-PARITY",
+        "C03-TASK",
+        "C03-SKILL"
+      ],
+      "external_gates": [
+        "E01"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP4",
+      "title": "Portable community procedures",
+      "depends_on": [
+        "CP3"
+      ],
+      "tasks": [
+        "CP4.1",
+        "CP4.2",
+        "CP4.3"
+      ],
+      "required_checks": [
+        "C04-PACKAGE",
+        "C04-HOSTILE"
+      ],
+      "external_gates": [
+        "E02"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP5",
+      "title": "Required researcher hub",
+      "depends_on": [
+        "CP3"
+      ],
+      "tasks": [
+        "CP5.1",
+        "CP5.2",
+        "CP5.3",
+        "CP5.4"
+      ],
+      "required_checks": [
+        "C05-HUB",
+        "C05-SECURITY",
+        "C05-UX"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP6",
+      "title": "Audio capture and optional generation",
+      "depends_on": [
+        "CP2",
+        "CP5"
+      ],
+      "tasks": [
+        "CP6.1",
+        "CP6.2",
+        "CP6.3",
+        "CP6.4"
+      ],
+      "required_checks": [
+        "C06-AUDIO",
+        "C06-AI"
+      ],
+      "external_gates": [
+        "E04",
+        "E05"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP7",
+      "title": "Papers and recurring findings",
+      "depends_on": [
+        "CP4",
+        "CP5"
+      ],
+      "tasks": [
+        "CP7.1",
+        "CP7.2",
+        "CP7.3",
+        "CP7.4"
+      ],
+      "required_checks": [
+        "C07-PAPER",
+        "C07-JOBS",
+        "C07-EXPORT"
+      ],
+      "external_gates": [
+        "E06"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP9",
+      "title": "LaTeX manuscript workspace and Overleaf Git (A01)",
+      "depends_on": [
+        "CP5",
+        "CP7"
+      ],
+      "tasks": [
+        "CP9.1",
+        "CP9.2",
+        "CP9.3",
+        "CP9.4"
+      ],
+      "required_checks": [
+        "C09-COMPILE",
+        "C09-EDITOR",
+        "C09-SYNC",
+        "C09-SAFETY"
+      ],
+      "external_gates": [
+        "E07"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP10",
+      "title": "Agent parity and research continuity (A02)",
+      "depends_on": [
+        "CP5",
+        "CP7"
+      ],
+      "tasks": [
+        "CP10.1",
+        "CP10.2",
+        "CP10.3",
+        "CP10.4",
+        "CP10.5",
+        "CP10.6"
+      ],
+      "required_checks": [
+        "C10-PARITY",
+        "C10-AUTH",
+        "C10-RUNS",
+        "C10-CONTINUITY",
+        "C10-RECOVERY",
+        "C10-WALK"
+      ],
+      "external_gates": [
+        "E09"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP18",
+      "title": "Work items, research events and the agent-visible queue (A05)",
+      "depends_on": [
+        "CP10"
+      ],
+      "tasks": [
+        "CP18.1",
+        "CP18.2",
+        "CP18.3",
+        "CP18.4"
+      ],
+      "required_checks": [
+        "C18-ITEMS",
+        "C18-EVENTS",
+        "C18-QUEUE",
+        "C18-WALK"
+      ],
+      "external_gates": [
+        "E18"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP19",
+      "title": "Desktop application and generic agent package (A05)",
+      "depends_on": [
+        "CP18"
+      ],
+      "tasks": [
+        "CP19.1",
+        "CP19.2",
+        "CP19.3",
+        "CP19.4"
+      ],
+      "required_checks": [
+        "C19-SPIKE",
+        "C19-SHELL",
+        "C19-PACKAGE",
+        "C19-WALK"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP17",
+      "title": "Generic project adoption (A05)",
+      "depends_on": [
+        "CP18"
+      ],
+      "tasks": [
+        "CP17.1",
+        "CP17.2",
+        "CP17.3",
+        "CP17.4",
+        "CP17.5",
+        "CP17.6"
+      ],
+      "required_checks": [
+        "C17-INVENTORY",
+        "C17-LINEAGE",
+        "C17-PLAN",
+        "C17-AI",
+        "C17-INCREMENTAL",
+        "C17-WALK"
+      ],
+      "external_gates": [
+        "E15",
+        "E16"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP11",
+      "title": "Local literature library (A02)",
+      "depends_on": [
+        "CP10"
+      ],
+      "tasks": [
+        "CP11.1",
+        "CP11.2",
+        "CP11.3",
+        "CP11.4"
+      ],
+      "required_checks": [
+        "C11-IMPORT",
+        "C11-DEDUP",
+        "C11-GROUNDING",
+        "C11-NOACCOUNT",
+        "C11-WALK"
+      ],
+      "external_gates": [
+        "E10"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP21",
+      "title": "The web-first application (A07)",
+      "depends_on": [
+        "CP19"
+      ],
+      "tasks": [
+        "CP21.1",
+        "CP21.2",
+        "CP21.3",
+        "CP21.4"
+      ],
+      "required_checks": [
+        "C21-LAUNCH",
+        "C21-PAIRING",
+        "C21-WALK"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP22",
+      "title": "The intelligence layer (A07)",
+      "depends_on": [
+        "CP6",
+        "CP10",
+        "CP17",
+        "CP18"
+      ],
+      "tasks": [
+        "CP22.1",
+        "CP22.2",
+        "CP22.3",
+        "CP22.4",
+        "CP22.5",
+        "CP22.6"
+      ],
+      "required_checks": [
+        "C22-GATEWAY",
+        "C22-TASKS",
+        "C22-EVAL",
+        "C22-USE",
+        "C22-RETRIEVAL",
+        "C22-WALK"
+      ],
+      "external_gates": [
+        "E20",
+        "E21"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP20",
+      "title": "The research map (A06.1)",
+      "depends_on": [
+        "CP10",
+        "CP17",
+        "CP18",
+        "CP22"
+      ],
+      "tasks": [
+        "CP20.1",
+        "CP20.2",
+        "CP20.3",
+        "CP20.4",
+        "CP20.5"
+      ],
+      "required_checks": [
+        "C20-STATUS",
+        "C20-STRUCTURE",
+        "C20-VERIFY",
+        "C20-ADOPT",
+        "C20-WALK"
+      ],
+      "external_gates": [
+        "E19"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP8",
+      "title": "Release candidate and field acceptance",
+      "depends_on": [
+        "CP0",
+        "CP1",
+        "CP2",
+        "CP3",
+        "CP4",
+        "CP5",
+        "CP6",
+        "CP7",
+        "CP9",
+        "CP10",
+        "CP11",
+        "CP17",
+        "CP18",
+        "CP19"
+      ],
+      "tasks": [
+        "CP8.1",
+        "CP8.2",
+        "CP8.3",
+        "CP8.4"
+      ],
+      "required_checks": [
+        "C08-INSTALL",
+        "C08-REGRESSION",
+        "C08-RIGHTS",
+        "C08-REPORT",
+        "C08-EVAL"
+      ],
+      "external_gates": [
+        "E03",
+        "E08"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP12",
+      "title": "CPU-first local AI (A02)",
+      "depends_on": [
+        "CP8"
+      ],
+      "tasks": [
+        "CP12.1",
+        "CP12.2",
+        "CP12.3",
+        "CP12.4"
+      ],
+      "required_checks": [
+        "C12-MODELS",
+        "C12-RETRIEVAL",
+        "C12-OFFLINE",
+        "C12-BUDGET",
+        "C12-WALK"
+      ],
+      "external_gates": [
+        "E11"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP13",
+      "title": "Literature discovery and review (A02)",
+      "depends_on": [
+        "CP11"
+      ],
+      "tasks": [
+        "CP13.1",
+        "CP13.2",
+        "CP13.3",
+        "CP13.4"
+      ],
+      "required_checks": [
+        "C13-SEARCH",
+        "C13-SCREEN",
+        "C13-SYNTH",
+        "C13-WALK"
+      ],
+      "external_gates": [
+        "E12"
+      ],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP14",
+      "title": "Literature watches (A02)",
+      "depends_on": [
+        "CP13"
+      ],
+      "tasks": [
+        "CP14.1",
+        "CP14.2"
+      ],
+      "required_checks": [
+        "C14-WATCH",
+        "C14-WALK"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP15",
+      "title": "Meeting-to-deliverable recipes (A02)",
+      "depends_on": [
+        "CP11"
+      ],
+      "tasks": [
+        "CP15.1",
+        "CP15.2",
+        "CP15.3"
+      ],
+      "required_checks": [
+        "C15-RECIPE",
+        "C15-WALK"
+      ],
+      "external_gates": [],
+      "independent_review_required": true
+    },
+    {
+      "id": "CP16",
+      "title": "Selected connectors (A02)",
+      "depends_on": [
+        "CP8"
+      ],
+      "tasks": [
+        "CP16.1",
+        "CP16.2",
+        "CP16.3"
+      ],
+      "required_checks": [
+        "C16-SYNC",
+        "C16-WALK"
+      ],
+      "external_gates": [
+        "E13",
+        "E14"
+      ],
+      "independent_review_required": true
+    }
+  ],
+  "checks": [
+    {
+      "id": "C00-BOOT",
+      "checkpoint": "CP0",
+      "criterion": "Fresh minimal environment installs CLI; help/version work without project or credentials."
+    },
+    {
+      "id": "C00-CONTRACT",
+      "checkpoint": "CP0",
+      "criterion": "Schemas reject malformed IDs, duplicate keys, unknown fields and nonfinite values; examples validate."
+    },
+    {
+      "id": "C00-RECEIPT",
+      "checkpoint": "CP0",
+      "criterion": "Promotion rejects missing checks, stale candidate bindings, missing/hash-mismatched artifacts and self-review."
+    },
+    {
+      "id": "C01-TXN",
+      "checkpoint": "CP1",
+      "criterion": "Concurrent/stale writes and duplicate request retries have exactly one atomic committed result."
+    },
+    {
+      "id": "C01-SOURCE",
+      "checkpoint": "CP1",
+      "criterion": "Import plan detects changed bytes; retained versions and reference-only unavailability are truthful."
+    },
+    {
+      "id": "C01-RECOVERY",
+      "checkpoint": "CP1",
+      "criterion": "Process kill before/after commit and media staging recovers without partial references or duplicate mutations."
+    },
+    {
+      "id": "C01-RESTORE",
+      "checkpoint": "CP1",
+      "criterion": "Verified snapshot restores into a second directory with equivalent records and safe explicit root rebinding."
+    },
+    {
+      "id": "C01-PATH",
+      "checkpoint": "CP1",
+      "criterion": "Traversal, archive escape, reparse paths and corrupt/missing media are rejected safely."
+    },
+    {
+      "id": "C02-CORRECTION",
+      "checkpoint": "CP2",
+      "criterion": "Two scoped findings remain distinct; applying authorized correction atomically changes effective context and marks dependents."
+    },
+    {
+      "id": "C02-NUMERIC",
+      "checkpoint": "CP2",
+      "criterion": "Every structured quantity matches bound retained bytes exactly; altered small numbers and stale locators fail."
+    },
+    {
+      "id": "C02-MEETING",
+      "checkpoint": "CP2",
+      "criterion": "Late-entered notes preserve as-known history; suggestion stays proposed, authorized commitment creates one action."
+    },
+    {
+      "id": "C02-PRIVACY",
+      "checkpoint": "CP2",
+      "criterion": "Restricted/private content and derived quotes do not leak through default agent contexts or logs; purge removes live canary copies."
+    },
+    {
+      "id": "C02-CONTEXT",
+      "checkpoint": "CP2",
+      "criterion": "Limited context preserves critical correction/coverage warnings and honestly reports omissions, missing sources and historical validity."
+    },
+    {
+      "id": "C03-PARITY",
+      "checkpoint": "CP3",
+      "criterion": "CLI and MCP produce equivalent records/errors and correct read-only annotations."
+    },
+    {
+      "id": "C03-TASK",
+      "checkpoint": "CP3",
+      "criterion": "Persisted task bindings survive restart; stale/cancelled submissions fail, replay is idempotent, model approval text grants nothing."
+    },
+    {
+      "id": "C03-SKILL",
+      "checkpoint": "CP3",
+      "criterion": "Three original Agent Skills validate; first-host setup is project-local and bounded."
+    },
+    {
+      "id": "C04-PACKAGE",
+      "checkpoint": "CP4",
+      "criterion": "Create/import/adapt/verify/update/revoke/remove/export preserves user files, locks provenance, quarantines denied digests and blocks distributable unknown-rights components."
+    },
+    {
+      "id": "C04-HOSTILE",
+      "checkpoint": "CP4",
+      "criterion": "Malicious archives, hidden install scripts, changed capabilities and recipe output mismatch are handled without execution."
+    },
+    {
+      "id": "C05-HUB",
+      "checkpoint": "CP5",
+      "criterion": "Built installed hub completes return, meeting adoption, source inspection and correction journeys against actual store."
+    },
+    {
+      "id": "C05-SECURITY",
+      "checkpoint": "CP5",
+      "criterion": "Unpaired access, invalid Host/Origin, CSRF and unsafe document content fail; authenticated owner and agent scopes differ."
+    },
+    {
+      "id": "C05-UX",
+      "checkpoint": "CP5",
+      "criterion": "Core routes have keyboard, empty/error/loading/offline states; response targets measured on declared Windows hardware."
+    },
+    {
+      "id": "C06-AUDIO",
+      "checkpoint": "CP6",
+      "criterion": "Media import/transcript provenance, recoverable segments, device failure/cancel and locator mapping pass adapter tests."
+    },
+    {
+      "id": "C06-AI",
+      "checkpoint": "CP6",
+      "criterion": "One adapter enforces egress, quantity/source schema, bounded repair, budget/unknown timeout and deterministic outage fallback."
+    },
+    {
+      "id": "C07-PAPER",
+      "checkpoint": "CP7",
+      "criterion": "Correction affects bound manuscript anchor; paper check is pure and source-derived requirements retain unknown states."
+    },
+    {
+      "id": "C07-JOBS",
+      "checkpoint": "CP7",
+      "criterion": "Single due-slot acquisition, DST/catch-up, cancellation and unknown external outcome avoid silent duplicate costly calls."
+    },
+    {
+      "id": "C07-EXPORT",
+      "checkpoint": "CP7",
+      "criterion": "Local manuscript/submission bundle has source/version manifest; no automatic cloud writes, compile install or publication."
+    },
+    {
+      "id": "C08-INSTALL",
+      "checkpoint": "CP8",
+      "criterion": "Fresh Windows wheel, built assets, migration/restore/uninstall and Linux CI pass on recorded candidate. Under A05 it also covers the desktop installer (per-user install, upgrade and uninstall that keeps project data) and the agent package's opt-in setup."
+    },
+    {
+      "id": "C08-REGRESSION",
+      "checkpoint": "CP8",
+      "criterion": "Critical integrated CLI/MCP/HTTP/hub/security regression, including the parity inventory and the CP10 and CP11 walks replayed on the candidate, and manual keyboard checks pass; no stale receipts used. Under A05 it also covers every other accepted checkpoint in the candidate and a two-host smoke test: the package's MCP server through each supported host's recorded configuration with a scripted MCP client session per host."
+    },
+    {
+      "id": "C08-RIGHTS",
+      "checkpoint": "CP8",
+      "criterion": "Exact dependency/reuse inventory, including executables, model weights, tokenizers, language packs, templates and other bundled or installable assets, and notices match distribution; unresolved rights are excluded or block release."
+    },
+    {
+      "id": "C08-REPORT",
+      "checkpoint": "CP8",
+      "criterion": "Capability matrix distinguishes technical/live/field/publication results, names the release profile each claim belongs to and links reproducible evidence."
+    },
+    {
+      "id": "C09-COMPILE",
+      "checkpoint": "CP9",
+      "criterion": "Pinned, digest-verified Tectonic compiles a staged multi-file project with bibliography; diagnostics map to file and line; PDF, log and SyncTeX are generated versions bound to exact input versions; a failed compile keeps the prior PDF labelled with its version."
+    },
+    {
+      "id": "C09-EDITOR",
+      "checkpoint": "CP9",
+      "criterion": "Browser tests on the built hub edit, save, compile and navigate source to PDF and back; completion, outline, diagnostics jump and evidence gutter work by keyboard; a file changed externally is never overwritten and the draft is kept."
+    },
+    {
+      "id": "C09-SYNC",
+      "checkpoint": "CP9",
+      "criterion": "Against a local bare remote: link, fast-forward and clean-merge pull with preview, divergence stops with both sides intact, push only with an exact-plan owner capability, no force; anchors follow the remap rules after pull."
+    },
+    {
+      "id": "C09-SAFETY",
+      "checkpoint": "CP9",
+      "criterion": "Hostile LaTeX (shell-escape, workspace path escape, runaway output, endless loop) is refused or bounded; credential-bearing remote URLs are rejected and no token appears in logs, records, contexts or exports; Git ignores repository-local executable configuration (hooks, fsmonitor, sshCommand, pager, diff/merge drivers, filters, askPass, credential helpers); an offline compile from a populated bundle cache makes no network request."
+    },
+    {
+      "id": "C10-PARITY",
+      "checkpoint": "CP10",
+      "criterion": "A generated inventory maps each registry operation to every route it requires (CLI, MCP and local HTTP, or owner routes only for owner-channel operations) and, where an ordinary workflow needs it, to an app path; in reverse, every CLI command, MCP tool or resource and HTTP route maps to a registry operation or to the reviewed exemption list of transport and presentation entry points, and an unmapped entry point fails; the same requests give equivalent records, errors and authority outcomes on every transport, including denied requests; capability discovery reports feature, version, availability, required authority, local or remote execution, cost class and blocker; large results page or return resource references."
+    },
+    {
+      "id": "C10-AUTH",
+      "checkpoint": "CP10",
+      "criterion": "Protected operations return a typed approval_required state carrying the exact plan digest and the trusted owner route; after an owner grant the agent resumes exactly that plan once, while a changed, expired, denied or withdrawn plan fails; no agent route creates or widens a grant, reads a secret value, crosses project scope or bypasses egress or recording rules; hostile text in sources, abstracts, PDFs, pages and model output cannot change workflow instructions, invoke tools, widen egress or create authority."
+    },
+    {
+      "id": "C10-RUNS",
+      "checkpoint": "CP10",
+      "criterion": "Long operations return a durable run ID at once; queued, running, waiting_for_input, paused_budget, completed, failed, cancelled and unknown_external states persist across restart and read the same through app, CLI, MCP and HTTP; resume accepts only identical input digests, configuration and workflow version; a kill between stages resumes without duplicate outputs; an uncertain billable or external write is never retried automatically, and a cancellation request is not reported as a confirmed stop."
+    },
+    {
+      "id": "C10-CONTINUITY",
+      "checkpoint": "CP10",
+      "criterion": "Claims record objective, comparator, regime and links to attributed assumption entries; an applied correction, including one that supersedes an assumption entry with a replacement assumption under the same decision authority as claim supersession, flags dependent claims, actions, generated views and manuscript uses in the same transaction, and an agent without a grant gets approval_required; a completed external execution or execution receipt stays in the awaiting-interpretation queue until an assessment or reviewed entry cites it (a dismissal is a reviewed entry giving the reason), and registering an execution never starts anything; each artifact shows availability and backup coverage, never showing reference-only bytes as backed up; Now lists changed, due, running, awaiting-interpretation and approval items with reasons."
+    },
+    {
+      "id": "C10-RECOVERY",
+      "checkpoint": "CP10",
+      "criterion": "With a disposable corrupt or unopenable project store, the maintenance service reached from CLI, MCP, HTTP and the app recovery screen inspects health, verifies a selected backup and restores it into a new store before any registry switch, never opening the damaged store for writing or overwriting it; an agent's registry switch returns approval_required, held in the per-user registry and granted only from the recovery screen or an interactive owner session; the damaged store stays listed for inspection."
+    },
+    {
+      "id": "C10-WALK",
+      "checkpoint": "CP10",
+      "criterion": "On the built app with a fresh store from synthetic fixtures, KERS scenarios K1-K4 (spec/10) run with browser steps asserting stored state, then repeat on a second fresh store through MCP with the hub stopped; normalised outcomes (records, states, relations, flags and authority results) are equivalent, and the reviewer reads the retained walk transcript."
+    },
+    {
+      "id": "C11-IMPORT",
+      "checkpoint": "CP11",
+      "criterion": "BibTeX, RIS and CSV import plans and a read-only local Zotero adapter (tested against a stub of its documented local API) create work records with retained original bytes, normalised DOI, arXiv and PubMed identifiers and per-field provenance; attached PDFs yield extracted text versions with page and span locators searchable through FTS5; annotations and BibTeX, RIS and CSV exports round-trip; malformed and hostile inputs, including embedded instructions, are rejected or stay inert data."
+    },
+    {
+      "id": "C11-DEDUP",
+      "checkpoint": "CP11",
+      "criterion": "Exact identifier duplicates resolve deterministically to one work keeping every provenance record; similarity matches are only proposed and need an explicit choice; preprint and published versions are related, never merged; re-importing the same bytes creates nothing new."
+    },
+    {
+      "id": "C11-GROUNDING",
+      "checkpoint": "CP11",
+      "criterion": "Every proposed or reviewed evidence-matrix cell binds a work, source version, locator and quote digest, and a cell without evidence can only be unsupported; invented IDs, out-of-range locators and altered quotations are rejected; metadata-only, abstract-only and missing-full-text states stay visible in the matrix, context and exports; an applied correction flags dependent matrix rows and generated briefs."
+    },
+    {
+      "id": "C11-NOACCOUNT",
+      "checkpoint": "CP11",
+      "criterion": "On a fresh install with no accounts, provider keys or network access, sources and a bibliography are imported, searched, assembled into a matrix, linked to actions and exported through the app and MCP, and no request leaves the machine."
+    },
+    {
+      "id": "C11-WALK",
+      "checkpoint": "CP11",
+      "criterion": "On the built app with a fresh store from synthetic fixtures: import a small collection, search it, classify selected items by rules or manual labels, build a source-linked matrix, read the same result through MCP, apply an authorised correction and see the dependent matrix row and generated brief flagged; repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C12-MODELS",
+      "checkpoint": "CP12",
+      "criterion": "The model manager in app, CLI, MCP and HTTP previews size, licence, exact revision hash, resource class and location; installs only on explicit request with digest verification, resumable download and offline import; reports load state and measured memory; unloads, removes and runs a bounded benchmark; removal never touches sources or decisions; every offered model, weight, tokenizer and language pack has recorded terms, unknown rights block the offer, and nothing downloads automatically."
+    },
+    {
+      "id": "C12-RETRIEVAL",
+      "checkpoint": "CP12",
+      "criterion": "On a labelled fixture question set with targets recorded before measurement, hybrid retrieval with a small local embedding model meets its target against the BM25 baseline or stays disabled with lexical search as default; the local classifier abstains below its threshold and reports precision and recall on held-out labels; OCR output is a derived version that never replaces the original."
+    },
+    {
+      "id": "C12-OFFLINE",
+      "checkpoint": "CP12",
+      "criterion": "With network access blocked after assets are installed, every declared local feature works without remote calls or downloads, remote routes and discovery report unavailable, and no work falls back silently to a remote provider."
+    },
+    {
+      "id": "C12-BUDGET",
+      "checkpoint": "CP12",
+      "criterion": "The provider capability interface routes generation, embedding, transcription and classification under a local_only, remote_allowed or manual policy per project and workflow and shows the selected route; the settings migration carries an existing CP6.3 provider configuration forward as remote_allowed for that provider's generation only and sets every other route local_only; call, token, time, disk and memory limits and spend reservations are enforced before work under concurrency; one heavy local job runs at a time; unknown completion is not retried; each call records provider, model version, input versions and usage. Under A07 the migration also carries an existing CP22 standing policy forward as remote_allowed for exactly its granted task kinds, granting nothing new."
+    },
+    {
+      "id": "C12-WALK",
+      "checkpoint": "CP12",
+      "criterion": "On the built app with a fresh store from synthetic fixtures and network blocked: import a model from a local file, run hybrid search and classification with the route shown, cancel a long job, then remove the model and confirm sources and decisions intact; repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C13-SEARCH",
+      "checkpoint": "CP13",
+      "criterion": "Inquiries save question, scope, criteria and editable queries; discovery adapters run only where the project or workflow opted in, after a plan preview that shows provider, query and which services will receive the owner's contact email, and persist query, filters, provider, pagination, time, failures and coverage; quotas and terms come from adapter metadata and are enforced; without network, discovery reports unavailable while local search works; the contact email is sent only to services on the owner-approved list (initially Crossref and Unpaywall), and an unapproved adapter whose metadata requests an email receives none."
+    },
+    {
+      "id": "C13-SCREEN",
+      "checkpoint": "CP13",
+      "criterion": "Screening records label, reasons, reviewer or method and rubric version, including uncertain and insufficient-information outcomes, and classifier or model labels stay proposed until a reviewer confirms them; systematic-review mode cannot report completion without a saved protocol, inclusion and exclusion records, recall checks and its stopping rule; ranking never marks unseen items excluded; a declared pipeline naming an operation outside the designated literature set is rejected, and a protected step stops at a review point with approval_required; hostile abstracts cannot change instructions, invoke tools, widen egress or create authority."
+    },
+    {
+      "id": "C13-SYNTH",
+      "checkpoint": "CP13",
+      "criterion": "A cited synthesis validates every source ID and excerpt against retrieved versions, keeps abstract-only and missing-full-text states visible, labels generated text and never accepts a citation recalled by a model as retrieved evidence; linking reviewed findings to claims never overwrites accepted decisions; exports cover bibliography, screening decisions, matrix, search history and report."
+    },
+    {
+      "id": "C13-WALK",
+      "checkpoint": "CP13",
+      "criterion": "On the built app with a fresh store and recorded adapter responses: KERS scenarios K5 (a literature comparison keeping abstract-only and missing-full-text states) and K7 (a provider quota is reached while viewing, searching and organising continue), repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C14-WATCH",
+      "checkpoint": "CP14",
+      "criterion": "A watch tied to an inquiry or claim processes only items new or changed since its cursor, stays quiet when nothing relevant changed, notifies when new material may affect the linked question or claim, pauses at quota with progress kept and resumes without repeating completed billable stages, creates no duplicate actions, and runs only while the scheduler process runs."
+    },
+    {
+      "id": "C14-WALK",
+      "checkpoint": "CP14",
+      "criterion": "On the built app with a fresh store and recorded adapter responses: two scheduled runs where the second is quiet, a third whose changed item notifies, and a quota pause then resume; repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C15-RECIPE",
+      "checkpoint": "CP15",
+      "criterion": "Advisor agenda, short brief, claim and do-not-claim card, slides, speaker notes and reviewer-response recipes render ordinary editable files from reviewed evidence and record the evidence and template versions used; superseded, withdrawn or unreviewed evidence is excluded or visibly flagged; a later correction marks earlier outputs stale; templates are inert and no template or package code runs."
+    },
+    {
+      "id": "C15-WALK",
+      "checkpoint": "CP15",
+      "criterion": "On the built app with a fresh store from synthetic fixtures: KERS scenario K6 (a supervisor agenda and brief from reviewed evidence), then a correction marks the brief stale and the regenerated brief cites the replacement; repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C16-SYNC",
+      "checkpoint": "CP16",
+      "criterion": "Against local stub services, the Zotero and calendar connectors keep remote IDs and versions, recover from cursor expiry, apply tombstones, deduplicate, keep one owner per synced field and surface conflicts without silent overwrite; disconnect stops access, keeps local records and marks them stale; tokens exist only as credential references; connector content is untrusted data."
+    },
+    {
+      "id": "C16-WALK",
+      "checkpoint": "CP16",
+      "criterion": "On the built app with a fresh store and local stub services: connect, sync, change items on both sides, resolve a conflict, expire a cursor, then disconnect and confirm local records remain; repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C08-EVAL",
+      "checkpoint": "CP8",
+      "criterion": "An evaluation suite on recorded synthetic fixtures measures grounding precision, lineage accuracy against an accepted synthetic adoption baseline, event triage, proposal acceptance, and input size and cost per task, against targets recorded before the first measurement; default runs replay recorded model responses offline; evaluating a new model is an opt-in live run whose responses are recorded and then replayed, and each result is stored with the model and version for comparison; no target is lowered to accept a model."
+    },
+    {
+      "id": "C17-INVENTORY",
+      "checkpoint": "CP17",
+      "criterion": "On seeded synthetic corpora and small sample folders, the inventory records stat, content digest, normalised-text digest and container type for every file, skips cloud placeholders without hydrating them, handles long paths, lists archives with size, count and nesting limits that stop bombs, never writes into the adopted tree (before/after root digest), and reports what it could not read."
+    },
+    {
+      "id": "C17-LINEAGE",
+      "checkpoint": "CP17",
+      "criterion": "Builtin and declarative analyzers, including the MATLAB/Simulink module (.m via tree-sitter-matlab after disambiguation from Objective-C, .slx via ZIP/XML, .mdl text), produce typed evidence with tiers T0-T8; fusion keeps contradictions; families and the ranked current member match the corpus's golden labels at targets recorded, with the generator seed, before the first measurement (no target is lowered after a run); every planted trap (rewritten modification times, line-ending-only differences, misleading FINAL/BEST names, contradictory documents, placeholders, nested archives, an Objective-C .m file) is detected or surfaced as unresolved, never silently ranked."
+    },
+    {
+      "id": "C17-PLAN",
+      "checkpoint": "CP17",
+      "criterion": "The consolidation plan is typed work (resolve conflict, tool-extract, re-run, recompute and verify, compare, metadata proposal, backup gap, hydrate-or-skip, dedupe proposal, convention proposal); each step declares digested inputs, allowed and forbidden actions, output schema and acceptance criteria and is created as a work item (from CP20, A06.1: except a family whose class needs no decision, and a check the agent can do, which becomes a verification action, as C20-ADOPT specifies); reported results are validated against the inventory; deletes and dedupes are only proposed; accepting results produces a new plan version and an owner-accepted baseline."
+    },
+    {
+      "id": "C17-AI",
+      "checkpoint": "CP17",
+      "criterion": "agent_task and ai_task analyzers return closed-schema results whose verbatim quotes PrometheOS re-reads by digest; they never override stronger evidence; high-impact items need agreement across samples or go to the owner; results are cached for offline replay; injected instructions in adopted files stay inert; default tests make no model calls."
+    },
+    {
+      "id": "C17-INCREMENTAL",
+      "checkpoint": "CP17",
+      "criterion": "Re-adoption records scan generations, detects added, changed, moved and deleted files and drift from the accepted baseline, re-analyses only what changed; vault import brings an existing notes vault's Markdown in as sources without writing to it; the baseline exports (including a one-way fenced Markdown export) and re-imports into a fresh store with equivalent families and ranks."
+    },
+    {
+      "id": "C17-WALK",
+      "checkpoint": "CP17",
+      "criterion": "On the built app with a fresh store and a synthetic corpus: adopt the folder, review families and the plan in the hub, complete plan steps through MCP as the agent, accept a baseline, change the folder and re-adopt; repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C18-ITEMS",
+      "checkpoint": "CP18",
+      "criterion": "Work items are actions with optional due_at, description and labels, created and edited by the owner in the hub, CLI, MCP and HTTP with the existing action transitions; the description is stored and shown as untrusted text; deadlines are stored in UTC and shown with the owner's time zone; no parallel task store exists."
+    },
+    {
+      "id": "C18-EVENTS",
+      "checkpoint": "CP18",
+      "criterion": "Every operation listed as emitting in the event catalogue (spec/04; registered as a contract schema checked by check_contracts) writes its typed event to the outbox in the same transaction as its change, and a test fails when such an operation commits without its event; built-in detectors emit deadline-approaching (14, 7 and 2 days, each once), approval-requested, awaiting-interpretation, correction-flagged-dependents, backup-gap, source-unavailable and external-outcome-unknown events without duplicates across restarts; events are acknowledged, never deleted silently; no event executes an operation."
+    },
+    {
+      "id": "C18-QUEUE",
+      "checkpoint": "CP18",
+      "criterion": "The agent-visible queue lists open work items and unacknowledged events with reasons and input size through MCP and HTTP, and reading it or the session-start summary changes nothing (store digest unchanged; no claim, lease or status change). The session-start summary (CP18's skill or hook) and the MCP tool descriptions direct an agent to list the items and ask the owner, and contain no directive to start work (from CP20, A06.1, the only exception is a budget-eligible read-only verification action, C20-VERIFY) and no urgency escalation; a test checks this text and rejects a mutated variant that tells the agent to start the most urgent item, and mutated variants that widen the exception (start any verification action, start one past the budget, start a rerun, model edit or literature check without asking). A static and a runtime test show that no PrometheOS code path starts an agent executable or registers a scheduled task, monitor or routine, and the package manifest declares none. Not repeating a declined suggestion is an instruction in the summary text, checked with it; real agent behaviour is observed in E18."
+    },
+    {
+      "id": "C18-WALK",
+      "checkpoint": "CP18",
+      "criterion": "On the built app with a fresh store: create work items with and without deadlines in the hub, see deadline events appear, open an agent session through MCP that lists them and asks, accept one, record its completion evidence and see the item done; repeated on a second fresh store through MCP with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C19-SHELL",
+      "checkpoint": "CP19",
+      "criterion": "The desktop application installs per user without administrator rights, shows the local hub in its window over loopback, starts and stops the core as a sidecar, shows server state in a tray icon, delivers system notifications for events, opens quick capture from a global hotkey, allows one instance per user, keeps the hub's pairing, CSRF and loopback rules, and adds no authority; uninstall keeps project data."
+    },
+    {
+      "id": "C19-PACKAGE",
+      "checkpoint": "CP19",
+      "criterion": "The agent package installs the MCP server, skills and session-start summary as a Claude Code plugin and as a documented configuration for at least one non-Claude MCP-capable agent, only through an opt-in setup the owner runs; a scripted MCP client session per supported host configuration lists the same tools and completes the same read and request flow; no host-specific operation exists."
+    },
+    {
+      "id": "C19-WALK",
+      "checkpoint": "CP19",
+      "criterion": "On the built desktop app with a fresh store: start it from the tray, pair, capture through the hotkey, receive a notification for an approval request, grant it in the window and see the agent resume through MCP; quit and restart without losing state; repeated on a second fresh store through MCP with the desktop app stopped, with equivalent outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C19-SPIKE",
+      "checkpoint": "CP19",
+      "criterion": "A decision record compares Tauri 2 with the Python core as a sidecar, pywebview and Electron on every stated criterion (per-user Windows installer without administrator rights, tray, notifications, global hotkey, installer size and idle memory as measured values, licence and notices, packaging the Python 3.14 core with its native dependencies, update path, signing needs) with recorded versions and a working prototype per candidate for the tray, notification and hotkey; the choice is registered in spec/09 and development/dependencies.json with its notices, and the shipped shell uses the recorded choice."
+    },
+    {
+      "id": "C20-STATUS",
+      "checkpoint": "CP20",
+      "criterion": "Every claim has one derived status with all its causes, chosen by the precedence withdrawn, superseded, stale, conflicting, settling, unverified, corrected, holds, and holds and corrected name their basis (reviewed, deterministic or agent_reported, the last always shown as such), decided by who recorded the assessment and never by its method field, so an agent's assessment claiming method researcher or deterministic_check is agent_reported; the status is computed from assessments, corrections, digests, producer edges (receipt input_refs and outputs, and adoption producer relations mapped to versions by digest), dependencies and source checks, is rebuildable, is never stored as a claim state and never promotes one; stale is raised for a newer producer version, for a run that predates an applied correction or assumption revision the claim depends on, and for a changed origin; conflicting needs two bindings with the same name and definition and different decimal or unit and is never raised for two definitions; a claim that is both stale and corrected shows stale; assessment checks carry expected, measured and tolerance and a pass naming an expected value without a measured one is refused; the file locator binds a digest without a quote or quantity and renders path, digest and size; every number in a claim summary equals a bound quantity of the claim; Papers and paper readiness never offer a stale, superseded or withdrawn claim as usable and list agent_reported support for the owner to confirm; mutation tests drop each stale cause, the precedence and the same-definition rule and fail."
+    },
+    {
+      "id": "C20-STRUCTURE",
+      "checkpoint": "CP20",
+      "criterion": "Track entries and the answers, addresses and draws_on relations record which claims answer which questions, which questions serve which deliverable or the objective, and which tracks they draw on, are accepted by the request protocol's relation list and promote nothing; deliverable stages (framed, evidence mapped, verified, then the paper status) are derived, each lists what keeps it from the next, and verified lists agent-reported support for the owner to confirm; the hub's Now leads with the objective, the deliverables and their stages, decisions waiting as cards and verification checks planned, and the paper page shows questions with their claims, one-line status and basis, with identifiers, digests and paths only in the claim's details; the same reads are available through MCP and HTTP with equivalent outcomes."
+    },
+    {
+      "id": "C20-VERIFY",
+      "checkpoint": "CP20",
+      "criterion": "Detectors propose verification actions with kind and estimated cost, deduplicated per claim and cause and ordered cheapest first; the owner's verification budget admits read-only checks only (default 15 minutes each and 60 a day, output folder named by the owner) and is changed only by the owner; an agent's transition of a budget-eligible action (read_only, estimate set and within the per-check limit, and created by a detector with no later agent revision of its verification fields, or adopted by the owner's recorded transition after the last such revision) to in_progress is accepted without an approval while the day's sum of started estimates in the project's time zone stays within the daily limit, and every other start (an agent-created action not yet adopted, a detector action whose kind or estimate an agent revised, an agent's attempt to adopt one, a missing estimate, a rerun, model edit or literature kind, a start past the daily total) answers approval_required; static and runtime tests show PrometheOS starts no agent or simulation; decision cards carry what, why, recommendation and default; a test asserts that when a default date passes no record, manuscript workspace file or anchor changes; apply-all-recommended is one owner approval over a listed, digest-bound set applied in one transaction that applies nothing when any item's base revision changed."
+    },
+    {
+      "id": "C20-ADOPT",
+      "checkpoint": "CP20",
+      "criterion": "Every family of a scan gets a class (variant, identical, tool output, run log, history, lineage, succession, compete) from deterministic rules first, with model or agent proposals kept as proposals; on a seeded synthetic corpus shaped like a repository that forks by track, with golden classes, per-class precision and recall meet targets recorded in the evaluation record before the first measurement and never lowered after a run, and no golden compete family is placed in a class that files no owner item (zero tolerance); owner decisions can say variant, noise, split or current and the baseline records class and decision; owner work items are created only for compete families and undecided succession defaults, checks become verification actions, and no other class files an item; the scan proposes an outline (tracks, deliverables, questions, results with producers, stale candidates) whose every item cites its file and line, confirmed in one owner decision or corrected first; a baseline file is cited by its scan digest as a reference-only version shown unverified until a source check confirms its bytes; nothing is written into the adopted folder. Under A07, class proposals for families the rules leave in compete, and the outline and producer proposals, may come from intelligence-layer tasks (CP22) evaluated under C22-EVAL's rules on this corpus; no proposal moves a family out of compete or closes its owner item without the owner's answer on that family."
+    },
+    {
+      "id": "C20-WALK",
+      "checkpoint": "CP20",
+      "criterion": "On the built app with a fresh store from synthetic fixtures shaped like a forking research repository (per-track forks, a stale run, a definitional pair, a corrected number): adopt the folder and confirm its outline once, see each claim's status, basis and causes under its question and each deliverable's stage, open a stale claim's cause and verifiables, let an agent session through MCP start a budget-eligible read-only check without an approval and record expected, measured and tolerance, see a rerun answer approval_required, answer one decision card and see its default leave the records unchanged; repeated on a second fresh store through MCP with equivalent normalised outcomes; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C21-LAUNCH",
+      "checkpoint": "CP21",
+      "criterion": "The core installs per user with `uv tool install` (a wheel, or editable from the source checkout) without administrator rights; `prometheos start` starts one hub per home on the home's fixed loopback port and `status` reports its process, port and start time as advisory metadata; the instance lock is OS-held (a locked file handle or named mutex): while it is held a second hub process refuses and a second `start` starts no hub but opens a paired browser on the running one with a fresh launch code, a killed hub's lock is released by the OS and the next `start` succeeds, and a live hub with a forged or recycled process id in the metadata is never taken over; an MCP write and a CLI act while the hub runs succeed through the transactional store and are visible in the hub; `start` refuses without moving port when the port is held by another program and while a desktop build from before CP21 is running, until it is quit; a store migration is preceded by a verified backup; the PWA's service worker caches no project data (asserted on the cache contents), names its cache by the build digest and fetches pages network-first, and the browser's installability report shows no errors; the CSP includes `worker-src 'self'` and `manifest-src 'self'`; `status` reports an agent package that names a different interpreter, and only the owner's setup command regenerates it; uninstalling the tool keeps the home."
+    },
+    {
+      "id": "C21-PAIRING",
+      "checkpoint": "CP21",
+      "criterion": "From CP21 the hub is served at the home's own host name `<home-id>.localhost` on its fixed port; `start` opens the browser with a one-use launch code only in the URL fragment: it never appears in a request line, Referer header or server log, the current session-history entry no longer contains it after the exchange, it is never printed to the terminal, and it fails on reuse and after 60 seconds; a successful pairing may set a host-only remembered-device cookie with a per-home name, HttpOnly and SameSite=Strict, stored only as a digest, rotated on each exchange for a new session with the previous value valid for 60 seconds (two tabs exchanging at once both keep their session), expiring after 14 days without use and 90 days at most; after a core restart it yields a new short-lived session without pairing; it is refused, and pairing asked, after revocation from the hub or the CLI, after expiry, when presented to another home's hub, or with any other Host, port or Origin; it never grants more than an owner session and an agent token cannot use it; the Host, exact-Origin and CSRF checks still reject hostile requests. Launch codes are issued only over the home's owner channel (an ACL-restricted named pipe or a user-only secret file): a request from another Windows account, a loopback request without the channel's secret and any request a browser makes obtain none, and no HTTP route reachable from a browser issues codes; revoking a device invalidates its current and its grace value at once."
+    },
+    {
+      "id": "C21-WALK",
+      "checkpoint": "CP21",
+      "criterion": "On the installed tool with a fresh home from synthetic fixtures, through the browser: `prometheos start`, pair once, capture an entry, restart the core and continue without pairing, run `start` again and see a paired browser open on the running hub with no second hub process, write through an MCP session while the hub runs and see the write in the hub, revoke the device and see pairing asked, stop. The MCP leg repeats, with the hub stopped, the record steps only (the capture and the MCP write), on a second fresh home, and the normalised store outcomes of the two homes are equivalent; the reviewer reads the walk transcript."
+    },
+    {
+      "id": "C22-GATEWAY",
+      "checkpoint": "CP22",
+      "criterion": "With a fake transport and no network: every request with project content carries the zero-data-retention, data-collection-deny and require-parameters routing fields, a strict wire schema, and temperature, seed and reasoning settings only where the model's stored metadata lists them; a router model, a moving alias or a free tier is refused; fallback stays inside the task's evaluated (model, provider) pairs; the served model and provider are recorded and an output from a model outside the list is kept as a hint only; a reservation precedes each call and a run stops cleanly at the per-run cap, the monthly cap and the key's reported remaining limit with finished items kept; 402, 429 and a timeout end the batch without a blind retry, and an unknown outcome is held and never repeated; a response without cost keeps the estimate labelled as such; a restricted or private record, a file under an adoption root whose sensitivity is unset or restricted, and an absolute path are never sent; an agent's request to lower a root's sensitivity answers approval_required and changes nothing, an owner approval for one root changes no other root, and pointing the alias at another folder returns it to restricted; and a layer task with such input answers policy_denied with no per-call path; the policy applies only where the project's route permits remote use; a policy without both caps is refused, the monthly cap counts across the home's projects, and a change of the provider configuration or of any policy field voids the grant; every call records its input bundle digest; outside the standing policy a run answers approval_required with the CP6.3 per-call preview; an agent's attempt to grant or widen the policy answers approval_required and to revoke it policy_denied, and agents start runs only where the policy allows; the key is read only by reference and appears in no log, receipt, export or context."
+    },
+    {
+      "id": "C22-TASKS",
+      "checkpoint": "CP22",
+      "criterion": "Every registered task declares its versioned input model, strict output model with an abstain branch, template digest, wire schema, validator and effect; the wire schema is derived from the strict model and passes the strict-output subset checks; on recorded cassettes the validators reject an output that fails the strict model, names an id, path, class or option the bundle did not offer, quotes text that does not re-read verbatim from the visible text of the exact bytes, names a file whose digest changed, writes a number instead of a bound quantity id, or disagrees across the required samples; an accepted output is stored once in `ai_results` with its provenance and becomes a proposal that sets no status, class, baseline, relation, default, promotion or permission; the same task on the rules, gateway and agent executors passes the same validators; tests make no model calls and a replay from cassettes gives the same stored results."
+    },
+    {
+      "id": "C22-EVAL",
+      "checkpoint": "CP22",
+      "criterion": "For every trusted task the evaluation record fixes before the first measurement, and the receipt binds by digest, the golden set, precision per outcome and coverage with a target for each, the 95% one-sided Clopper–Pearson lower bound as the decision rule and the minimum number of items, and none of these changes after a run; `tools/ai_eval.py` runs on cassettes by default and live only with the owner's recorded OK and a spend cap; trust is written only by the harness, from replies bound by digest to the gateway's own call receipts, per task version, template, wire schema and model, when the lower bound meets the target and coverage meets its target; an edited or hand-made cassette and an edited evaluation record confer no trust; a change of any bound element, or of the served provider set, withdraws trust until a new measurement; a trust change is shown to the owner; an untrusted task's outputs are hints; results are stored per model and readable through `ai eval`."
+    },
+    {
+      "id": "C22-USE",
+      "checkpoint": "CP22",
+      "criterion": "The CP17.4 family assist (`agent_task` and `ai_task`) runs as a registered task on the rules, gateway and agent executors, all through the same validators, on CP17's seeded corpora with recorded synthetic cassettes or a deterministic fake model and no live call; T4 evidence comes only from verified quotes, and CP17's own measured targets are unchanged; its proposals appear in the hub tagged with their source (rules, model, agent) and are accepted or rejected as one owner action; a task without a qualifying measurement stays untrusted and its outputs stay hints; a trusted proposal can never close an owner work item or move a family out of a class that asks the owner, and a model's output never fills a card's default fields; with no key each place runs its rules or agent path and says in one line what it did instead. Whether a real model meets the task's targets is gate E21, not this check."
+    },
+    {
+      "id": "C22-RETRIEVAL",
+      "checkpoint": "CP22",
+      "criterion": "On a labelled synthetic set with recall@k, its k and a paired comparison with BM25 on the same queries fixed in the evaluation record before the first measurement: local CPU embeddings fused with BM25 (and an optional local reranker) are enabled for a linking task only where the fusion meets its target and beats BM25 in that comparison; the measurement uses a pre-installed embedding model whose revision and digest the receipt records, installed only by explicit owner action, while unit and walk tests use a fixture embedder and download nothing; results are record ids with their scores; with the network blocked after install the retrieval works; there is no question-answering operation."
+    },
+    {
+      "id": "C22-WALK",
+      "checkpoint": "CP22",
+      "criterion": "On the built app with a fresh store from synthetic fixtures and no key: every page opens and each model-assisted place says what it did instead; then with a recorded standing policy and cassettes (no network): run the family assist task, see the proposals tagged and their spend, open a call's input bundle digest, reject one proposal and accept one, reach the per-run cap and see the batch stop cleanly, see an agent's attempt to widen the policy answer approval_required, revoke the policy and see new calls refused; repeated through MCP on a second fresh store with equivalent normalised outcomes; no model call is made; the reviewer reads the walk transcript."
+    }
+  ],
+  "external_gates": [
+    {
+      "id": "E01",
+      "checkpoint": "CP3",
+      "required_for_full_product": true,
+      "title": "First real coding host",
+      "required_for_publication": false
+    },
+    {
+      "id": "E02",
+      "checkpoint": "CP4",
+      "required_for_full_product": true,
+      "title": "Second real coding host (A05: Claude Code plus one non-Claude MCP host through the generic package)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E03",
+      "checkpoint": "CP8",
+      "required_for_full_product": true,
+      "title": "Four real researcher work sessions including literature (A02)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E04",
+      "checkpoint": "CP6",
+      "required_for_full_product": true,
+      "title": "Windows microphone and loopback recording",
+      "required_for_publication": false
+    },
+    {
+      "id": "E05",
+      "checkpoint": "CP6",
+      "required_for_full_product": true,
+      "title": "Real audio transcript verification",
+      "required_for_publication": false
+    },
+    {
+      "id": "E06",
+      "checkpoint": "CP7",
+      "required_for_full_product": true,
+      "title": "Actual external-agent MATLAB/Simulink evidence",
+      "required_for_publication": false
+    },
+    {
+      "id": "E07",
+      "checkpoint": "CP9",
+      "required_for_full_product": true,
+      "title": "Authorized owner sandbox Overleaf Git roundtrip (A01)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E08",
+      "checkpoint": "CP8",
+      "required_for_full_product": false,
+      "title": "Owner public release authorization",
+      "required_for_publication": true
+    },
+    {
+      "id": "E09",
+      "checkpoint": "CP10",
+      "required_for_full_product": true,
+      "title": "Real coding agent completes the CP10 walk with the hub closed (A02)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E10",
+      "checkpoint": "CP11",
+      "required_for_full_product": true,
+      "title": "Owner's local Zotero library read through its local API (A02)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E11",
+      "checkpoint": "CP12",
+      "required_for_full_product": true,
+      "title": "Measured CPU-only local AI on named owner hardware (A02)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E12",
+      "checkpoint": "CP13",
+      "required_for_full_product": true,
+      "title": "Authorised live public-API discovery on a real topic (A02)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E13",
+      "checkpoint": "CP16",
+      "required_for_full_product": true,
+      "title": "Owner's real Zotero library synchronised (A02)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E14",
+      "checkpoint": "CP16",
+      "required_for_full_product": false,
+      "title": "Optional owner calendar connection (A02)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E15",
+      "checkpoint": "CP17",
+      "required_for_full_product": true,
+      "title": "Owner's real project adopted against blind labels collected first (A05)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E16",
+      "checkpoint": "CP17",
+      "required_for_full_product": true,
+      "title": "A second real folder of another kind adopted (A05)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E18",
+      "checkpoint": "CP18",
+      "required_for_full_product": true,
+      "title": "Two weeks of the owner's real use of work items, events and the queue (A05)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E19",
+      "checkpoint": "CP20",
+      "required_for_full_product": false,
+      "title": "The owner's real project under the research map, against the owner's own reading recorded first (A06.1)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E20",
+      "checkpoint": "CP22",
+      "required_for_full_product": false,
+      "title": "The owner's labelled real sample for the intelligence layer, labels recorded before the proposals are seen (A07)",
+      "required_for_publication": false
+    },
+    {
+      "id": "E21",
+      "checkpoint": "CP22",
+      "required_for_full_product": false,
+      "title": "A real model meets the family-assist targets on gateway-recorded replies, with the owner's OK and a spend cap (A07)",
+      "required_for_publication": false
+    }
+  ]
+}

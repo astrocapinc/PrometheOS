@@ -1,0 +1,51 @@
+{
+  "scan_gen": 2,
+  "family_id": "fam_0123456789abcdef",
+  "key": "model:plant",
+  "kind": "model",
+  "members": [
+    {
+      "path": "models/plant.slx",
+      "outcome": "current",
+      "copy_of": null,
+      "rank": 1,
+      "reasons": [
+        {
+          "rule": "R3",
+          "tier": "T1",
+          "text": "same model identity; highest revision and release (2.4, R2025b)",
+          "evidence": [
+            "ev_0123456789abcdef0123456789abcdef"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "models/plant_backup_2026_01_10.slx",
+      "outcome": "candidate",
+      "copy_of": null,
+      "rank": 2,
+      "reasons": []
+    },
+    {
+      "path": "models/plant.slx.r2024b",
+      "outcome": "excluded",
+      "copy_of": null,
+      "rank": 3,
+      "reasons": [
+        {
+          "rule": "R2",
+          "tier": "T2",
+          "text": "a release-upgrade backup of models/plant.slx",
+          "evidence": [
+            "ev_0123456789abcdef0123456789abcdef"
+          ]
+        }
+      ]
+    }
+  ],
+  "current": "models/plant.slx",
+  "band": "decided",
+  "deciding_rule": "R3",
+  "conflicts": []
+}

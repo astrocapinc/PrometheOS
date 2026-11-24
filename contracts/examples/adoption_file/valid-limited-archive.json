@@ -1,0 +1,20 @@
+{
+  "scan_gen": 3,
+  "path": "archives/bomb.zip",
+  "parent": null,
+  "depth": 0,
+  "entry": "file",
+  "size": 412,
+  "mtime_us": 1767603600000000,
+  "attributes": 32,
+  "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "text_sha256": null,
+  "container": "zip",
+  "status": "limited",
+  "reason": "max_ratio: 1028 > 200",
+  "zone": "archive",
+  "change": null,
+  "detail": {
+    "members": 1
+  }
+}

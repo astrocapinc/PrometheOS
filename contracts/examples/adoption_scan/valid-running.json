@@ -1,0 +1,26 @@
+{
+  "scan_gen": 4,
+  "root_alias": "research",
+  "run_id": "oprun_7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "state": "running",
+  "config": {
+    "exclusions": [
+      "**/private/**"
+    ],
+    "limits": {
+      "max_members": 10000,
+      "max_depth": 2,
+      "max_member_bytes": 67108864,
+      "max_total_uncompressed": 2147483648,
+      "max_ratio": 200
+    },
+    "profile": "generic",
+    "previous_gen": 2
+  },
+  "started_at": "2026-10-15T10:00:00.000000Z",
+  "finished_at": null,
+  "root_digest_before": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "root_digest_after": null,
+  "summary": null,
+  "error": null
+}

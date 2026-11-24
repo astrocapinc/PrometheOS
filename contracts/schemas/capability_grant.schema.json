@@ -1,0 +1,45 @@
+{
+  "$id": "https://prometheos.local/contracts/capability_grant.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "What an owner channel issues: one capability for one operation, bound to an exact\ndigest (a plan, request or payload) where the operation requires one, with a use count\nand a lifetime. Agents never send this; owner routes create it (the CLI's interactive\nconfirmation, the paired hub session, the review queue).",
+  "properties": {
+    "digest": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Digest"
+    },
+    "max_uses": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Max Uses",
+      "type": "integer"
+    },
+    "operation": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+      "title": "Operation",
+      "type": "string"
+    },
+    "ttl_seconds": {
+      "maximum": 86400,
+      "minimum": 30,
+      "title": "Ttl Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "operation",
+    "digest",
+    "ttl_seconds",
+    "max_uses"
+  ],
+  "title": "CapabilityGrant",
+  "type": "object"
+}

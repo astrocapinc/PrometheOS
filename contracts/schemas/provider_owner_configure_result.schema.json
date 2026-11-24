@@ -1,0 +1,26 @@
+{
+  "$id": "https://prometheos.local/contracts/provider_owner_configure_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "policy": {
+      "title": "Policy",
+      "type": "string"
+    },
+    "revision": {
+      "title": "Revision",
+      "type": "integer"
+    },
+    "route": {
+      "title": "Route",
+      "type": "string"
+    }
+  },
+  "required": [
+    "revision",
+    "route",
+    "policy"
+  ],
+  "title": "ProviderOwnerConfigureResult",
+  "type": "object"
+}

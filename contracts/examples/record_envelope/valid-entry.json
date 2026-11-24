@@ -1,0 +1,20 @@
+{
+  "id": "entry_00000000-0000-4000-8000-000000000003",
+  "kind": "entry",
+  "rev": 2,
+  "recorded_at": "2026-10-04T12:00:00.123456Z",
+  "occurred_at": null,
+  "sensitivity": "normal",
+  "lifecycle": "active",
+  "body": {
+    "title": "Initial research question",
+    "text": "Compare the proposed controller with the recorded baseline.",
+    "category": "question",
+    "evidence": [],
+    "claim_refs": [],
+    "author_ref": null,
+    "origin": "typed",
+    "quantities": [],
+    "review": "unreviewed"
+  }
+}

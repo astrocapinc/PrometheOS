@@ -1,0 +1,16 @@
+{
+  "title": "Submit paper P1 to journal X",
+  "reason": "Owner work item.",
+  "source_refs": [],
+  "owner_ref": null,
+  "due_at": "2026-11-02T20:59:00Z",
+  "dependencies": [],
+  "status": "ready",
+  "blocker": null,
+  "completion_evidence": [],
+  "commitment_item_id": null,
+  "description": "Final checks on figures 3-5, then submit through the journal portal.",
+  "labels": [
+    " padded"
+  ]
+}

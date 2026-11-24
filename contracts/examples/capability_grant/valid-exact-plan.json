@@ -1,0 +1,6 @@
+{
+  "operation": "exact_request",
+  "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "ttl_seconds": 600,
+  "max_uses": 1
+}

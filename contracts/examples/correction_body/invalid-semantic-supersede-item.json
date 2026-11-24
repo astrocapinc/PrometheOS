@@ -1,0 +1,32 @@
+{
+  "target_refs": [
+    {
+      "id": "item_00000000-0000-4000-8000-000000000050",
+      "rev": 1
+    }
+  ],
+  "replacement_refs": [
+    {
+      "id": "entry_00000000-0000-4000-8000-000000000051",
+      "rev": 1
+    }
+  ],
+  "reason": "Drag varies with speed in the high regime.",
+  "evidence": [],
+  "effects": [
+    {
+      "target_ref": {
+        "id": "item_00000000-0000-4000-8000-000000000050",
+        "rev": 1
+      },
+      "effect": "supersede",
+      "replacement_ref": {
+        "id": "entry_00000000-0000-4000-8000-000000000051",
+        "rev": 1
+      },
+      "replacement_text": null
+    }
+  ],
+  "status": "proposed",
+  "applied_seq": null
+}

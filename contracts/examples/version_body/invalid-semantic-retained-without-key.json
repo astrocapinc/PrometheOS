@@ -1,0 +1,14 @@
+{
+  "source_id": "source_00000000-0000-4000-8000-000000000005",
+  "sha256": "fdf6c15b8c18bd29f68c1bf44a31d00bff48be374516d560ffa20b50120a7e82",
+  "byte_length": 545,
+  "mime": "text/markdown",
+  "captured_at": "2026-10-04T12:00:00Z",
+  "storage": "body",
+  "storage_key": null,
+  "availability": "retained",
+  "extraction": "none",
+  "derived_from": null,
+  "payload_schema": "text",
+  "transformation": null
+}

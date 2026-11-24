@@ -1,0 +1,1475 @@
+{
+  "$defs": {
+    "ActionSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^action_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "action",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "ActionSubject",
+      "type": "object"
+    },
+    "ApprovalDecided": {
+      "additionalProperties": false,
+      "description": "The owner granted or denied an approval request.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/ApprovalDecidedData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ApprovalSubject"
+        },
+        "type": {
+          "const": "approval.decided",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "ApprovalDecided",
+      "type": "object",
+      "x-emitter": "the owner's grant or deny of an approval request"
+    },
+    "ApprovalDecidedData": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "enum": [
+            "granted",
+            "denied"
+          ],
+          "title": "Decision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision"
+      ],
+      "title": "ApprovalDecidedData",
+      "type": "object"
+    },
+    "ApprovalRequested": {
+      "additionalProperties": false,
+      "description": "An operation answered approval_required and stored its exact plan.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/ApprovalRequestedData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ApprovalSubject"
+        },
+        "type": {
+          "const": "approval.requested",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "ApprovalRequested",
+      "type": "object",
+      "x-emitter": "storing a new approval request (approval_required)"
+    },
+    "ApprovalRequestedData": {
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "title": "Operation",
+          "type": "string"
+        },
+        "scope": {
+          "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "scope"
+      ],
+      "title": "ApprovalRequestedData",
+      "type": "object"
+    },
+    "ApprovalSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^apreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "approval_request",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "ApprovalSubject",
+      "type": "object"
+    },
+    "AwaitingData": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "completed",
+            "unregistered_receipt"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "title": "AwaitingData",
+      "type": "object"
+    },
+    "BackupCoverageGap": {
+      "additionalProperties": false,
+      "description": "Retained source versions have no verified backup.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/BackupGapData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ProjectSubject"
+        },
+        "type": {
+          "const": "backup.coverage_gap",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "BackupCoverageGap",
+      "type": "object",
+      "x-emitter": "backup coverage detector, when the uncovered count grows"
+    },
+    "BackupGapData": {
+      "additionalProperties": false,
+      "properties": {
+        "uncovered_versions": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Uncovered Versions",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "uncovered_versions"
+      ],
+      "title": "BackupGapData",
+      "type": "object"
+    },
+    "ClaimNeedsReview": {
+      "additionalProperties": false,
+      "description": "A claim's derived status became stale or conflicting (A06.1; decision 0108): do not\nquote it until it is rerun, corrected or decided. Once per entry into either status.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/ClaimNeedsReviewData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ClaimSubject"
+        },
+        "type": {
+          "const": "claim.needs_review",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "ClaimNeedsReview",
+      "type": "object",
+      "x-emitter": "claim status detector, once per entry into stale or conflicting"
+    },
+    "ClaimNeedsReviewData": {
+      "additionalProperties": false,
+      "description": "The derived status the claim entered and its first cause's code (decision 0108).",
+      "properties": {
+        "cause": {
+          "pattern": "^[a-z][a-z_]{0,39}$",
+          "title": "Cause",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "stale",
+            "conflicting"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "cause"
+      ],
+      "title": "ClaimNeedsReviewData",
+      "type": "object"
+    },
+    "ClaimSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^claim_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "claim",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "ClaimSubject",
+      "type": "object"
+    },
+    "CorrectionFlaggedDependents": {
+      "additionalProperties": false,
+      "description": "An applied correction flagged dependent records for review.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/FlaggedDependentsData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/CorrectionSubject"
+        },
+        "type": {
+          "const": "correction.flagged_dependents",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "CorrectionFlaggedDependents",
+      "type": "object",
+      "x-emitter": "correction apply, when it flags at least one dependent"
+    },
+    "CorrectionSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^correction_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "correction",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "CorrectionSubject",
+      "type": "object"
+    },
+    "DeadlineApproaching": {
+      "additionalProperties": false,
+      "description": "An open work item's deadline is within 14, 7 or 2 days.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/DeadlineData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ActionSubject"
+        },
+        "type": {
+          "const": "deadline.approaching",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "DeadlineApproaching",
+      "type": "object",
+      "x-emitter": "deadline detector, once per deadline and threshold"
+    },
+    "DeadlineData": {
+      "additionalProperties": false,
+      "properties": {
+        "days_before": {
+          "enum": [
+            14,
+            7,
+            2
+          ],
+          "title": "Days Before",
+          "type": "integer"
+        },
+        "due_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Due At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "due_at",
+        "days_before"
+      ],
+      "title": "DeadlineData",
+      "type": "object"
+    },
+    "FlaggedDependentsData": {
+      "additionalProperties": false,
+      "properties": {
+        "dependents": {
+          "additionalProperties": {
+            "maximum": 9007199254740991,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "project",
+              "source",
+              "version",
+              "entry",
+              "claim",
+              "assessment",
+              "correction",
+              "person",
+              "role",
+              "meeting",
+              "item",
+              "action",
+              "paper",
+              "anchor",
+              "task",
+              "job",
+              "package",
+              "run",
+              "execution"
+            ]
+          },
+          "title": "Dependents",
+          "type": "object"
+        },
+        "total": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Total",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "dependents",
+        "total"
+      ],
+      "title": "FlaggedDependentsData",
+      "type": "object"
+    },
+    "ProjectSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^project_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "project",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "ProjectSubject",
+      "type": "object"
+    },
+    "ResultAwaitingInterpretation": {
+      "additionalProperties": false,
+      "description": "A completed execution, or a receipt without one, waits for an interpretation.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/AwaitingData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ResultSubject"
+        },
+        "type": {
+          "const": "result.awaiting_interpretation",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "ResultAwaitingInterpretation",
+      "type": "object",
+      "x-emitter": "awaiting-interpretation detector, once per queue entry"
+    },
+    "ResultSubject": {
+      "additionalProperties": false,
+      "description": "A registered execution, or the receipt version when no execution was registered.",
+      "properties": {
+        "id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "execution",
+            "version"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "ResultSubject",
+      "type": "object"
+    },
+    "RunOutcomeUnknown": {
+      "additionalProperties": false,
+      "description": "An operation run's external call has an unknown outcome; it is never repeated.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/RunOutcomeUnknownData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/RunSubject"
+        },
+        "type": {
+          "const": "run.outcome_unknown",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "RunOutcomeUnknown",
+      "type": "object",
+      "x-emitter": "an operation run entering unknown_external (run recovery or the worker's finish)"
+    },
+    "RunOutcomeUnknownData": {
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "title": "Operation",
+          "type": "string"
+        },
+        "stage": {
+          "pattern": "^[a-z][a-z0-9_:.-]{0,99}$",
+          "title": "Stage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "stage"
+      ],
+      "title": "RunOutcomeUnknownData",
+      "type": "object"
+    },
+    "RunSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^oprun_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "operation_run",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "RunSubject",
+      "type": "object"
+    },
+    "SourceSubject": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^source_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "source",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "SourceSubject",
+      "type": "object"
+    },
+    "SourceUnavailable": {
+      "additionalProperties": false,
+      "description": "Versions of a source are unavailable (bytes missing or corrupt, or origin gone).",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/SourceUnavailableData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/SourceSubject"
+        },
+        "type": {
+          "const": "source.unavailable",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "SourceUnavailable",
+      "type": "object",
+      "x-emitter": "artifact availability detector, once until available again"
+    },
+    "SourceUnavailableData": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "const": "unavailable",
+          "title": "Availability",
+          "type": "string"
+        },
+        "versions": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Versions",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "availability",
+        "versions"
+      ],
+      "title": "SourceUnavailableData",
+      "type": "object"
+    },
+    "WorkItemChanged": {
+      "additionalProperties": false,
+      "description": "A work item was revised or moved to another status.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/WorkItemChangedData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ActionSubject"
+        },
+        "type": {
+          "const": "work_item.changed",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "WorkItemChanged",
+      "type": "object",
+      "x-emitter": "action revise or transition (apply)"
+    },
+    "WorkItemChangedData": {
+      "additionalProperties": false,
+      "properties": {
+        "changed": {
+          "items": {
+            "enum": [
+              "title",
+              "reason",
+              "source_refs",
+              "owner_ref",
+              "due_at",
+              "dependencies",
+              "status",
+              "blocker",
+              "completion_evidence",
+              "commitment_item_id",
+              "description",
+              "labels"
+            ],
+            "type": "string"
+          },
+          "maxItems": 12,
+          "title": "Changed",
+          "type": "array"
+        },
+        "due_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Due At"
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "ready",
+            "in_progress",
+            "blocked",
+            "done",
+            "cancelled"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "changed",
+        "status",
+        "due_at"
+      ],
+      "title": "WorkItemChangedData",
+      "type": "object"
+    },
+    "WorkItemCreated": {
+      "additionalProperties": false,
+      "description": "A work item (an action) was created.",
+      "properties": {
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledged_by": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged By"
+        },
+        "acknowledged_note": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged Note"
+        },
+        "data": {
+          "$ref": "#/$defs/WorkItemCreatedData"
+        },
+        "event_id": {
+          "pattern": "^evt_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "project_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Project Seq",
+          "type": "integer"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ActionSubject"
+        },
+        "type": {
+          "const": "work_item.created",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "project_seq",
+        "acknowledged_at",
+        "acknowledged_by",
+        "acknowledged_note",
+        "type",
+        "subject_ref",
+        "data"
+      ],
+      "title": "WorkItemCreated",
+      "type": "object",
+      "x-emitter": "every action create (apply create of kind action)"
+    },
+    "WorkItemCreatedData": {
+      "additionalProperties": false,
+      "properties": {
+        "due_at": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Due At"
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "ready",
+            "in_progress",
+            "blocked",
+            "done",
+            "cancelled"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "due_at"
+      ],
+      "title": "WorkItemCreatedData",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/event.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "One research event (the ``events`` outbox row, store schema 9).",
+  "discriminator": {
+    "mapping": {
+      "approval.decided": "#/$defs/ApprovalDecided",
+      "approval.requested": "#/$defs/ApprovalRequested",
+      "backup.coverage_gap": "#/$defs/BackupCoverageGap",
+      "claim.needs_review": "#/$defs/ClaimNeedsReview",
+      "correction.flagged_dependents": "#/$defs/CorrectionFlaggedDependents",
+      "deadline.approaching": "#/$defs/DeadlineApproaching",
+      "result.awaiting_interpretation": "#/$defs/ResultAwaitingInterpretation",
+      "run.outcome_unknown": "#/$defs/RunOutcomeUnknown",
+      "source.unavailable": "#/$defs/SourceUnavailable",
+      "work_item.changed": "#/$defs/WorkItemChanged",
+      "work_item.created": "#/$defs/WorkItemCreated"
+    },
+    "propertyName": "type"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/WorkItemCreated"
+    },
+    {
+      "$ref": "#/$defs/WorkItemChanged"
+    },
+    {
+      "$ref": "#/$defs/DeadlineApproaching"
+    },
+    {
+      "$ref": "#/$defs/ApprovalRequested"
+    },
+    {
+      "$ref": "#/$defs/ApprovalDecided"
+    },
+    {
+      "$ref": "#/$defs/ResultAwaitingInterpretation"
+    },
+    {
+      "$ref": "#/$defs/CorrectionFlaggedDependents"
+    },
+    {
+      "$ref": "#/$defs/BackupCoverageGap"
+    },
+    {
+      "$ref": "#/$defs/SourceUnavailable"
+    },
+    {
+      "$ref": "#/$defs/RunOutcomeUnknown"
+    },
+    {
+      "$ref": "#/$defs/ClaimNeedsReview"
+    }
+  ],
+  "title": "Event"
+}

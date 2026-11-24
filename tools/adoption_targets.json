@@ -1,0 +1,31 @@
+{
+  "kind": "prometheos-adoption-targets",
+  "checks": ["C17-LINEAGE"],
+  "recorded_at": "2026-10-15",
+  "recorded_by": "claude-opus-5-5-cp17",
+  "recorded_before": "the first family/ranking measurement (CP17.3 fusion did not exist when this file was committed)",
+  "rule": "A target is never lowered after a run (C17-LINEAGE). A failed target is reported, repaired in the method, or escalated; never relaxed here.",
+  "generator": "adoption-corpus",
+  "generator_version": "1.6.0",
+  "generator_note": "1.1.0 when the targets were first recorded (f2d3ebb); 1.2.0 adds review cp17-1-a traps before any measurement; 1.3.0 (after measurements) adds the review cp17-234-a traps status_phrasing and abandoned_caller and two golden families, which first failed on the unrepaired method; 1.4.0 adds hidden_markdown (review F7, F8); 1.5.0 adds trivial_files (review F18); 1.6.0 makes hidden_markdown hold a statement and adds tag_characters (review r2 R2-4). Targets unchanged: traps and families are only ever added, a target is never lowered.",
+  "seeds": [17, 18, 19, 20, 21],
+  "limits": {"max_members": 50, "max_depth": 2, "max_ratio": 200},
+  "metrics": {
+    "family_pairwise_precision": "Of the file pairs PrometheOS puts in one family, the share that one golden family also holds (pairs over golden-family members only).",
+    "family_pairwise_recall": "Of the file pairs one golden family holds, the share PrometheOS also puts in one family.",
+    "current_precision": "Over golden families whose PrometheOS family has a current member in band decided or supported, the share whose current member is the golden one.",
+    "current_coverage": "The share of golden families whose PrometheOS family has a current member in band decided or supported.",
+    "traps_handled": "The share of planted traps that are detected as specified or surfaced as unresolved (never silently ranked).",
+    "auto_applied_supersessions": "Supersessions or exclusions applied as owner decisions without an owner act (must be zero).",
+    "mtime_decisions": "Ranks whose deciding reason is a filesystem modification time (must be zero)."
+  },
+  "targets": {
+    "family_pairwise_precision": {"min": 0.95},
+    "family_pairwise_recall": {"min": 0.9},
+    "current_precision": {"min": 0.98},
+    "current_coverage": {"min": 0.8},
+    "traps_handled": {"min": 1.0},
+    "auto_applied_supersessions": {"max": 0},
+    "mtime_decisions": {"max": 0}
+  }
+}

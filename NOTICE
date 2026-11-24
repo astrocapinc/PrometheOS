@@ -1,0 +1,17 @@
+PrometheOS
+Copyright 2026 Luis Sebastian Castro Chapa
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It includes or redistributes third-party software under their own licences. The
+components, their versions and licences are listed in THIRD_PARTY_NOTICES.md; the
+Windows installer carries the full licence texts of everything it ships in
+resources/THIRD-PARTY-NOTICES.txt, and Electron's and Chromium's notices in
+LICENSE.electron.txt and LICENSES.chromium.html next to PrometheOS.exe.
+
+The PDF engine (PDFium, through pypdfium2) is built with the FreeType font engine:
+Portions of this software are copyright The FreeType Project (https://freetype.org).
+All rights reserved.
+
+A software licence covers the code only. It grants no rights over research papers,
+abstracts, recordings or data that a user keeps in PrometheOS.

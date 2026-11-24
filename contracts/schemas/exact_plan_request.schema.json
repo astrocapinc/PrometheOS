@@ -1,0 +1,31 @@
+{
+  "$id": "https://prometheos.local/contracts/exact_plan_request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The owner applies exactly one previewed plan (an Overleaf push): the digest the preview\nshowed. A single-use capability bound to it is issued and spent in one step; a changed\nplan is refused. ``request_id`` is only for an agent's approval request of the same plan.",
+  "properties": {
+    "digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Digest",
+      "type": "string"
+    },
+    "request_id": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Request Id"
+    }
+  },
+  "required": [
+    "digest"
+  ],
+  "title": "ExactPlanRequest",
+  "type": "object"
+}

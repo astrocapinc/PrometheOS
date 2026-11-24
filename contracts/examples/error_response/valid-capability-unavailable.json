@@ -1,0 +1,13 @@
+{
+  "ok": false,
+  "error": {
+    "code": "capability_unavailable",
+    "message": "the LaTeX engine is not installed",
+    "retryable": false,
+    "details": {
+      "capability": "latex.compile",
+      "blocker": "not_installed"
+    }
+  },
+  "project_seq": null
+}

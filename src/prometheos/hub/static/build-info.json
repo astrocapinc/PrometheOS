@@ -1,0 +1,15 @@
+{
+  "files": {
+    "assets/Workspace-Bi59yjup.js": "b2a020219dea91af472627d9de28d6fcd355740c1225d420675b2cb6c45ede32",
+    "assets/index-BJkXrvpk.css": "b32e7310808ded1a89558c5c0ef0b818f5edfd821e2478b74073d1224a6d7d18",
+    "assets/index-Ds5InvXJ.js": "43487bdc12ae8d93960fdfea89a7615ba4912865e6726e750ffc6817d89459f0",
+    "assets/pdf.worker.min-CjEcRF4W.mjs": "9536359f1b8367850d485731ca1d5e45c159a7b7a0912325e539937aa21ceb18",
+    "icons/icon-192.png": "151d6ffcd9cf0cef49d8229df8df25d2436623f598dae39207db32c3a870fae1",
+    "icons/icon-512.png": "94c27c6082420ded3b3388e251b3e72d5f72872348484acb5920b8ce8010d257",
+    "index.html": "1faec6dfeae00b21a635d0991f70b94fe92376f7b000b25a7ae2135f4c66be7b",
+    "manifest.webmanifest": "4fc7f2e63634e8c18c7e918f47df4841a30de526a3b2b92f77e0fb3234b96326"
+  },
+  "node": "v24.13.0",
+  "npm": "11.6.2",
+  "source_sha256": "81e9678d5fe5cf011bd8c20b335716a77540a9ef52c0c3e0afe1fc1794beb40f"
+}

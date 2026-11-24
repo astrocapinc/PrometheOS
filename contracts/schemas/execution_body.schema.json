@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "RecordRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^(?:project|source|version|entry|claim|assessment|correction|person|role|meeting|item|action|paper|anchor|task|job|package|run|execution|work|matrix|extraction)_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "rev": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "title": "Rev",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "rev"
+      ],
+      "title": "RecordRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/execution_body.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A run owned by a coding agent or another tool, observed, never controlled (spec/03).\n\nStates are what was reported (no app-controlled observer exists yet); silence or a\ntimeout becomes ``status_unknown``, never failed or completed. Whether a completed run\nawaits interpretation is derived from ``cites`` relations, never stored. Registering or\nreporting never starts, stops or restarts anything.",
+  "properties": {
+    "command_summary": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Command Summary"
+    },
+    "expected_outputs": {
+      "items": {
+        "maxLength": 500,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Expected Outputs",
+      "type": "array"
+    },
+    "external_ref": {
+      "anyOf": [
+        {
+          "maxLength": 300,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "External Ref"
+    },
+    "host_label": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Host Label",
+      "type": "string"
+    },
+    "last_reported_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Reported At"
+    },
+    "receipt_refs": {
+      "items": {
+        "$ref": "#/$defs/RecordRef"
+      },
+      "maxItems": 200,
+      "title": "Receipt Refs",
+      "type": "array"
+    },
+    "reporter": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Reporter",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "registered",
+        "reported_running",
+        "reported_completed",
+        "reported_failed",
+        "reported_cancelled",
+        "status_unknown"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "working_root_alias": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Working Root Alias"
+    }
+  },
+  "required": [
+    "title",
+    "host_label",
+    "reporter",
+    "command_summary",
+    "working_root_alias",
+    "external_ref",
+    "expected_outputs",
+    "state",
+    "last_reported_at",
+    "receipt_refs"
+  ],
+  "title": "ExecutionBody",
+  "type": "object"
+}

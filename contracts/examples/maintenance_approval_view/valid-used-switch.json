@@ -1,0 +1,47 @@
+{
+  "approval_request_id": "mapreq_00000000-0000-4000-8000-000000000096",
+  "operation": "maintenance_switch",
+  "state": "used",
+  "project_id": "project_00000000-0000-4000-8000-000000000001",
+  "caller_rank": 0,
+  "actor": "mcp",
+  "request_id": "00000000-0000-4000-8000-000000000097",
+  "plan": {
+    "action": "registry_switch",
+    "project_id": "project_00000000-0000-4000-8000-000000000001",
+    "damaged_store_path": "C:/Users/researcher/PrometheOS/stores/kers",
+    "damaged_store_label": "<local path>/kers",
+    "damaged_db_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+    "backup_path": "C:/Users/researcher/PrometheOS/stores/kers/exports/backup-1.zip",
+    "backup_name": "backup-1.zip",
+    "backup_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "backup_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "project_seq": 12,
+    "schema_version": 8,
+    "target_store_path": "C:/Users/researcher/PrometheOS/stores/kers-restored",
+    "target_store_label": "<local path>/kers-restored",
+    "target_db_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "plan_sha256": "95b971e57ef1017d63fecfa056635127dd1a6f4cd709886c4d56e46abe1d362b",
+  "summary": [
+    "switch project to the restored store <local path>/kers-restored",
+    "the damaged store is kept unchanged and listed for inspection"
+  ],
+  "owner_route": {
+    "hub": "/recovery",
+    "cli": "prometheos maintenance review --request mapreq_00000000-0000-4000-8000-000000000096 --project project_00000000-0000-4000-8000-000000000001"
+  },
+  "damaged_store_path": "C:/Users/researcher/PrometheOS/stores/kers",
+  "damaged_store_label": "<local path>/kers",
+  "damaged_db_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+  "backup_manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "target_store_path": "C:/Users/researcher/PrometheOS/stores/kers-restored",
+  "target_store_label": "<local path>/kers-restored",
+  "created_at": "2026-10-07T10:00:00Z",
+  "expires_at": "2026-10-08T10:00:00Z",
+  "decided_at": "2026-10-07T10:05:00Z",
+  "decided_by": "hub-owner",
+  "grant_expires_at": "2026-10-08T10:00:00Z",
+  "used_at": "2026-10-07T10:06:00Z",
+  "closed_at": "2026-10-07T10:06:00Z"
+}

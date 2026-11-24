@@ -1,0 +1,9 @@
+{
+  "$id": "https://prometheos.local/contracts/device_list_request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "No parameters: the home's remembered devices.",
+  "properties": {},
+  "title": "DeviceListRequest",
+  "type": "object"
+}

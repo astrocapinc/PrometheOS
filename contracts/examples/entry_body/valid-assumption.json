@@ -1,0 +1,11 @@
+{
+  "title": "Drag coefficient held constant",
+  "text": "The sweep assumes a constant drag coefficient of 0.31 across the regime.",
+  "category": "assumption",
+  "evidence": [],
+  "claim_refs": [],
+  "author_ref": null,
+  "origin": "typed",
+  "quantities": [],
+  "review": "unreviewed"
+}

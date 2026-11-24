@@ -1,0 +1,28 @@
+{
+  "schema_version": "pdf_pages_v1",
+  "pdf_sha256": "c32f2e835c0f73fffb0b7fe362044074390e6f387b10a92f5b81a1f16a15d112",
+  "engine": {
+    "name": "pypdfium2",
+    "version": "5.13.0",
+    "pdfium": "153.0.7999.0"
+  },
+  "normalisation": "lf-controls-v1",
+  "page_count": 1,
+  "info": {
+    "title": "Kinetic energy recovery: a synthetic review",
+    "author": "E. Invented",
+    "subject": null,
+    "keywords": null,
+    "creator": null,
+    "producer": "PrometheOS synthetic_pdf"
+  },
+  "pages": [
+    {
+      "page": 2,
+      "state": "text",
+      "chars": 182,
+      "sha256": "3d315f5f47c2f3f23c2570da75ae118a45199960039e0c22c0fb21f8c62dde13",
+      "text": "Kinetic energy recovery: a synthetic review\nE. Invented\narXiv:2602.04321\n1 Scope\nWe review kinetic energy recovery systems.\n2 Findings\nRound-trip efficiency ranges from 70 % to 85 %."
+    }
+  ]
+}

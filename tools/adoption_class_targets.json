@@ -1,0 +1,56 @@
+{
+  "check": "C20-ADOPT",
+  "decision": "0085",
+  "recorded": "2026-10-30, before the first measurement of the family classifier; never lowered after a run",
+  "corpus": {
+    "generator": "adoption-fork-corpus",
+    "generator_version": "1.1.0",
+    "history": "1.0.0 (measured once, development/impact/cp20-4/class-score-1-corpus-1.0.0.json) named its succession family with the generic stem 'summary', which fusion never groups by design; 1.0.1 renames it. Targets unchanged. 1.1.0 adds two compete traps (version-named folders; a generated export beside a live file) after review cp20-4-a. Targets unchanged."
+  },
+  "seeds": [
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "matching": "a scanned family matches a golden family when their member sets are equal; an unmatched scanned family counts as a wrong prediction of its class",
+  "per_class": {
+    "variant": {
+      "precision": 0.9,
+      "recall": 0.9
+    },
+    "identical": {
+      "precision": 0.9,
+      "recall": 0.9
+    },
+    "tool_output": {
+      "precision": 0.9,
+      "recall": 0.9
+    },
+    "run_log": {
+      "precision": 0.9,
+      "recall": 0.9
+    },
+    "history": {
+      "precision": 0.9,
+      "recall": 0.9
+    },
+    "lineage": {
+      "precision": 0.9,
+      "recall": 0.9
+    },
+    "succession": {
+      "precision": 0.9,
+      "recall": 0.9
+    },
+    "compete": {
+      "precision": 0.9,
+      "recall": 1.0
+    }
+  },
+  "compete_hidden": {
+    "max": 0,
+    "meaning": "golden compete families placed in a class that files no owner item, over all seeds (zero tolerance)"
+  }
+}

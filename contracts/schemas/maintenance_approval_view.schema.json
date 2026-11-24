@@ -1,0 +1,257 @@
+{
+  "$defs": {
+    "JsonValue": {}
+  },
+  "$id": "https://prometheos.local/contracts/maintenance_approval_view.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A maintenance approval as its requester or the owner is shown (CP10.5; decision 0021).\n\nThe row plus what a reader needs without local paths: every store location also has a\nlabel (``<PrometheOS home>/...`` or the folder name under ``<local path>``), which is what\nthe hub shows (it removes the absolute paths), the owner routes, and summary lines. No\ngrant secret exists: the grant is the row's ``granted`` state, held in the registry.",
+  "properties": {
+    "actor": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Actor",
+      "type": "string"
+    },
+    "approval_request_id": {
+      "pattern": "^mapreq_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Approval Request Id",
+      "type": "string"
+    },
+    "backup_manifest_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Backup Manifest Sha256"
+    },
+    "caller_rank": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Caller Rank",
+      "type": "integer"
+    },
+    "closed_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Closed At"
+    },
+    "created_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Created At",
+      "type": "string"
+    },
+    "damaged_db_sha256": {
+      "pattern": "^(?:[0-9a-f]{64}|missing)$",
+      "title": "Damaged Db Sha256",
+      "type": "string"
+    },
+    "damaged_store_label": {
+      "maxLength": 600,
+      "minLength": 1,
+      "title": "Damaged Store Label",
+      "type": "string"
+    },
+    "damaged_store_path": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Damaged Store Path",
+      "type": "string"
+    },
+    "decided_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decided At"
+    },
+    "decided_by": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Decided By"
+    },
+    "expires_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "grant_expires_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Grant Expires At"
+    },
+    "operation": {
+      "enum": [
+        "maintenance_switch",
+        "maintenance_migrate"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "owner_route": {
+      "additionalProperties": {
+        "maxLength": 300,
+        "type": "string"
+      },
+      "propertyNames": {
+        "enum": [
+          "hub",
+          "cli"
+        ]
+      },
+      "title": "Owner Route",
+      "type": "object"
+    },
+    "plan": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Plan",
+      "type": "object"
+    },
+    "plan_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "project_id": {
+      "pattern": "^project_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "request_id": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Request Id"
+    },
+    "state": {
+      "enum": [
+        "pending",
+        "granted",
+        "denied",
+        "withdrawn",
+        "expired",
+        "revoked",
+        "used"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "summary": {
+      "items": {
+        "maxLength": 600,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Summary",
+      "type": "array"
+    },
+    "target_store_label": {
+      "anyOf": [
+        {
+          "maxLength": 600,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Target Store Label"
+    },
+    "target_store_path": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Target Store Path"
+    },
+    "used_at": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Used At"
+    }
+  },
+  "required": [
+    "approval_request_id",
+    "operation",
+    "state",
+    "project_id",
+    "caller_rank",
+    "actor",
+    "request_id",
+    "plan",
+    "plan_sha256",
+    "summary",
+    "owner_route",
+    "damaged_store_path",
+    "damaged_store_label",
+    "damaged_db_sha256",
+    "backup_manifest_sha256",
+    "target_store_path",
+    "target_store_label",
+    "created_at",
+    "expires_at",
+    "decided_at",
+    "decided_by",
+    "grant_expires_at",
+    "used_at",
+    "closed_at"
+  ],
+  "title": "MaintenanceApprovalView",
+  "type": "object"
+}

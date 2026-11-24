@@ -1,0 +1,211 @@
+{
+  "$defs": {
+    "AnalyzerSelect": {
+      "additionalProperties": false,
+      "properties": {
+        "containers": {
+          "items": {
+            "enum": [
+              "text",
+              "binary",
+              "zip",
+              "opc_slx",
+              "opc_mlx",
+              "opc_slxc",
+              "opc_office",
+              "opc_other",
+              "mat_v4",
+              "mat_v5",
+              "mat_v73",
+              "hdf5",
+              "pdf",
+              "png",
+              "jpeg",
+              "executable",
+              "empty",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "maxItems": 18,
+          "title": "Containers",
+          "type": "array"
+        },
+        "extensions": {
+          "items": {
+            "pattern": "^\\.[a-z0-9.]{1,20}$",
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Extensions",
+          "type": "array"
+        },
+        "zones": {
+          "items": {
+            "enum": [
+              "source_code",
+              "notebooks",
+              "data_raw",
+              "data_derived",
+              "results",
+              "models_sim",
+              "manuscript",
+              "deliverable",
+              "notes",
+              "literature",
+              "instrument_data",
+              "tracking_records",
+              "agent_memory",
+              "tool_output",
+              "env_cache_noise",
+              "vendored",
+              "backup_copy",
+              "archive",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "maxItems": 19,
+          "title": "Zones",
+          "type": "array"
+        }
+      },
+      "title": "AnalyzerSelect",
+      "type": "object"
+    }
+  },
+  "$id": "https://prometheos.local/contracts/adoption_analyzer.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "An analyzer declaration: a typed, versioned producer of evidence. Declarations are data;\nPrometheOS never runs third-party code for an analyzer (spec/02, decision 0039).",
+  "properties": {
+    "determinism": {
+      "enum": [
+        "pure",
+        "pinned_tool",
+        "reported",
+        "proposed"
+      ],
+      "title": "Determinism",
+      "type": "string"
+    },
+    "emits": {
+      "items": {
+        "enum": [
+          "copy_of",
+          "same_origin_as",
+          "revision_of",
+          "autosave_of",
+          "backup_of",
+          "cache_of",
+          "derived_from",
+          "generated_by",
+          "used",
+          "consumed_by",
+          "references",
+          "calls",
+          "model_reference",
+          "library_link",
+          "has_status",
+          "supersedes",
+          "project_file",
+          "facet",
+          "language",
+          "unresolved"
+        ],
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Emits",
+      "type": "array"
+    },
+    "hydrates_placeholders": {
+      "const": false,
+      "default": false,
+      "title": "Hydrates Placeholders",
+      "type": "boolean"
+    },
+    "id": {
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z0-9_]+)+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "builtin",
+        "declarative",
+        "pinned_tool",
+        "agent_task",
+        "ai_task"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "max_bytes": {
+      "maximum": 1099511627776,
+      "minimum": 0,
+      "title": "Max Bytes",
+      "type": "integer"
+    },
+    "reads": {
+      "enum": [
+        "inventory_only",
+        "prefix",
+        "container_parts",
+        "whole_file",
+        "directory"
+      ],
+      "title": "Reads",
+      "type": "string"
+    },
+    "selects": {
+      "$ref": "#/$defs/AnalyzerSelect"
+    },
+    "summary": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "tiers": {
+      "items": {
+        "enum": [
+          "T0",
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5",
+          "T6",
+          "T7",
+          "T8"
+        ],
+        "type": "string"
+      },
+      "maxItems": 9,
+      "minItems": 1,
+      "title": "Tiers",
+      "type": "array"
+    },
+    "version": {
+      "pattern": "^\\d{1,4}\\.\\d{1,4}\\.\\d{1,6}$",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "kind",
+    "determinism",
+    "summary",
+    "selects",
+    "reads",
+    "max_bytes",
+    "emits",
+    "tiers"
+  ],
+  "title": "AdoptionAnalyzer",
+  "type": "object"
+}

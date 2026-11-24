@@ -1,0 +1,24 @@
+{
+  "pushed": [
+    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  ],
+  "remote_head": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "authorised": {
+    "ok": true,
+    "schema_version": 1,
+    "project_id": "project_00000000-0000-4000-8000-000000000001",
+    "request_id": "00000000-0000-4000-8000-000000000002",
+    "project_seq": 7,
+    "results": [
+      {
+        "op_index": 0,
+        "id": "paper_00000000-0000-4000-8000-000000000003",
+        "rev": 1
+      }
+    ],
+    "replayed": false
+  },
+  "limitations": [
+    "Overleaf comments are not synchronised."
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "capability": "provider.generation",
+  "blocker": "quota_exhausted"
+}

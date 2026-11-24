@@ -1,0 +1,21 @@
+{
+  "scan_gen": 3,
+  "path": "backup/notes.zip!/notes/log.md",
+  "parent": "backup/notes.zip",
+  "depth": 1,
+  "entry": "member",
+  "size": 412,
+  "mtime_us": null,
+  "attributes": null,
+  "sha256": null,
+  "text_sha256": null,
+  "container": null,
+  "status": "listed",
+  "reason": null,
+  "zone": "notes",
+  "change": null,
+  "detail": {
+    "crc32": "1a2b3c4d",
+    "compressed": 120
+  }
+}

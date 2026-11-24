@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "error": {
+    "code": "approval_required",
+    "message": "this plan needs the owner's approval; nothing was committed",
+    "retryable": false,
+    "details": {
+      "approval_request_id": "apreq_00000000-0000-4000-8000-000000000061",
+      "plan_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "required_scope": "exact_request",
+      "owner_route": {
+        "hub": "/approvals/apreq_00000000-0000-4000-8000-000000000061",
+        "cli": "prometheos decision review --approval apreq_00000000-0000-4000-8000-000000000061"
+      },
+      "expires_at": "2026-10-06T12:00:00Z"
+    }
+  },
+  "project_seq": 4
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "project_id": "project_00000000-0000-4000-8000-000000000001",
+  "request_id": "00000000-0000-4000-8000-000000000002",
+  "expected_seq": 4,
+  "operations": [
+    {
+      "op": "revise",
+      "id": "entry_00000000-0000-4000-8000-000000000003",
+      "base_rev": 1,
+      "sensitivity": "restricted",
+      "occurred_at": "2026-09-28T10:00:00Z",
+      "body": {
+        "title": "Initial research question",
+        "text": "Compare the proposed controller with the recorded baseline.",
+        "category": "question",
+        "evidence": [],
+        "claim_refs": [],
+        "author_ref": null,
+        "origin": "typed",
+        "quantities": [],
+        "review": "unreviewed"
+      }
+    },
+    {
+      "op": "transition",
+      "id": "action_00000000-0000-4000-8000-000000000004",
+      "base_rev": 2,
+      "to": "ready",
+      "reason": null,
+      "evidence": [
+        {
+          "source_id": "source_00000000-0000-4000-8000-000000000005",
+          "version_id": "version_00000000-0000-4000-8000-000000000006",
+          "locator": {
+            "type": "text",
+            "start_line": 3,
+            "end_line": 4
+          },
+          "quote_sha256": null
+        }
+      ]
+    },
+    {
+      "op": "relation_add",
+      "source_ref": {
+        "id": "entry_00000000-0000-4000-8000-000000000003",
+        "rev": 2
+      },
+      "target_ref": {
+        "id": "claim_00000000-0000-4000-8000-000000000007",
+        "rev": 1
+      },
+      "relation": "cites"
+    },
+    {
+      "op": "archive",
+      "id": "entry_00000000-0000-4000-8000-000000000003",
+      "base_rev": 2
+    },
+    {
+      "op": "correction_apply",
+      "id": "correction_00000000-0000-4000-8000-000000000008",
+      "base_rev": 1
+    },
+    {
+      "op": "project_update",
+      "base_rev": 1,
+      "settings": {}
+    }
+  ]
+}

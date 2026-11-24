@@ -1,0 +1,744 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "scenarios": [
+    {
+      "id": "S01",
+      "check_ids": [
+        "C01-TXN"
+      ],
+      "given": "Two clients share expected_seq; one retries after losing its response.",
+      "when": "Commit, retry identical request, then change same request body.",
+      "then": "One commit; original reply on identical retry; key conflict otherwise.",
+      "fixture": null
+    },
+    {
+      "id": "S02",
+      "check_ids": [
+        "C01-SOURCE"
+      ],
+      "given": "A retained baseline file and a reference-only artifact are registered.",
+      "when": "Edit original baseline and remove reference-only file.",
+      "then": "Historical baseline remains verifiable; current change and unavailable external artifact are separate observations.",
+      "fixture": "fixtures/baseline.md"
+    },
+    {
+      "id": "S03",
+      "check_ids": [
+        "C01-RECOVERY"
+      ],
+      "given": "A disposable store has a pre-staged media blob.",
+      "when": "Kill process at transaction boundaries and retry request.",
+      "then": "No half-record or missing retained byte reference; orphan reported/collected after grace.",
+      "fixture": null
+    },
+    {
+      "id": "S04",
+      "check_ids": [
+        "C01-RESTORE"
+      ],
+      "given": "A store contains revised notes and retained/external source versions; CP2 later extends the case to claims/notebook.",
+      "when": "Backup, validate, restore in new folder; corrupt a copy and try again.",
+      "then": "Equivalent semantic snapshot; corrupt restore rejected without changing live registry.",
+      "fixture": null
+    },
+    {
+      "id": "S05",
+      "check_ids": [
+        "C02-CORRECTION"
+      ],
+      "given": "Simplified result and plant result describe distinct fidelity scopes.",
+      "when": "Propose then authorize correction of overbroad inference.",
+      "then": "Proposal alone changes no effective truth; applied correction updates current context while retaining both sources. CP7 extends this case to manuscript anchors.",
+      "fixture": "fixtures/plant-result.md"
+    },
+    {
+      "id": "S06",
+      "check_ids": [
+        "C02-NUMERIC"
+      ],
+      "given": "Source states decimal quantity 2.40 kJ.",
+      "when": "Render bound value; submit 2.41 and 2.4 without declared formatting transformation.",
+      "then": "Exact copied representation accepted; altered assertions rejected or require explicit transformation.",
+      "fixture": "fixtures/baseline.md"
+    },
+    {
+      "id": "S07",
+      "check_ids": [
+        "C02-MEETING"
+      ],
+      "given": "Meeting suggests a comparison and contains one explicit commitment.",
+      "when": "Ingest later, reconcile twice, adopt commitment.",
+      "then": "No title merge or retroactive knowledge; one action, suggestion unadopted, owner unknown when ambiguous.",
+      "fixture": "fixtures/meeting.txt"
+    },
+    {
+      "id": "S08",
+      "check_ids": [
+        "C02-PRIVACY"
+      ],
+      "given": "Restricted source has unique canary repeated in derived summary.",
+      "when": "Query from agent scope, inspect logs, purge source plus derivatives.",
+      "then": "No default egress; live DB/API/context/cache cannot retrieve canary; backup limitation remains explicit.",
+      "fixture": null
+    },
+    {
+      "id": "S09",
+      "check_ids": [
+        "C02-CONTEXT"
+      ],
+      "given": "Many background entries compete with correction for a small context budget.",
+      "when": "Request 2000 characters and unavailable-root coverage.",
+      "then": "Correction/coverage preserved; omissions disclosed; no implication of whole-project knowledge.",
+      "fixture": null
+    },
+    {
+      "id": "S10",
+      "check_ids": [
+        "C03-TASK"
+      ],
+      "given": "Prepared task references versions; source dependency changes before submission.",
+      "when": "Submit stale result and self-declared researcher approval.",
+      "then": "Reject stale result/unauthorized transition; identical valid replay creates nothing twice.",
+      "fixture": null
+    },
+    {
+      "id": "S11",
+      "check_ids": [
+        "C04-PACKAGE"
+      ],
+      "given": "Package contains unknown-license file, traversal path and script.",
+      "when": "Inspect/plan/install/export/update/remove.",
+      "then": "No execution or path escape; rights unresolved export blocked; unrelated/local modified files preserved.",
+      "fixture": null
+    },
+    {
+      "id": "S12",
+      "check_ids": [
+        "C05-HUB"
+      ],
+      "given": "Paired owner opens actual installed app with synthetic project.",
+      "when": "Orient, review meeting, inspect source, apply correction, return to Now.",
+      "then": "Real records change once; source/context coherent; keyboard/error states usable.",
+      "fixture": null
+    },
+    {
+      "id": "S13",
+      "check_ids": [
+        "C05-SECURITY"
+      ],
+      "given": "Untrusted web origin targets loopback service.",
+      "when": "Attempt unpaired reads, CSRF, hostile Host and rendered script content.",
+      "then": "All denied/sanitized without content leakage; valid paired route works.",
+      "fixture": null
+    },
+    {
+      "id": "S14",
+      "check_ids": [
+        "C06-AUDIO"
+      ],
+      "given": "Imported audio and a capture adapter encounter cancellation/device loss.",
+      "when": "Transcribe sample, stop capture and recover segments.",
+      "then": "Source/timestamp provenance retained, recoverable file truthful, failure visible; this mock case is not E04.",
+      "fixture": null
+    },
+    {
+      "id": "S15",
+      "check_ids": [
+        "C06-AI"
+      ],
+      "given": "Provider returns altered quantity, malformed JSON or unknown timeout.",
+      "when": "Generate under small budget and restricted-input exclusion.",
+      "then": "At most one repair; no invented validated result or silent unknown-cost retry; deterministic notebook remains usable.",
+      "fixture": null
+    },
+    {
+      "id": "S16",
+      "check_ids": [
+        "C07-PAPER"
+      ],
+      "given": "Draft cites overbroad claim corrected after anchoring.",
+      "when": "Run paper check twice and export local bundle.",
+      "then": "Check writes no research event; gap/needs_review shown; export bound to exact manuscript/source versions.",
+      "fixture": "fixtures/manuscript.md"
+    },
+    {
+      "id": "S17",
+      "check_ids": [
+        "C07-JOBS"
+      ],
+      "given": "Weekly job spans DST and process dies after external request.",
+      "when": "Tick twice, expire lease, resume.",
+      "then": "One due slot, declared DST behavior, unknown side effect not auto-repeated.",
+      "fixture": null
+    },
+    {
+      "id": "S18",
+      "check_ids": [
+        "C08-INSTALL"
+      ],
+      "given": "Fresh Windows user environment has no Node/provider key or old repo.",
+      "when": "Install candidate wheel, launch hub, upgrade/restore and uninstall app.",
+      "then": "Core works; packaged assets load; research preserved; unsupported integrations labeled.",
+      "fixture": null
+    },
+    {
+      "id": "S19",
+      "check_ids": [
+        "C09-COMPILE"
+      ],
+      "given": "A paper bound to a multi-file LaTeX folder with a .bib file and one figure; Tectonic installed by explicit command.",
+      "when": "Compile, introduce an undefined reference and an error, compile again, then fix and recompile.",
+      "then": "Diagnostics name file and line; the failing compile keeps the previous PDF labelled with its older version; each PDF is a generated version bound to exact input versions.",
+      "fixture": null
+    },
+    {
+      "id": "S20",
+      "check_ids": [
+        "C09-EDITOR"
+      ],
+      "given": "The same workspace open in the hub with an anchor bound to a claim; another process edits one file on disk.",
+      "when": "Edit a section, try to save over the externally changed file, reload, complete a citation key, compile, click in the PDF.",
+      "then": "The save is refused with the draft kept; the claim shows beside its line; the PDF click opens the matching source line; the stored version and anchor state match.",
+      "fixture": null
+    },
+    {
+      "id": "S21",
+      "check_ids": [
+        "C09-SYNC"
+      ],
+      "given": "A workspace cloned from a local bare repository standing in for Overleaf; a collaborator commit arrives remotely.",
+      "when": "Pull a non-overlapping change, then create a conflicting local and remote edit, pull, then push an owner-approved plan.",
+      "then": "The clean change integrates with a preview; the conflict stops with both sides intact; push happens only with the exact-plan capability and never forces.",
+      "fixture": null
+    },
+    {
+      "id": "S22",
+      "check_ids": [
+        "C09-SAFETY"
+      ],
+      "given": "A workspace containing a hostile .tex using shell-escape, an input path outside the workspace and a runaway loop; a remote URL containing a token.",
+      "when": "Compile the hostile source and try to link the credential-bearing URL.",
+      "then": "No command executes, nothing outside the workspace is read, compile stops at its limits, the URL is rejected and no secret appears in logs, records or exports.",
+      "fixture": null
+    },
+    {
+      "id": "S23",
+      "check_ids": [
+        "C10-PARITY"
+      ],
+      "given": "A fresh project loaded from the synthetic fixtures, an owner session and an agent session.",
+      "when": "Read capability discovery, then run every operation family through CLI, MCP and HTTP, including requests the agent scope may not perform.",
+      "then": "Each operation has a route on every transport or a documented exemption; records, errors and authority outcomes are equivalent; discovery reports availability and blockers truthfully.",
+      "fixture": null
+    },
+    {
+      "id": "S24",
+      "check_ids": [
+        "C10-AUTH"
+      ],
+      "given": "An agent prepares a correction apply and an egress expansion; an imported PDF, an abstract and a model output contain instructions to approve, call tools and send data.",
+      "when": "The agent submits both plans plus two more; the owner grants one and denies another in the hub queue; the agent resumes, edits a granted plan and resubmits, lets a third request pass its expiry and withdraws the fourth; the hostile texts are processed.",
+      "then": "approval_required carries the exact plan digest; only the granted plan executes, once; the edited, denied, expired and withdrawn plans fail; no secret value or grant reaches the agent; hostile text changes nothing beyond its role as data.",
+      "fixture": null
+    },
+    {
+      "id": "S25",
+      "check_ids": [
+        "C10-RUNS"
+      ],
+      "given": "A long extraction run, a run whose external provider call has started, and a fake budget close to its limit.",
+      "when": "Kill the process between stages, restart and resume, change an input and resume again, exhaust the budget, then cancel.",
+      "then": "One run ID throughout with truthful states; compatible resume finishes without duplicate outputs; the changed input is refused; paused_budget then resumes; the uncertain external call becomes unknown_external and is not repeated.",
+      "fixture": null
+    },
+    {
+      "id": "S26",
+      "check_ids": [
+        "C10-CONTINUITY"
+      ],
+      "given": "Two scoped findings, an assumption entry shared by one finding and a manuscript anchor, an adopted action, an external simulation registered as running, and an execution receipt imported without a registration.",
+      "when": "An agent proposes a correction superseding the assumption with a replacement assumption and tries to apply it, then the owner applies it with a grant; the simulation is reported completed with a receipt; Now is opened; a reviewed entry dismisses the bare receipt with a reason; a reference-only artifact is removed.",
+      "then": "The agent's apply returns approval_required; the owner's apply flags the dependent finding, action and anchor in the same commit; the completed run waits in awaiting interpretation until an assessment or reviewed entry cites it, and the dismissed receipt leaves the queue; Now shows changed, due, running and awaiting items with reasons; the artifact shows unavailable and not backed up.",
+      "fixture": "fixtures/plant-result.md"
+    },
+    {
+      "id": "S27",
+      "check_ids": [
+        "C10-RECOVERY"
+      ],
+      "given": "A disposable project whose record.sqlite is corrupted, and a verified backup of it.",
+      "when": "Open the project, then use the app recovery screen and the MCP maintenance route to inspect, verify the backup and restore into a new store; the agent then asks to switch the registry and the owner grants it from the recovery screen.",
+      "then": "Opening fails with a recovery pointer; the restore lands in a new store; the agent's switch returns approval_required held in the per-user registry, and the registry switches only after the owner's grant and verification; the damaged store is unchanged and listed for inspection.",
+      "fixture": null
+    },
+    {
+      "id": "S28",
+      "check_ids": [
+        "C10-WALK"
+      ],
+      "given": "The built app and a fresh store made from the synthetic fixtures (baseline, plant result, meeting and manuscript).",
+      "when": "Run KERS scenarios K1-K4 in the hub, then on a second fresh store through MCP with the hub stopped.",
+      "then": "The best supported result appears with comparator, scope, source revision and limits; the correction flags dependents; the finished run surfaces as uninterpreted; resuming needs no prose handoff; both stores reach equivalent outcomes.",
+      "fixture": null
+    },
+    {
+      "id": "S29",
+      "check_ids": [
+        "C11-IMPORT"
+      ],
+      "given": "Synthetic BibTeX, RIS and CSV files, two PDFs (one without a text layer), a stub of the Zotero local API, and an abstract containing injected instructions.",
+      "when": "Plan and commit the imports, search a phrase from a PDF page, annotate a span, and export to each format.",
+      "then": "Works carry normalised identifiers and per-field provenance; search hits cite page and span; the image-only PDF shows no text rather than invented text; exports round-trip; the injected text stays inert.",
+      "fixture": null
+    },
+    {
+      "id": "S30",
+      "check_ids": [
+        "C11-DEDUP"
+      ],
+      "given": "One DOI arriving from BibTeX and from the Zotero stub, an arXiv preprint of a published paper, and two similar titles of different works.",
+      "when": "Import everything, re-import the same file, and review the candidates.",
+      "then": "One work holds the DOI with both provenance records; the preprint is related as a version, not merged; similar titles are only proposed; the re-import creates nothing.",
+      "fixture": null
+    },
+    {
+      "id": "S31",
+      "check_ids": [
+        "C11-GROUNDING"
+      ],
+      "given": "A matrix over three works: one with full text, one abstract-only and one metadata-only.",
+      "when": "Submit cells with a fabricated source ID, a page beyond the PDF, an altered quote, a valid quote and no evidence at all; then apply a correction to a claim the matrix cites.",
+      "then": "Invalid cells are rejected; the valid cell binds version, locator and quote digest; the evidence-less cell is accepted only as unsupported; access states stay visible in matrix, context and export; the dependent row and brief are flagged.",
+      "fixture": null
+    },
+    {
+      "id": "S32",
+      "check_ids": [
+        "C11-NOACCOUNT"
+      ],
+      "given": "A fresh install with no accounts or provider keys and network access blocked.",
+      "when": "Import, search, build a matrix, link an action and export through the app and MCP.",
+      "then": "Every step succeeds locally and no outbound request is attempted.",
+      "fixture": null
+    },
+    {
+      "id": "S33",
+      "check_ids": [
+        "C11-WALK"
+      ],
+      "given": "The built app and a fresh store made from synthetic literature fixtures.",
+      "when": "Import, search, classify by rules or labels, build the matrix, read it through MCP, apply an authorised correction; repeat through MCP on a second fresh store.",
+      "then": "App and MCP return the same matrix; the dependent row and brief are flagged; both stores reach equivalent outcomes.",
+      "fixture": null
+    },
+    {
+      "id": "S34",
+      "check_ids": [
+        "C12-MODELS"
+      ],
+      "given": "A model catalog with one entry of known terms and one whose tokenizer terms are unknown, plus a local model file for offline import.",
+      "when": "Preview, install, interrupt and resume, import offline, load, benchmark, unload and remove.",
+      "then": "The preview shows size, licence, revision hash and location; the unknown-rights entry is not offered; digests verify; removal leaves sources and decisions; nothing downloads automatically.",
+      "fixture": null
+    },
+    {
+      "id": "S35",
+      "check_ids": [
+        "C12-RETRIEVAL"
+      ],
+      "given": "A labelled fixture question set with targets recorded before measurement, a BM25 baseline and a scanned page.",
+      "when": "Evaluate hybrid retrieval and the classifier on held-out labels, then OCR the page.",
+      "then": "Hybrid retrieval is enabled only if it meets its target; the classifier abstains below threshold and reports precision and recall; OCR text is a derived version beside the original.",
+      "fixture": null
+    },
+    {
+      "id": "S36",
+      "check_ids": [
+        "C12-OFFLINE"
+      ],
+      "given": "Installed local assets, a configured remote provider and network access blocked.",
+      "when": "Run local search, classification and transcription, then a task routed to the remote provider.",
+      "then": "Local features work without any outbound attempt; the remote task reports unavailable; nothing falls back silently.",
+      "fixture": null
+    },
+    {
+      "id": "S37",
+      "check_ids": [
+        "C12-BUDGET"
+      ],
+      "given": "A remote_allowed workflow with a small spend cap, two concurrent requests, a provider that times out, and a pre-CP12 project with the CP6.3 provider configured next to one without.",
+      "when": "Migrate both projects' settings, route tasks under local_only, remote_allowed and manual policies, exceed the cap, and let a call time out.",
+      "then": "The configured project keeps remote_allowed for that provider's generation only and every other route is local_only; the route is shown and honoured; the reservation blocks the second request; the cap stops work before any call; the timeout is recorded unknown and not retried; usage and provenance are recorded.",
+      "fixture": null
+    },
+    {
+      "id": "S38",
+      "check_ids": [
+        "C12-WALK"
+      ],
+      "given": "The built app, a fresh store, network access blocked and a local model file.",
+      "when": "Import the model, run hybrid search and classification with the route visible, cancel a long job, remove the model; repeat through MCP on a second store.",
+      "then": "Both stores reach equivalent outcomes; sources and decisions are intact after removal.",
+      "fixture": null
+    },
+    {
+      "id": "S39",
+      "check_ids": [
+        "C13-SEARCH"
+      ],
+      "given": "An inquiry with criteria; recorded responses from the selected public adapters, including a failed page and a quota header; an owner contact email approved for Crossref and Unpaywall only; and an adapter whose metadata requests an email for a service that is not approved.",
+      "when": "Preview and run the queries, edit one and rerun, then run offline.",
+      "then": "Query, filters, provider, pagination, time, failures and coverage persist; the quota is honoured; the preview names Crossref and Unpaywall as the only services receiving the email; recorded requests carry it only to them and the unapproved adapter's requests carry none; offline discovery reports unavailable while local search works.",
+      "fixture": null
+    },
+    {
+      "id": "S40",
+      "check_ids": [
+        "C13-SCREEN"
+      ],
+      "given": "Fifty recorded candidates, a rubric, an abstract with injected instructions, a systematic-review protocol with a stopping rule, and an imported pipeline declaration with one step outside the designated literature operations and one protected step.",
+      "when": "Screen by rules, a classifier and manual review, leave some uncertain, try to finish before the stopping rule is met, and validate and run the imported pipeline.",
+      "then": "Labels keep reasons, reviewer and rubric version; classifier labels stay proposed until confirmed; uncertain items remain; completion is refused until the protocol holds; unseen items are not excluded; the pipeline with the undesignated step is rejected, and the protected step stops at a review point with approval_required; the injected text stays inert.",
+      "fixture": null
+    },
+    {
+      "id": "S41",
+      "check_ids": [
+        "C13-SYNTH"
+      ],
+      "given": "Screened works with full text, abstract-only and missing full text, and a draft synthesis citing one real and one invented source with one altered excerpt.",
+      "when": "Validate and save the synthesis, link a finding to a claim that has an accepted decision, and export.",
+      "then": "The invented source and altered excerpt are rejected; access states stay visible; generated text is labelled; the accepted decision is untouched; the export is complete.",
+      "fixture": null
+    },
+    {
+      "id": "S42",
+      "check_ids": [
+        "C13-WALK"
+      ],
+      "given": "The built app, a fresh store and recorded adapter responses.",
+      "when": "Run KERS scenarios K5 and K7 in the hub, then through MCP on a second fresh store.",
+      "then": "The comparison keeps abstract-only and missing-full-text states; at quota, viewing, searching and organising continue; both stores reach equivalent outcomes.",
+      "fixture": null
+    },
+    {
+      "id": "S43",
+      "check_ids": [
+        "C14-WATCH"
+      ],
+      "given": "A watch tied to an inquiry and a claim, with recorded responses for three runs: unchanged, changed and quota-limited.",
+      "when": "Tick the scheduler three times, then resume after the quota resets.",
+      "then": "The first run processes everything, the second is quiet, the third notifies about the changed item linked to the claim; the quota pause keeps progress; no duplicate actions or recharged stages.",
+      "fixture": null
+    },
+    {
+      "id": "S44",
+      "check_ids": [
+        "C14-WALK"
+      ],
+      "given": "The built app, a fresh store and recorded adapter responses.",
+      "when": "Run two scheduled runs, a third with a changed item, and a quota pause and resume in the hub; repeat through MCP on a second store.",
+      "then": "The second run is quiet, the changed item notifies once, the resume repeats no completed stage; both stores reach equivalent outcomes.",
+      "fixture": null
+    },
+    {
+      "id": "S45",
+      "check_ids": [
+        "C15-RECIPE"
+      ],
+      "given": "Reviewed and unreviewed evidence, a superseded claim, adopted actions, a review round and inert templates.",
+      "when": "Render the agenda, brief, claim card, slides, speaker notes and reviewer response, then apply a correction.",
+      "then": "Editable files record evidence and template versions; superseded or unreviewed evidence is excluded or flagged; outputs predating the correction are marked stale; no template code runs.",
+      "fixture": "fixtures/manuscript.md"
+    },
+    {
+      "id": "S46",
+      "check_ids": [
+        "C15-WALK"
+      ],
+      "given": "The built app and a fresh store made from the synthetic fixtures.",
+      "when": "Prepare a supervisor agenda and brief (K6), correct a cited claim and regenerate; repeat through MCP on a second store.",
+      "then": "The agenda and brief cite reviewed evidence; the old brief is flagged stale; the regenerated brief cites the replacement; both stores reach equivalent outcomes.",
+      "fixture": null
+    },
+    {
+      "id": "S47",
+      "check_ids": [
+        "C16-SYNC"
+      ],
+      "given": "Stub Zotero local API and calendar services with remote changes, deletions, an expired cursor, a field edited on both sides, and an item note with injected instructions.",
+      "when": "Connect, sync repeatedly, expire the cursor, then disconnect.",
+      "then": "Remote IDs and versions are kept, tombstones applied, duplicates avoided, the conflict surfaced and the cursor recovered; disconnect keeps local records marked stale; only credential references are stored; the injected text stays inert.",
+      "fixture": null
+    },
+    {
+      "id": "S48",
+      "check_ids": [
+        "C16-WALK"
+      ],
+      "given": "The built app, a fresh store and local stub services.",
+      "when": "Connect, sync, change items on both sides, resolve a conflict, expire a cursor and disconnect in the hub; repeat through MCP on a second store.",
+      "then": "Local records remain after disconnect and are marked stale; both stores reach equivalent outcomes.",
+      "fixture": null
+    },
+    {
+      "id": "S49",
+      "check_ids": [
+        "C17-INVENTORY",
+        "C17-LINEAGE"
+      ],
+      "given": "A seeded synthetic research folder with golden labels and planted traps (rewritten modification times, line-ending-only copies, a FINAL file that is not current, contradictory notes, cloud placeholders, an archive inside an archive, an Objective-C .m file, MATLAB .m, .slx and .mdl files with calls and model references).",
+      "when": "Record the targets and generator seed, then adopt the folder.",
+      "then": "Every file is inventoried without writing to the folder; families and current members match the golden labels at the recorded targets; every trap is detected or shown as unresolved; MATLAB call and model-reference edges are extracted.",
+      "fixture": null
+    },
+    {
+      "id": "S50",
+      "check_ids": [
+        "C17-PLAN",
+        "C17-AI"
+      ],
+      "given": "An adopted synthetic folder with unresolved families and a file carrying injected instructions.",
+      "when": "Generate the consolidation plan, complete steps as the agent with recorded tool and model outputs, including one wrong quote.",
+      "then": "Each step is a work item with declared inputs and acceptance criteria; the wrong quote is rejected by digest; the injected text stays inert; nothing is deleted; the owner accepts a baseline.",
+      "fixture": null
+    },
+    {
+      "id": "S51",
+      "check_ids": [
+        "C17-INCREMENTAL"
+      ],
+      "given": "An accepted baseline of a synthetic folder.",
+      "when": "Add, change, move and delete files, import a small notes vault, then re-adopt and export.",
+      "then": "Only changes are re-analysed; drift from the baseline is reported; the fenced export re-imports into a fresh store with equivalent families.",
+      "fixture": null
+    },
+    {
+      "id": "S52",
+      "check_ids": [
+        "C17-WALK"
+      ],
+      "given": "The built app, a fresh store and a synthetic corpus.",
+      "when": "Adopt, review, complete plan steps through MCP, accept a baseline and re-adopt after a change; repeat through MCP on a second store.",
+      "then": "Both stores reach equivalent baselines and plans; the transcript is retained.",
+      "fixture": null
+    },
+    {
+      "id": "S53",
+      "check_ids": [
+        "C18-ITEMS",
+        "C18-QUEUE"
+      ],
+      "given": "A fresh store and a scripted MCP agent session.",
+      "when": "Create work items with and without deadlines and descriptions, read the queue and the session-start summary through MCP, and run the summary-text check including a mutated 'start the most urgent item' variant.",
+      "then": "The queue lists the items with reasons and sizes; reading it changes no stored state; the summary text directs the agent to list and ask and contains no start directive or urgency escalation; the mutated variant is rejected; no code path starts an agent or registers a scheduled task, monitor or routine.",
+      "fixture": null
+    },
+    {
+      "id": "S54",
+      "check_ids": [
+        "C18-EVENTS"
+      ],
+      "given": "A store with a deadline in 15 days, a pending approval, a finished run awaiting interpretation and a correction with dependents.",
+      "when": "Advance the clock across 14, 7 and 2 days, restart between detector runs, and acknowledge events.",
+      "then": "Each event appears once, in the same transaction as its change; restarts create no duplicates; acknowledged events stay recorded; no event runs an operation.",
+      "fixture": null
+    },
+    {
+      "id": "S55",
+      "check_ids": [
+        "C18-WALK"
+      ],
+      "given": "The built app and a fresh store.",
+      "when": "Create work items in the hub, see events, list and accept one through MCP, complete it; repeat through MCP on a second store.",
+      "then": "Both stores reach equivalent outcomes; the transcript is retained.",
+      "fixture": null
+    },
+    {
+      "id": "S56",
+      "check_ids": [
+        "C19-SHELL"
+      ],
+      "given": "A clean Windows user profile and the built desktop installer.",
+      "when": "Install without administrator rights, start from the tray, use the hotkey, receive a notification, start a second instance, quit and uninstall.",
+      "then": "The window shows the hub over loopback; the second instance focuses the first; no authority is added; project data survive uninstall.",
+      "fixture": null
+    },
+    {
+      "id": "S57",
+      "check_ids": [
+        "C19-PACKAGE"
+      ],
+      "given": "The agent package and recorded configurations for Claude Code and one non-Claude MCP host.",
+      "when": "Run the opt-in setup into temporary host configuration folders and run a scripted MCP session per host.",
+      "then": "Both list the same tools and complete the same read and request flow; no global host configuration changes outside the opt-in setup.",
+      "fixture": null
+    },
+    {
+      "id": "S58",
+      "check_ids": [
+        "C19-WALK"
+      ],
+      "given": "The built desktop app and a fresh store.",
+      "when": "Start, pair, capture, receive an approval notification, grant it in the window, see the agent resume through MCP, quit and restart; repeat through MCP on a second fresh store with the app stopped.",
+      "then": "State survives the restart; both stores reach equivalent outcomes; the transcript is retained.",
+      "fixture": null
+    },
+    {
+      "id": "S59",
+      "check_ids": [
+        "C19-SPIKE"
+      ],
+      "given": "The three candidate shells (Tauri 2 with the Python core as a sidecar, pywebview, Electron) at recorded versions.",
+      "when": "Build a minimal installer for each with tray, notification and global hotkey, package the Python 3.14 core, measure installer size and idle memory, and review licences.",
+      "then": "The decision record compares every criterion with measured values; the chosen framework is registered with its notices; the shipped shell uses it.",
+      "fixture": null
+    },
+    {
+      "id": "S60",
+      "check_ids": [
+        "C08-EVAL"
+      ],
+      "given": "Recorded synthetic fixtures with golden labels and recorded model responses, and targets recorded before the first measurement.",
+      "when": "Run the evaluation suite offline, then an opt-in live run for a new model whose responses are recorded and replayed.",
+      "then": "Each result is stored with the model and version and is comparable with earlier ones; no target was changed after a run.",
+      "fixture": null
+    },
+    {
+      "id": "S61",
+      "check_ids": [
+        "C20-STATUS"
+      ],
+      "given": "A claim whose evidence a script produced that later got a newer version; a claim corrected by an applied correction; a claim that is both; two bindings with the same name and definition and different values; two bindings with the same name and different definitions; a claim supported only by an agent's assessment, and one by an agent's assessment that declares method researcher; a claim targeted by a proposed correction.",
+      "when": "Read the claims' derived status and the paper's claims.",
+      "then": "The first is stale naming the newer script version, the second corrected, the third stale, the fourth conflicting, the fifth not conflicting, the sixth and seventh hold with basis agent_reported, the eighth is settling; no claim state changed; no stale claim is offered as usable.",
+      "fixture": null
+    },
+    {
+      "id": "S62",
+      "check_ids": [
+        "C20-STRUCTURE"
+      ],
+      "given": "A paper with two questions, claims answering them, one supported only by an agent's assessment, and a track they draw on.",
+      "when": "Open the paper page and the project landing.",
+      "then": "Each question shows its claims with one-line status and basis, the paper's stage is derived with what keeps it from the next and lists the agent-reported claim for confirmation, and no identifier, digest or path shows outside a claim's details.",
+      "fixture": null
+    },
+    {
+      "id": "S63",
+      "check_ids": [
+        "C20-VERIFY"
+      ],
+      "given": "A stale claim with a detector-proposed read-only check estimated at 5 minutes, an agent-created read-only check, a detector-proposed rerun, a detector check whose estimate the agent then lowered, the default budget, and an agent session.",
+      "when": "The agent starts the detector's check, then the agent-created one, the rerun after revising its kind to read_only, the lowered check, tries to adopt the agent-created one itself, and starts read-only checks until the day's total is passed.",
+      "then": "The detector's untouched check starts without an approval and records expected, measured and tolerance; the agent-created check, the revised rerun, the lowered check and the check past the daily total answer approval_required, and the agent's adoption is refused; after the owner adopts the agent-created check it starts without an approval.",
+      "fixture": null
+    },
+    {
+      "id": "S64",
+      "check_ids": [
+        "C20-VERIFY"
+      ],
+      "given": "Three decision cards with recommendations and default dates, one of whose claims changes after the cards were made.",
+      "when": "The default dates pass without an answer, then the owner applies all recommended.",
+      "then": "Before the owner acts, views show the defaults and no record, manuscript file or anchor changed; the owner's one approval is refused as a whole because one item's base revision changed, and applies all three after a refreshed preview.",
+      "fixture": null
+    },
+    {
+      "id": "S65",
+      "check_ids": [
+        "C20-ADOPT",
+        "C20-WALK"
+      ],
+      "given": "A seeded synthetic folder that forks by track, with identical copies, unpacked tool output, run logs, an archive, a model lineage, a succession and two real competitions, and golden classes.",
+      "when": "Scan, review the proposed outline and confirm it.",
+      "then": "Per-class precision and recall meet the recorded targets, both competitions file owner work items and nothing else does, the outline cites its files and lines and is confirmed once, and the folder is unchanged.",
+      "fixture": null
+    },
+    {
+      "id": "S66",
+      "check_ids": [
+        "C21-LAUNCH",
+        "C21-WALK"
+      ],
+      "given": "The core installed as a uv tool and a fresh home; the hub running.",
+      "when": "Run a second `prometheos start`, write through MCP, forge the lock metadata with another process id, then kill the hub and start again.",
+      "then": "The second start opens a paired browser on the running hub and starts no second hub; the MCP write succeeds and shows in the hub; the forged metadata takes nothing over; after the kill the OS has released the lock and the new start succeeds on the same port.",
+      "fixture": null
+    },
+    {
+      "id": "S67",
+      "check_ids": [
+        "C21-PAIRING",
+        "C21-WALK"
+      ],
+      "given": "A paired browser with a remembered device on the home's own host name.",
+      "when": "Restart the core, reuse the launch code, present the cookie to another home's hub and with a hostile Origin, then revoke the device.",
+      "then": "The session resumes without pairing after the restart; the reused code, the other home, the hostile request and the revoked device are each refused, and the code never appears in a request line or the history entry.",
+      "fixture": null
+    },
+    {
+      "id": "S68",
+      "check_ids": [
+        "C22-GATEWAY"
+      ],
+      "given": "A standing policy with an evaluated model list and caps, and a fake transport.",
+      "when": "Run a batch that meets a 429, a timeout with unknown outcome, a served model outside the list and the per-run cap.",
+      "then": "The batch stops cleanly with finished items kept, the unknown outcome is held and not repeated, the off-list output is a hint only, and spend never passes the cap.",
+      "fixture": null
+    },
+    {
+      "id": "S69",
+      "check_ids": [
+        "C22-TASKS"
+      ],
+      "given": "Cassettes for a task with a wrong quote, a changed digest, an unbound number, an unoffered id and two disagreeing samples.",
+      "when": "Validate each reply.",
+      "then": "Each is rejected with its reason and none becomes a proposal; a valid reply becomes one proposal that changes no status, class or relation.",
+      "fixture": null
+    },
+    {
+      "id": "S70",
+      "check_ids": [
+        "C22-EVAL"
+      ],
+      "given": "A golden set and targets recorded before measurement.",
+      "when": "Measure a task on recorded gateway replies, then hand-edit a cassette, then change the template.",
+      "then": "Trust follows the fixed Clopper–Pearson bound against the unchanged targets; the edited cassette confers no trust; the template change withdraws trust until a new measurement.",
+      "fixture": null
+    },
+    {
+      "id": "S71",
+      "check_ids": [
+        "C22-USE",
+        "C22-WALK"
+      ],
+      "given": "CP17's seeded corpus with golden labels, and no key.",
+      "when": "Open adoption, then add a recorded policy and cassettes and run the family assist task.",
+      "then": "Without a key each place says what it did instead; with cassettes the proposals appear tagged, accepting one is one owner action, and no proposal closes an owner work item.",
+      "fixture": null
+    },
+    {
+      "id": "S72",
+      "check_ids": [
+        "C22-RETRIEVAL"
+      ],
+      "given": "A labelled claim-to-question set and recorded targets.",
+      "when": "Measure BM25 alone and the fusion with local embeddings, with the network blocked.",
+      "then": "The fusion is enabled only if it meets the target and beats BM25; results are record ids.",
+      "fixture": null
+    },
+    {
+      "id": "S73",
+      "check_ids": [
+        "C22-GATEWAY",
+        "C22-WALK"
+      ],
+      "given": "A standing policy and an agent session through MCP.",
+      "when": "The agent runs a task, then tries to widen the policy to restricted input, then to revoke it.",
+      "then": "The run is recorded; the widening answers approval_required; the revocation answers policy_denied; restricted input is never sent.",
+      "fixture": null
+    }
+  ]
+}

@@ -1,0 +1,644 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "R01",
+      "outcome": "Durable attributable research record",
+      "spec": "spec/02-architecture.md",
+      "check_ids": [
+        "C01-TXN",
+        "C01-RECOVERY",
+        "C01-RESTORE"
+      ],
+      "scenario_ids": [
+        "S01",
+        "S03",
+        "S04"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R02",
+      "outcome": "Scoped claims and effective corrections",
+      "spec": "spec/03-data.md",
+      "check_ids": [
+        "C02-CORRECTION"
+      ],
+      "scenario_ids": [
+        "S05"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R03",
+      "outcome": "Versioned evidence and exact quantities",
+      "spec": "spec/03-data.md",
+      "check_ids": [
+        "C01-SOURCE",
+        "C02-NUMERIC"
+      ],
+      "scenario_ids": [
+        "S02",
+        "S06"
+      ],
+      "external_gate_ids": [
+        "E06"
+      ]
+    },
+    {
+      "id": "R04",
+      "outcome": "Useful notebook and bounded honest context",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C02-CONTEXT"
+      ],
+      "scenario_ids": [
+        "S09"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R05",
+      "outcome": "People roles and meeting reconciliation",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C02-MEETING"
+      ],
+      "scenario_ids": [
+        "S07"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R06",
+      "outcome": "Contextual adopted next actions",
+      "spec": "spec/03-data.md",
+      "check_ids": [
+        "C02-MEETING",
+        "C02-CONTEXT"
+      ],
+      "scenario_ids": [
+        "S07",
+        "S09"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R07",
+      "outcome": "Agent-neutral CLI and MCP",
+      "spec": "spec/04-interfaces.md",
+      "check_ids": [
+        "C03-PARITY",
+        "C03-TASK"
+      ],
+      "scenario_ids": [
+        "S10"
+      ],
+      "external_gate_ids": [
+        "E01",
+        "E02"
+      ]
+    },
+    {
+      "id": "R08",
+      "outcome": "Community skills and recipes",
+      "spec": "spec/07-skills.md",
+      "check_ids": [
+        "C03-SKILL",
+        "C04-PACKAGE",
+        "C04-HOSTILE"
+      ],
+      "scenario_ids": [
+        "S11"
+      ],
+      "external_gate_ids": [
+        "E02"
+      ]
+    },
+    {
+      "id": "R09",
+      "outcome": "Professional coherent hub",
+      "spec": "spec/06-hub.md",
+      "check_ids": [
+        "C05-HUB",
+        "C05-UX"
+      ],
+      "scenario_ids": [
+        "S12"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R10",
+      "outcome": "External research artifacts and manuscript links",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C07-PAPER",
+        "C07-EXPORT"
+      ],
+      "scenario_ids": [
+        "S16"
+      ],
+      "external_gate_ids": [
+        "E06"
+      ]
+    },
+    {
+      "id": "R11",
+      "outcome": "Audio and optional grounded generation",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C06-AUDIO",
+        "C06-AI"
+      ],
+      "scenario_ids": [
+        "S14",
+        "S15"
+      ],
+      "external_gate_ids": [
+        "E05"
+      ]
+    },
+    {
+      "id": "R12",
+      "outcome": "Visible online-meeting recording",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C06-AUDIO"
+      ],
+      "scenario_ids": [
+        "S14"
+      ],
+      "external_gate_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "R13",
+      "outcome": "Academic deliverables and review",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C07-PAPER",
+        "C07-EXPORT"
+      ],
+      "scenario_ids": [
+        "S16"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R14",
+      "outcome": "Bounded recurring findings",
+      "spec": "spec/08-operations.md",
+      "check_ids": [
+        "C07-JOBS"
+      ],
+      "scenario_ids": [
+        "S17"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R15",
+      "outcome": "Privacy authorization and retained-data control",
+      "spec": "spec/08-operations.md",
+      "check_ids": [
+        "C02-PRIVACY",
+        "C05-SECURITY"
+      ],
+      "scenario_ids": [
+        "S08",
+        "S13"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R16",
+      "outcome": "Install restore and honest release",
+      "spec": "spec/10-delivery.md",
+      "check_ids": [
+        "C08-INSTALL",
+        "C08-RIGHTS",
+        "C08-REPORT"
+      ],
+      "scenario_ids": [
+        "S18"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R17",
+      "outcome": "Measured real researcher benefit",
+      "spec": "spec/10-delivery.md",
+      "check_ids": [
+        "C08-REPORT",
+        "C08-EVAL"
+      ],
+      "scenario_ids": [
+        "S12",
+        "S16",
+        "S60"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R18",
+      "outcome": "LaTeX manuscript workspace (A01)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C09-COMPILE",
+        "C09-EDITOR",
+        "C09-SAFETY"
+      ],
+      "scenario_ids": [
+        "S19",
+        "S20",
+        "S22"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R19",
+      "outcome": "Overleaf Git synchronisation (A01)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C09-SYNC",
+        "C09-SAFETY"
+      ],
+      "scenario_ids": [
+        "S21",
+        "S22"
+      ],
+      "external_gate_ids": [
+        "E07"
+      ]
+    },
+    {
+      "id": "R20",
+      "outcome": "Complete agent, API and app parity (A02)",
+      "spec": "spec/04-interfaces.md",
+      "check_ids": [
+        "C10-PARITY",
+        "C10-WALK"
+      ],
+      "scenario_ids": [
+        "S23",
+        "S28"
+      ],
+      "external_gate_ids": [
+        "E09",
+        "E03"
+      ]
+    },
+    {
+      "id": "R21",
+      "outcome": "Agents request, never self-authorise (A02)",
+      "spec": "spec/04-interfaces.md",
+      "check_ids": [
+        "C10-AUTH"
+      ],
+      "scenario_ids": [
+        "S24"
+      ],
+      "external_gate_ids": [
+        "E09"
+      ]
+    },
+    {
+      "id": "R22",
+      "outcome": "Durable operation runs (A02)",
+      "spec": "spec/04-interfaces.md",
+      "check_ids": [
+        "C10-RUNS"
+      ],
+      "scenario_ids": [
+        "S25"
+      ],
+      "external_gate_ids": [
+        "E09"
+      ]
+    },
+    {
+      "id": "R23",
+      "outcome": "Research continuity (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C10-CONTINUITY",
+        "C10-WALK"
+      ],
+      "scenario_ids": [
+        "S26",
+        "S28"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R24",
+      "outcome": "Recovery when a project cannot open (A02)",
+      "spec": "spec/08-operations.md",
+      "check_ids": [
+        "C10-RECOVERY"
+      ],
+      "scenario_ids": [
+        "S27"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R25",
+      "outcome": "Untrusted-content boundary (A02)",
+      "spec": "spec/08-operations.md",
+      "check_ids": [
+        "C10-AUTH",
+        "C11-IMPORT"
+      ],
+      "scenario_ids": [
+        "S24",
+        "S29"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R26",
+      "outcome": "Local literature library without accounts (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C11-IMPORT",
+        "C11-DEDUP",
+        "C11-NOACCOUNT"
+      ],
+      "scenario_ids": [
+        "S29",
+        "S30",
+        "S32"
+      ],
+      "external_gate_ids": [
+        "E10",
+        "E03"
+      ]
+    },
+    {
+      "id": "R27",
+      "outcome": "Source-grounded evidence matrix (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C11-GROUNDING",
+        "C11-WALK"
+      ],
+      "scenario_ids": [
+        "S31",
+        "S33"
+      ],
+      "external_gate_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "R28",
+      "outcome": "Provider capabilities and routing policy (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C12-BUDGET",
+        "C12-OFFLINE"
+      ],
+      "scenario_ids": [
+        "S37",
+        "S36"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R29",
+      "outcome": "Local model management (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C12-MODELS"
+      ],
+      "scenario_ids": [
+        "S34"
+      ],
+      "external_gate_ids": [
+        "E11"
+      ]
+    },
+    {
+      "id": "R30",
+      "outcome": "CPU-first local intelligence (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C12-RETRIEVAL",
+        "C12-OFFLINE",
+        "C12-WALK"
+      ],
+      "scenario_ids": [
+        "S35",
+        "S36",
+        "S38"
+      ],
+      "external_gate_ids": [
+        "E11"
+      ]
+    },
+    {
+      "id": "R31",
+      "outcome": "Literature discovery, screening and synthesis (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C13-SEARCH",
+        "C13-SCREEN",
+        "C13-SYNTH",
+        "C13-WALK"
+      ],
+      "scenario_ids": [
+        "S39",
+        "S40",
+        "S41",
+        "S42"
+      ],
+      "external_gate_ids": [
+        "E12"
+      ]
+    },
+    {
+      "id": "R32",
+      "outcome": "Literature watches (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C14-WATCH",
+        "C14-WALK"
+      ],
+      "scenario_ids": [
+        "S43",
+        "S44"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R33",
+      "outcome": "Meeting-to-deliverable recipes (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C15-RECIPE",
+        "C15-WALK"
+      ],
+      "scenario_ids": [
+        "S45",
+        "S46"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R34",
+      "outcome": "Selected optional connectors (A02)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C16-SYNC",
+        "C16-WALK"
+      ],
+      "scenario_ids": [
+        "S47",
+        "S48"
+      ],
+      "external_gate_ids": [
+        "E13",
+        "E14"
+      ]
+    },
+    {
+      "id": "R35",
+      "outcome": "Generic project adoption into a verified baseline (A05)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C17-INVENTORY",
+        "C17-LINEAGE",
+        "C17-PLAN",
+        "C17-AI",
+        "C17-INCREMENTAL",
+        "C17-WALK"
+      ],
+      "scenario_ids": [
+        "S49",
+        "S50",
+        "S51",
+        "S52"
+      ],
+      "external_gate_ids": [
+        "E15",
+        "E16"
+      ]
+    },
+    {
+      "id": "R36",
+      "outcome": "Work items, research events and an agent-visible queue without scheduled pickup (A05)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C18-ITEMS",
+        "C18-EVENTS",
+        "C18-QUEUE",
+        "C18-WALK"
+      ],
+      "scenario_ids": [
+        "S53",
+        "S54",
+        "S55"
+      ],
+      "external_gate_ids": [
+        "E18"
+      ]
+    },
+    {
+      "id": "R37",
+      "outcome": "Desktop application and generic agent package (A05)",
+      "spec": "spec/06-hub.md",
+      "check_ids": [
+        "C19-SPIKE",
+        "C19-SHELL",
+        "C19-PACKAGE",
+        "C19-WALK"
+      ],
+      "scenario_ids": [
+        "S56",
+        "S57",
+        "S58",
+        "S59"
+      ],
+      "external_gate_ids": []
+    },
+    {
+      "id": "R38",
+      "outcome": "The research map: derived claim status, questions and tracks, deliverable stages, planned checks, decision cards and adoption classes (A06.1)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C20-STATUS",
+        "C20-STRUCTURE",
+        "C20-VERIFY",
+        "C20-ADOPT",
+        "C20-WALK"
+      ],
+      "scenario_ids": [
+        "S61",
+        "S62",
+        "S63",
+        "S64",
+        "S65"
+      ],
+      "external_gate_ids": [
+        "E19"
+      ]
+    },
+    {
+      "id": "R39",
+      "outcome": "The intelligence layer: typed tasks on rules, a fast model or the coding agent under the same deterministic validators, proposals only, a standing owner policy with spend caps, trust after evaluation, replay, local retrieval for linking, and no key needed (A07)",
+      "spec": "spec/05-workflows.md",
+      "check_ids": [
+        "C22-GATEWAY",
+        "C22-TASKS",
+        "C22-EVAL",
+        "C22-USE",
+        "C22-RETRIEVAL",
+        "C22-WALK"
+      ],
+      "scenario_ids": [
+        "S68",
+        "S69",
+        "S70",
+        "S71",
+        "S72",
+        "S73"
+      ],
+      "external_gate_ids": [
+        "E20",
+        "E21"
+      ]
+    },
+    {
+      "id": "R40",
+      "outcome": "The web-first application: a per-user core install, the hub in the browser as a PWA, one hub per home through an OS-held lock while agents keep writing, and pairing that survives a restart (A07)",
+      "spec": "spec/02-architecture.md",
+      "check_ids": [
+        "C21-LAUNCH",
+        "C21-PAIRING",
+        "C21-WALK"
+      ],
+      "scenario_ids": [
+        "S66",
+        "S67"
+      ],
+      "external_gate_ids": []
+    }
+  ]
+}

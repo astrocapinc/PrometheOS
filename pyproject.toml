@@ -1,0 +1,121 @@
+[project]
+name = "prometheos"
+version = "0.1.0.dev0"
+description = "Local research record and companion hub used by coding agents."
+readme = "README.md"
+requires-python = ">=3.12"
+# The owner chose Apache-2.0 (decision 0072). The wheel carries LICENSE, NOTICE and the
+# third-party notices of the hub assets it bundles. Publishing on PyPI is a separate owner
+# decision; until then the classifier below blocks an accidental upload.
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
+classifiers = [
+    "Private :: Do Not Upload",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: Microsoft :: Windows",
+]
+dependencies = [
+    "pydantic==2.13.5",
+    "typer==0.27.2",
+    "tzdata==2026.5",
+    "mcp==2.3.0",
+    "jsonschema==4.26.0",
+    "packaging==26.3",
+    "fastapi==0.142.2",
+    "uvicorn==0.54.0",
+    "pypdfium2==5.13.0",
+]
+
+[project.optional-dependencies]
+# Optional audio capability (decision 0013): local transcription, compressed-audio decode and
+# Windows live capture. Never required for the core. PyAV's Windows wheel bundles FFmpeg with
+# GPL x264/x265 libraries: recorded in development/dependencies.json and flagged for E08.
+audio = [
+    "faster-whisper==1.2.1",
+    "av==19.0.1",
+    "PyAudioWPatch==0.2.12.8; sys_platform == 'win32'",
+]
+# Optional MATLAB code parsing for adoption (decisions 0040, 0053; both MIT). Without it the
+# code.matlab analyzer does not run and every scan says so (analysis.analyzers_unavailable).
+adoption-parsers = [
+    "tree-sitter==0.26.0",
+    "tree-sitter-matlab==1.3.1",
+]
+
+[project.scripts]
+prometheos = "prometheos.cli:main"
+
+[dependency-groups]
+dev = [
+    # The test environment parses MATLAB like an install with the adoption-parsers extra; the
+    # degraded path is tested by hiding the parser (decision 0053).
+    "tree-sitter==0.26.0",
+    "tree-sitter-matlab==1.3.1",
+    "mypy==2.4.0",
+    "pytest==9.1.1",
+    "pytest-xdist==3.8.0",
+    "ruff==0.16.10",
+]
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+# The pinned build closure (decisions 0057, 0059): every uv command that builds the project
+# (uv sync's editable install, uv build) resolves build dependencies with these pins, so an
+# offline build never floats. Must equal build-constraints.txt (the register checks it).
+build-constraint-dependencies = [
+    "hatchling==1.32.4",
+    "packaging==26.3",
+    "pathspec==1.1.1",
+    "pluggy==1.6.0",
+    "tomlkit==0.15.1",
+    "trove-classifiers==2026.9.21.13",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prometheos"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# development/ holds evidence (receipts, archived spec versions, saved originals), never code.
+extend-exclude = ["tools/verify_package.py", "tools/seal_package.py", "development"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "RUF"]
+ignore = ["S101", "S603", "S607"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106", "S108", "S311"]
+"src/prometheos/cli.py" = ["B008"]
+"src/prometheos/cli_latex.py" = ["B008"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["prometheos"]
+mypy_path = "src"
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = [
+    "jsonschema", "jsonschema.*", "faster_whisper", "faster_whisper.*", "pyaudiowpatch",
+    "pypdfium2", "pypdfium2.*",
+    # The audio extra's own modules: a clean `uv sync --locked` (CI) does not install them.
+    "av", "av.*", "numpy", "numpy.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers -p no:cacheprovider"
+markers = [
+    "slow: process-kill and concurrency probes",
+    "real_model: needs the explicitly installed speech model (skipped unless required)",
+    "audio_extra: needs the optional audio extra (skipped unless required)",
+    "noaccount: C11-NOACCOUNT, hub and MCP subprocesses under the test-only socket guard",
+]
+filterwarnings = ["error"]
